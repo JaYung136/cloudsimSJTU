@@ -196,6 +196,69 @@ public class Controller {
         return ResultDTO.success(jsonPrettyPrintString);
     }
 
+    @RequestMapping("/convertworkload")
+    public ResultDTO convertworkload() throws Exception{
+        //读result1制作ip->starttime/endtime的字典
+        String content = Files.readString(Path.of("./InputFiles/result1.json"));
+        JSONArray json = new JSONArray(content);
+        Map<String, String> startmap = new HashMap<>();
+        Map<String, String> endmap = new HashMap<>();
+
+        for(Object obj : json) {
+            JSONObject host = (JSONObject) obj;
+            startmap.put(host.getString("name"), host.getString("start"));
+            endmap.put(host.getString("name"), host.getString("end"));
+        }
+
+        //读appinfo.xml 写workload.csv
+        String xml = Files.readString(
+                Path.of("./InputFiles/Input_AppInfo10.xml"));
+        JSONArray apps = XML.toJSONObject(xml).getJSONObject("AppInfo").getJSONArray("Application");
+        String filePath = "./Intermediate/workload.csv";
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            writer.write("count,period,atime,name.1,zeros,w.1.1,link.1.2,name.2,p.1.2,w.2.1,link.2.3,name.3,p.2.3,w.3\n");
+            for(Object obj : apps){
+                JSONObject app = (JSONObject) obj;
+                String src = app.getString("IpAddress");
+                JSONObject tem = app.getJSONObject("A653SamplingPort").getJSONObject("A664Message");
+                Object dataField = tem.opt("A653SamplingPort");
+
+                //case1:大于等于2条msg
+                if (dataField instanceof JSONArray) {
+                    JSONArray msgs = (JSONArray) dataField;
+                    for (Object obj2 : msgs) {
+                        JSONObject msg = (JSONObject) obj2;
+                        String dst = msg.getString("IpAddress");
+                        int period = msg.getInt("SamplePeriod");
+                        int pktsize = msg.getInt("MessageSize");
+                        int count = 0;
+                        for (double t = Double.parseDouble(startmap.get(src)); t < Double.parseDouble(endmap.get(src)); t += period) {
+                            count++;
+                        }
+                        writer.write(count + "," + period + "," + startmap.get(src) + "," + src + ",0,0,default," + dst + "," + pktsize + ",0,,,,\n");
+                    }
+                }
+                //case2:1条msg
+                else {
+                    JSONObject msg = (JSONObject) dataField;
+                    String dst = msg.getString("IpAddress");
+                    int period = msg.getInt("SamplePeriod");
+                    int pktsize = msg.getInt("MessageSize");
+                    int count = 0;
+                    for (double t = Double.parseDouble(startmap.get(src)); t < Double.parseDouble(endmap.get(src)); t += period) {
+                        count++;
+                    }
+                    writer.write(count + "," + period + "," + startmap.get(src) + "," + src + ",0,0,default," + dst + "," + pktsize + ",0,,,,\n");
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred while writing the CSV file: " + e.getMessage());
+        }
+        return ResultDTO.success("ok");
+    }
+
+
     @PostMapping("/uploadphysical")
     public ResultDTO uploadPhysical(MultipartFile file, HttpServletRequest req) throws IOException {
         System.out.println("上传物理拓扑文件");
