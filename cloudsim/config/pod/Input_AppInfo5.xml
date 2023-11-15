@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<adag xmlns="http://pegasus.isi.edu/schema/DAX" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pegasus.isi.edu/schema/DAX http://pegasus.isi.edu/schema/dax-2.1.xsd" version="2.1" count="1" index="0" name="test" jobCount="25" fileCount="0" childCount="20">
+  <application Name="HF_SM_1" Guid="a96ef0520" IpAddress="10.31.40.1" Hardware="" ComputeTime="10" MemoryBssSize="13631488" MemoryDataSize="1048576" MemoryPersistentBssSize="0" MemoryPersistentDataSize="0" MemoryRoDataSize="1900544" MemoryTextSize="1048576" PartitionId="1" Period="10" RequiredMemorySize="100" Key="True" Priority="1" UpBandwidth="40" DownBandwidth="10" Parent="HF_SM_2,HF_SM_3">
+    <uses file="2.fits" link="input" register="true" transfer="true" optional="false" type="data" size="320"/>
+    <uses file="3.fits" link="input" register="true" transfer="true" optional="false" type="data" size="320"/>
+  </application>
+  <application Name="HF_SM_2" Guid="a96ef0521" IpAddress="10.31.40.2" Hardware="" ComputeTime="11" MemoryBssSize="13631488" MemoryDataSize="1048576" MemoryPersistentBssSize="0" MemoryPersistentDataSize="0" MemoryRoDataSize="1900544" MemoryTextSize="1048576" PartitionId="1" Period="10" RequiredMemorySize="100" Key="True" Priority="2" UpBandwidth="50" DownBandwidth="30" Parent="">
+    <uses file="2.fits" link="output" register="true" transfer="true" optional="false" type="data" size="320"/>
+  </application>
+  <application Name="HF_SM_3" Guid="a96ef0522" IpAddress="10.31.40.3" Hardware="" ComputeTime="21" MemoryBssSize="13631488" MemoryDataSize="1048576" MemoryPersistentBssSize="0" MemoryPersistentDataSize="0" MemoryRoDataSize="1900544" MemoryTextSize="1048576" PartitionId="1" Period="10" RequiredMemorySize="200" Key="True" Priority="3" UpBandwidth="60" DownBandwidth="40" Parent="">
+    <uses file="2.fits" link="input" register="true" transfer="true" optional="false" type="data" size="320"/>
+    <uses file="3.fits" link="output" register="true" transfer="true" optional="false" type="data" size="320"/>
+  </application>
+  <application Name="HF_SM_4" Guid="a96ef0523" IpAddress="10.31.40.4" Hardware="" ComputeTime="51" MemoryBssSize="13631488" MemoryDataSize="1048576" MemoryPersistentBssSize="0" MemoryPersistentDataSize="0" MemoryRoDataSize="1900544" MemoryTextSize="1048576" PartitionId="1" Period="20" RequiredMemorySize="300" Key="True" Priority="4" UpBandwidth="80" DownBandwidth="80" Parent="">
+    <uses file="2.fits" link="input" register="true" transfer="true" optional="false" type="data" size="320"/>
+    <uses file="3.fits" link="input" register="true" transfer="true" optional="false" type="data" size="320"/>
+  </application>
+  <application Name="HF_SM_5" Guid="a96ef0524" IpAddress="10.31.40.5" Hardware="" ComputeTime="81" MemoryBssSize="13631488" MemoryDataSize="1048576" MemoryPersistentBssSize="0" MemoryPersistentDataSize="0" MemoryRoDataSize="1900544" MemoryTextSize="1048576" PartitionId="1" Period="40" RequiredMemorySize="600" Key="False" Priority="5" UpBandwidth="120" DownBandwidth="80" Parent="">
+    <uses file="2.fits" link="input" register="true" transfer="true" optional="false" type="data" size="320"/>
+    <uses file="3.fits" link="input" register="true" transfer="true" optional="false" type="data" size="320"/>
+  </application>
+  <child ref = "HF_SM_1">
+    <parent ref = "HF_SM_2"/>
+    <parent ref = "HF_SM_3"/>
+  </child>
+</adag>

@@ -1,0 +1,117 @@
+/**
+ * Copyright 2019-2020 University Of Southern California
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ *
+ * http://www.apache.com.wfc.cloudsim/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ */
+package com.wfc.cloudsim.workflowsim.scheduling;
+
+import com.wfc.cloudsim.cloudsim.Cloudlet;
+import com.wfc.cloudsim.cloudsim.container.core.*;
+import com.wfc.cloudsim.workflowsim.WorkflowSimTags;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * MinMin algorithm.
+ *
+ * @author Arman Riazi
+ * @since WorkflowSim Toolkit 1.0
+ * @date March 29, 2020
+ */
+public class MinMinSchedulingAlgorithm extends BaseSchedulingAlgorithm {
+
+    public MinMinSchedulingAlgorithm() {
+        super();
+    }
+    private final List<Boolean> hasChecked = new ArrayList<>();
+
+    @Override
+    public void run() {
+
+        int size = getCloudletList().size();
+        hasChecked.clear();
+        for (int t = 0; t < size; t++) {
+            hasChecked.add(false);
+        }
+        for (int i = 0; i < size; i++) {
+            int minIndex = 0;
+            Cloudlet minCloudlet = null;
+            for (int j = 0; j < size; j++) {
+                Cloudlet cloudlet = (Cloudlet) getCloudletList().get(j);
+                if (!hasChecked.get(j)) {
+                    minCloudlet = cloudlet;
+                    minIndex = j;
+                    break;
+                }
+            }
+            if (minCloudlet == null) {
+                break;
+            }
+
+
+            for (int j = 0; j < size; j++) {
+                Cloudlet cloudlet = (Cloudlet) getCloudletList().get(j);
+                if (hasChecked.get(j)) {
+                    continue;
+                }
+                long length = cloudlet.getCloudletLength();
+                if (length < minCloudlet.getCloudletLength()) {
+                    minCloudlet = cloudlet;
+                    minIndex = j;
+                }
+            }
+            hasChecked.set(minIndex, true);
+
+            int vmSize = getVmList().size();
+            ContainerPod firstIdleVm = null;//(CondorPod)getVmList().get(0);
+            Container firstIdleContainer = null;
+            for (int j = 0; j < vmSize; j++) {
+                ContainerPod vm = (ContainerPod) getVmList().get(j);
+                if (vm.getState() == WorkflowSimTags.VM_STATUS_IDLE) {
+                    for(Container c:vm.getContainerList()) {
+                        if(c.getState() == WorkflowSimTags.VM_STATUS_IDLE) {
+                            firstIdleVm = vm;
+                            firstIdleContainer = c;
+                            break;
+                        }
+                    }
+                }
+            }
+            if (firstIdleVm == null) {
+                break;
+            }
+            for (int j = 0; j < vmSize; j++) {
+                ContainerPod vm = (ContainerPod) getVmList().get(j);
+                if ((vm.getState() == WorkflowSimTags.VM_STATUS_IDLE)) {
+                    for(Container c: vm.getContainerList()) {
+                        if (c.getState() == WorkflowSimTags.VM_STATUS_IDLE && c.getCurrentRequestedTotalMips() > firstIdleContainer.getCurrentRequestedTotalMips()) {
+                            firstIdleVm = vm;
+                            firstIdleContainer = c;
+                        }
+                    }
+                }
+            }
+            firstIdleContainer.setState(WorkflowSimTags.VM_STATUS_BUSY);
+            minCloudlet.setVmId(firstIdleVm.getId());
+            ((ContainerCloudlet)minCloudlet).setContainerId(firstIdleContainer.getId());
+
+        // minCloudlet.setContainerId(firstIdleVm.getId());
+
+            
+       
+            
+            getScheduledList().add(minCloudlet);
+        }
+    }
+}

@@ -1,0 +1,13 @@
+metadata:
+  name: pod_15
+apiVersion: v1
+kind: Pod
+spec:
+  nodeName: Host 5
+  containers:
+  - image: ''
+    name: container_0_0
+    resources:
+      limits:
+        memory: 200.0
+        cpu: 2

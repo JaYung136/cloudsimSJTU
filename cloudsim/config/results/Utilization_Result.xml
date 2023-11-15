@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Utilizations>
+    <Utilization time="0.1">  <!-- time时各个Host的资源利用率 !-->
+        <Host id="1" cpu="31" mem="23" storage="5"/>
+        <Host id="2" cpu="55" mem="31" storage="12"/>
+    </Utilization>
+    <Utilization time="0.2">
+        <Host id="1" cpu="21" mem="13" storage="5"/>
+        <Host id="2" cpu="45" mem="21" storage="12"/>
+    </Utilization>
+</Utilizations>
