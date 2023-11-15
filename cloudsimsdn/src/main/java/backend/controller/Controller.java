@@ -52,7 +52,7 @@ public class Controller {
     @RequestMapping("/convertphytopo")
     public ResultDTO convertphytopo() throws IOException {
         String xml = Files.readString(
-                Path.of("D:\\11桌面备份11\\CloudSim-djy\\文档\\输入输出接口1109\\Input_TopoInfo.xml"));
+                Path.of("./InputFiles/Input_TopoInfo.xml"));
         JSONObject json = XML.toJSONObject(xml).getJSONObject("NetworkTopo");
         JSONArray swches = json.getJSONObject("Switches").getJSONArray("Switch");
         JSONArray links = json.getJSONObject("Links").getJSONArray("Link");
@@ -140,7 +140,7 @@ public class Controller {
             }
         }
         // 新建所有的主机
-        xml = Files.readString(Path.of("D:\\11桌面备份11\\CloudSim-djy\\文档\\输入输出接口1109\\Input_Host8.xml"));
+        xml = Files.readString(Path.of("./InputFiles/Input_Host8.xml"));
         json = XML.toJSONObject(xml);
         JSONArray hosts = json.getJSONObject("adag").getJSONArray("node");
         for(Object obj : hosts){
