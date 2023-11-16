@@ -27,7 +27,7 @@ public class Controller {
 
     private String physicalf = "Intermediate/physical.json";
     private String virtualf = "Intermediate/virtual.json";
-    private String workloadf = "Intermediate/one-workload.csv";
+    private String workloadf = "Intermediate/workload.csv";
     private boolean halfDuplex = false;
 
     @RequestMapping("/visit")
