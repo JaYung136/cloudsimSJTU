@@ -299,10 +299,11 @@ public class PhysicalTopologyParser {
 				String src = (String) link.get("source");
 				String dst = (String) link.get("destination");
 				double lat = Double.parseDouble((String)link.get("latency"));
+				String name = (String) link.get("name");
 				Node srcNode = nameNodeTable.get(src);
 				Node dstNode = nameNodeTable.get(dst);
 				// TODO: -1? bw在addLink函数中根据switch赋值
-				Link l = new Link(srcNode, dstNode, lat, -1); //(Double) link.get("bw")); // Temporary Link (blueprint) to create the real one in NOS
+				Link l = new Link(srcNode, dstNode, lat, -1, name); //(Double) link.get("bw")); // Temporary Link (blueprint) to create the real one in NOS
 				this.links.add(l);
 			}
 		} catch (FileNotFoundException e) {

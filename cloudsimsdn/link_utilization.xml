@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Links Timespan="1.0" >
+	<Link Name="LINK1" Src="Switch: edge1" Dst="Switch: core1" Starttime="1.0" Bytes="19998" Util="0.019998" />
+	<Link Name="LINK1" Src="Switch: core1" Dst="Switch: edge1" Starttime="1.0" Bytes="30000" Util="0.03" />
+	<Link Name="LINK3" Src="host1" Dst="Switch: edge1" Starttime="1.0" Bytes="19998" Util="0.019998" />
+	<Link Name="LINK3" Src="Switch: edge1" Dst="host1" Starttime="1.0" Bytes="30000" Util="0.03" />
+	<Link Name="LINK8" Src="Switch: edge4" Dst="Switch: core2" Starttime="1.0" Bytes="20000" Util="0.02" />
+	<Link Name="LINK8" Src="Switch: core2" Dst="Switch: edge4" Starttime="1.0" Bytes="60000" Util="0.06" />
+	<Link Name="LINK12" Src="host8" Dst="Switch: edge4" Starttime="1.0" Bytes="20000" Util="0.02" />
+	<Link Name="LINK12" Src="Switch: edge4" Dst="host8" Starttime="1.0" Bytes="60000" Util="0.06" />
+	<Link Name="LINK1" Src="Switch: edge1" Dst="Switch: core1" Starttime="2.0" Bytes="19999" Util="0.019999" />
+	<Link Name="LINK1" Src="Switch: core1" Dst="Switch: edge1" Starttime="2.0" Bytes="60000" Util="0.06" />
+	<Link Name="LINK3" Src="host1" Dst="Switch: edge1" Starttime="2.0" Bytes="19999" Util="0.019999" />
+	<Link Name="LINK3" Src="Switch: edge1" Dst="host1" Starttime="2.0" Bytes="60000" Util="0.06" />
+	<Link Name="LINK8" Src="Switch: core2" Dst="Switch: edge4" Starttime="2.0" Bytes="50000" Util="0.05" />
+	<Link Name="LINK12" Src="Switch: edge4" Dst="host8" Starttime="2.0" Bytes="50000" Util="0.05" />
+	<Link Name="LINK7" Src="Switch: edge3" Dst="Switch: core2" Starttime="2.0" Bytes="60000" Util="0.06" />
+	<Link Name="LINK10" Src="host6" Dst="Switch: edge3" Starttime="2.0" Bytes="60000" Util="0.06" />
+	<Link Name="LINK1" Src="Switch: core1" Dst="Switch: edge1" Starttime="7.0" Bytes="60000" Util="0.06" />
+	<Link Name="LINK3" Src="Switch: edge1" Dst="host1" Starttime="7.0" Bytes="60000" Util="0.06" />
+	<Link Name="LINK7" Src="Switch: edge3" Dst="Switch: core2" Starttime="7.0" Bytes="60000" Util="0.06" />
+	<Link Name="LINK10" Src="host6" Dst="Switch: edge3" Starttime="7.0" Bytes="60000" Util="0.06" />
+</Links>

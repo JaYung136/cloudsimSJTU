@@ -11,6 +11,7 @@ import org.cloudbus.cloudsim.*;
 import org.cloudbus.cloudsim.core.CloudSim;
 import org.cloudbus.cloudsim.sdn.CloudSimEx;
 import org.cloudbus.cloudsim.sdn.Configuration;
+import org.cloudbus.cloudsim.sdn.LogWriter;
 import org.cloudbus.cloudsim.sdn.SDNBroker;
 import org.cloudbus.cloudsim.sdn.monitor.power.PowerUtilizationMaxHostInterface;
 import org.cloudbus.cloudsim.sdn.nos.NetworkOperatingSystem;
@@ -131,7 +132,8 @@ public class SimpleExampleInterCloud {
 				Log.disable();
 
 			List<Workload> res = startSimulation(broker, dcs.values());
-
+			LogWriter log = LogWriter.getLogger("link_utilization.xml");
+			log.printLine("</Links>");
 			return res;
 
 		} catch (Exception e) {

@@ -143,11 +143,12 @@ public abstract class PhysicalTopology {
 				lowNode = temp;
 			}
 			double latency = link.getLatency();
-			addLink(highNode, lowNode, latency);
+			String linkname = link.getName();
+			addLink(highNode, lowNode, latency, linkname);
 		}
 	}
 
-	public void addLink(Node fromNode, Node toNode, double latency){
+	public void addLink(Node fromNode, Node toNode, double latency, String linkname){
 		int from = fromNode.getAddress();
 		int to = toNode.getAddress();
 		// TODO: link的bw在这里计算
@@ -169,7 +170,7 @@ public abstract class PhysicalTopology {
 			throw new IllegalArgumentException("Unable to establish orders for nodes on link:"+nodesTable.get(from).getAddress()+"->"+nodesTable.get(to).getAddress());
 		}
 
-		Link l = new Link(fromNode, toNode, latency, bw);
+		Link l = new Link(fromNode, toNode, latency, bw, linkname);
 
 		// Two way links (From -> to, To -> from)
 		linkTable.put(from, to, l);
@@ -187,7 +188,7 @@ public abstract class PhysicalTopology {
 		long bw = NetworkOperatingSystem.bandwidthWithinSameHost;
 		double latency = NetworkOperatingSystem.latencyWithinSameHost;
 
-		Link l = new Link(node, node, latency, bw);
+		Link l = new Link(node, node, latency, bw, node.toString());
 
 		// Two way links (From -> to, To -> from)
 		linkTable.put(nodeId, nodeId, l);

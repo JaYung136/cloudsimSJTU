@@ -120,6 +120,7 @@ public class Controller {
                     .put("source",link.getString("Src"))
                     .put("destination",link.getString("Dst"))
                     .put("latency",String.valueOf(link.getDouble("Latency")))
+                    .put("name", link.getString("Name"))
             );
         }
         // 补建links：gateway<->interswitch
@@ -127,7 +128,9 @@ public class Controller {
             topo.accumulate("links", new JSONObject()
                     .put("source","inter")
                     .put("destination","gw"+dcname)
-                    .put("latency","0"));
+                    .put("latency","0")
+                    .put("name", "gw"+dcname+"-inter")
+            );
         }
         // 补建links：core<->gateway
         for(Object obj : swches){
@@ -136,7 +139,9 @@ public class Controller {
                 topo.accumulate("links", new JSONObject()
                         .put("source",swch.getString("Name"))
                         .put("destination","gw"+swch.getString("Network"))
-                        .put("latency","0"));
+                        .put("latency","0")
+                        .put("name", "gw"+swch.getString("Network")+"-core")
+                );
             }
         }
         // 新建所有的主机
@@ -258,48 +263,6 @@ public class Controller {
         return ResultDTO.success("ok");
     }
 
-
-    @PostMapping("/uploadphysical")
-    public ResultDTO uploadPhysical(MultipartFile file, HttpServletRequest req) throws IOException {
-        System.out.println("上传物理拓扑文件");
-        try {
-            String InputOutput = System.getProperty("user.dir")+"\\InputOutput";
-            System.out.println(InputOutput);
-            file.transferTo(new File(InputOutput, file.getOriginalFilename() ));
-            physicalf = "InputOutput/" + file.getOriginalFilename();
-        }catch (IOException e){
-            System.out.print(e.getMessage());
-        }
-        return ResultDTO.success("上传成功");
-    }
-
-    @PostMapping("/uploadvirtual")
-    public ResultDTO uploadVirtual(MultipartFile file, HttpServletRequest req) throws IOException {
-        System.out.println("上传虚拟拓扑文件");
-        try {
-            String InputOutput = System.getProperty("user.dir")+"\\InputOutput";
-            System.out.println(InputOutput);
-            file.transferTo(new File(InputOutput, file.getOriginalFilename() ));
-            virtualf = "InputOutput/" + file.getOriginalFilename();
-        }catch (IOException e){
-            System.out.print(e.getMessage());
-        }
-        return ResultDTO.success("上传成功");
-    }
-
-    @PostMapping("/uploadworkload")
-    public ResultDTO uploadWorkload(MultipartFile file, HttpServletRequest req) throws IOException {
-        System.out.println("上传负载文件");
-        try {
-            String InputOutput = System.getProperty("user.dir")+"\\InputOutput";
-            System.out.println(InputOutput);
-            file.transferTo(new File(InputOutput, file.getOriginalFilename() ));
-            workloadf = "InputOutput/" + file.getOriginalFilename();
-        }catch (IOException e){
-            System.out.print(e.getMessage());
-        }
-        return ResultDTO.success("上传成功");
-    }
 
     @RequestMapping("/run")
     public ResultDTO run() throws IOException {

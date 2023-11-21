@@ -3,16 +3,16 @@
     <Switches>
         <Switch Name="core1" Network="A" PortNum="2" Type="core" Speed="100" IpAddress="10.31.42.1" Guid="a2e6640e-8d60-411a-977f-d09c5aab8d04" ExtGuid="123">
         </Switch>
-        <Switch Name="core2" Network="B" PortNum="2" Type="core" Speed="100" IpAddress="10.31.42.2" Guid="a2e6640e-8d60-411a-977f-d09c5aab8d04" ExtGuid="123">
+        <Switch Name="core2" Network="B" PortNum="2" Type="core" Speed="100" IpAddress="10.31.42.2" Guid="a2e6640e-8d60-411a-977f-d09c5aab8d04" ExtGuid="124">
         </Switch>
 
-        <Switch Name="edge1" Network="A" PortNum="2" Type="edge" Speed="100" IpAddress="10.31.42.3" Guid="a2e6640e-8d60-411a-977f-d09c5aab8d04" ExtGuid="124">
+        <Switch Name="edge1" Network="A" PortNum="2" Type="edge" Speed="100" IpAddress="10.31.42.3" Guid="a2e6640e-8d60-411a-977f-d09c5aab8d04" ExtGuid="125">
         </Switch>
-        <Switch Name="edge2" Network="A" PortNum="2" Type="edge" Speed="100" IpAddress="10.31.42.4" Guid="a2e6640e-8d60-411a-977f-d09c5aab8d04" ExtGuid="125">
+        <Switch Name="edge2" Network="A" PortNum="2" Type="edge" Speed="100" IpAddress="10.31.42.4" Guid="a2e6640e-8d60-411a-977f-d09c5aab8d04" ExtGuid="126">
         </Switch>
-        <Switch Name="edge3" Network="B" PortNum="2" Type="edge" Speed="100" IpAddress="10.31.42.5" Guid="a2e6640e-8d60-411a-977f-d09c5aab8d04" ExtGuid="124">
+        <Switch Name="edge3" Network="B" PortNum="2" Type="edge" Speed="100" IpAddress="10.31.42.5" Guid="a2e6640e-8d60-411a-977f-d09c5aab8d04" ExtGuid="127">
         </Switch>
-        <Switch Name="edge4" Network="B" PortNum="2" Type="edge" Speed="100" IpAddress="10.31.42.6" Guid="a2e6640e-8d60-411a-977f-d09c5aab8d04" ExtGuid="125">
+        <Switch Name="edge4" Network="B" PortNum="2" Type="edge" Speed="100" IpAddress="10.31.42.6" Guid="a2e6640e-8d60-411a-977f-d09c5aab8d04" ExtGuid="128">
         </Switch>
     </Switches>
 

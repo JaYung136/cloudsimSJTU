@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<NetworkTopo RleaseDate="27/01/2021 21:52:27" ICDVerison="BP2.3.1">
+    <Switches>
+        <Switch Name="core1" Network="A" PortNum="2" Type="core" Speed="100" IpAddress="10.31.42.1" Guid="a2e6640e-8d60-411a-977f-d09c5aab8d04" ExtGuid="123">
+        </Switch>
+        <Switch Name="edge1" Network="A" PortNum="2" Type="edge" Speed="100" IpAddress="10.31.42.3" Guid="a2e6640e-8d60-411a-977f-d09c5aab8d04" ExtGuid="125">
+        </Switch>
+    </Switches>
+
+    <Links>
+        <Link Name="LINK1" Src="edge1" Dst="core1" BW="100" Latency="0.1">
+        </Link>
+        <Link Name="LINK3" Src="host1" Dst="edge1" BW="100" Latency="0.1">
+        </Link>
+        <Link Name="LINK4" Src="host2" Dst="edge1" BW="100" Latency="0.1">
+        </Link>
+    </Links>
+
+    <EndSystems>
+        <EndSystem Name="GPM1" HwType="GPM" ATA="-1" EdeSubscriberIndex="-1" EquipmentPosition="-1" HwTableBankIndex="-1">
+            <AesPhysPorts>
+                <AesPhysPort Name="pio_A664_A" Speed="100" MACAddress="-1" Medium="-1" Network="A"/>
+            </AesPhysPorts>
+        </EndSystem>
+    </EndSystems>
+
+</NetworkTopo>

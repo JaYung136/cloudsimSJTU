@@ -6,8 +6,10 @@
     <node name="host2" memory="30720" storage="1363148800" cores="4" mips="20000" bandwidth="250" network="A"/>
     <node name="host3" memory="30720" storage="1363148800" cores="8" mips="25000" bandwidth="350" network="A"/>
     <node name="host4" memory="30720" storage="1363148800" cores="4" mips="18000" bandwidth="300" network="A"/>
-    <node name="host5" memory="30720" storage="1363148800" cores="8" mips="21000" bandwidth="280" network="A"/>
-    <node name="host6" memory="30720" storage="1363148800" cores="8" mips="18000" bandwidth="570" network="A"/>
-    <node name="host7" memory="30720" storage="1363148800" cores="6" mips="38000" bandwidth="570" network="A"/>
-    <node name="host8" memory="30720" storage="1363148800" cores="8" mips="38000" bandwidth="660" network="A"/>
+    <node name="host5" memory="30720" storage="1363148800" cores="8" mips="21000" bandwidth="280" network="B"/>
+    <node name="host6" memory="30720" storage="1363148800" cores="8" mips="18000" bandwidth="570" network="B"/>
+    <node name="host7" memory="30720" storage="1363148800" cores="6" mips="38000" bandwidth="570" network="B"/>
+    <node name="host8" memory="30720" storage="1363148800" cores="8" mips="38000" bandwidth="660" network="B"/>
+    <utilization type = "cpu" up = "0.70" />
+    <utilization type = "memory" up = "0.70" />
 </adag>

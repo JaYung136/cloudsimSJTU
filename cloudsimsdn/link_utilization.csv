@@ -1,7 +1,10 @@
-Link,Clock,ProcessedBytes,utilization
-host1->Switch: edge1,1.0,50000000,50.0
-Switch: edge1->Switch: core1,1.0,50000000,50.0
-Switch: edge1->host1,11.0,600000,0.6
-Switch: core1->Switch: edge1,11.0,600000,0.6
-host8->Switch: edge4,11.0,600000,0.6
-Switch: edge4->Switch: core2,11.0,600000,0.6
+Switch: edge1->host1,1.0,30000,0.03
+Switch: core1->Switch: edge1,1.0,30000,0.03
+Switch: core2->Switch: edge4,1.0,60000,0.06
+Switch: edge4->host8,1.0,60000,0.06
+Switch: edge1->host1,2.0,60000,0.06
+Switch: core1->Switch: edge1,2.0,60000,0.06
+Switch: core2->Switch: edge4,2.0,50000,0.05
+Switch: edge4->host8,2.0,50000,0.05
+Switch: edge1->host1,7.0,60000,0.06
+Switch: core1->Switch: edge1,7.0,60000,0.06

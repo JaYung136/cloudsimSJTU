@@ -204,81 +204,97 @@
         {
             "latency": "0.1",
             "destination": "edge1",
+            "name": "LINK1",
             "source": "core1"
         },
         {
             "latency": "0.1",
             "destination": "edge2",
+            "name": "LINK2",
             "source": "core1"
         },
         {
             "latency": "0.1",
             "destination": "host1",
+            "name": "LINK3",
             "source": "edge1"
         },
         {
             "latency": "0.1",
             "destination": "host2",
+            "name": "LINK4",
             "source": "edge1"
         },
         {
             "latency": "0.1",
             "destination": "host3",
+            "name": "LINK5",
             "source": "edge2"
         },
         {
             "latency": "0.1",
             "destination": "host4",
+            "name": "LINK6",
             "source": "edge2"
         },
         {
             "latency": "0.1",
             "destination": "edge3",
+            "name": "LINK7",
             "source": "core2"
         },
         {
             "latency": "0.1",
             "destination": "edge4",
+            "name": "LINK8",
             "source": "core2"
         },
         {
             "latency": "0.1",
             "destination": "host5",
+            "name": "LINK9",
             "source": "edge3"
         },
         {
             "latency": "0.1",
             "destination": "host6",
+            "name": "LINK10",
             "source": "edge3"
         },
         {
             "latency": "0.1",
             "destination": "host7",
+            "name": "LINK11",
             "source": "edge4"
         },
         {
             "latency": "0.1",
             "destination": "host8",
+            "name": "LINK12",
             "source": "edge4"
         },
         {
             "latency": "0",
             "destination": "gwA",
+            "name": "gwA-inter",
             "source": "inter"
         },
         {
             "latency": "0",
             "destination": "gwB",
+            "name": "gwB-inter",
             "source": "inter"
         },
         {
             "latency": "0",
             "destination": "gwA",
+            "name": "gwA-core",
             "source": "core1"
         },
         {
             "latency": "0",
             "destination": "gwB",
+            "name": "gwB-core",
             "source": "core2"
         }
     ]

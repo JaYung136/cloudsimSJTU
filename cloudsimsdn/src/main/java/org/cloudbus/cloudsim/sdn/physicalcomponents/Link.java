@@ -27,31 +27,30 @@ import java.util.List;
  * @since CloudSimSDN 1.0
  */
 public class Link {
-
 	// bi-directional link (one link = both ways)
 	private Node highOrder;
 	private Node lowOrder;
 	private double upBW;	// low -> high
 	private double downBW;	// high -> low
 	private double latency;	// in milliseconds, need to *0.001 to transform in seconds.
-
+	private String linkname;
 	private List<Channel> upChannels;
 	private List<Channel> downChannels;
 
-	public Link(Node highOrder, Node lowOrder, double latency, double bw) {
+	public Link(Node highOrder, Node lowOrder, double latency, double bw, String name) {
 		this.highOrder = highOrder;
 		this.lowOrder = lowOrder;
 		this.upBW = this.downBW = bw;
 		this.latency = latency;
-
+		this.linkname = name;
 		this.upChannels = new LinkedList<Channel>();
 		this.downChannels = new LinkedList<Channel>();
 	}
 
-	public Link(Node highOrder, Node lowOrder, double latency, double upBW, double downBW) {
-		this(highOrder, lowOrder, latency, upBW);
-		this.downBW = downBW;
-	}
+//	public Link(Node highOrder, Node lowOrder, double latency, double upBW, double downBW) {
+//		this(highOrder, lowOrder, latency, upBW);
+//		this.downBW = downBW;
+//	}
 
 	public Node getHighOrder() {
 		return highOrder;
@@ -61,6 +60,7 @@ public class Link {
 		return lowOrder;
 	}
 
+	public String getName() { return linkname; }
 	public Node getOtherNode(Node from) {
 		if(highOrder.equals(from))
 			return lowOrder;
@@ -224,8 +224,11 @@ public class Link {
 
 	public double updateMonitor(double logTime, double timeUnit) {
 		if(CloudSim.linkutif){
-			LogWriter log = LogWriter.getLogger("link_utilization.csv");
-			log.printLine("Link,Clock,ProcessedBytes,utilization");
+//			LogWriter log = LogWriter.getLogger("link_utilization.csv");
+//			log.printLine("Link,Clock,ProcessedBytes,utilization");
+			LogWriter log = LogWriter.getLogger("link_utilization.xml");
+			log.printLine("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+			log.printLine("<Links Timespan=\"" +timeUnit+ "\" >");
 			CloudSim.linkutif = false;
 		}
 		long capacity = (long) (this.getBw() * timeUnit);
@@ -236,8 +239,11 @@ public class Link {
 				&& this.highOrder instanceof IntercloudSwitch != true
 				&& this.lowOrder instanceof GatewaySwitch != true
 				&& this.highOrder instanceof GatewaySwitch != true){
-			LogWriter log = LogWriter.getLogger("link_utilization.csv");
-			log.printLine(this.lowOrder+"->"+this.highOrder+","+logTime+","+ monitoringProcessedBytesPerUnitUp+","+utilization1);
+//			LogWriter log = LogWriter.getLogger("link_utilization.csv");
+//			log.printLine(this.lowOrder+"->"+this.highOrder+","+logTime+","+ monitoringProcessedBytesPerUnitUp+","+utilization1);
+			LogWriter log = LogWriter.getLogger("link_utilization.xml");
+			log.printLine("\t<Link Name=\"" +this.linkname+ "\" Src=\"" +this.lowOrder+ "\" Dst=\"" +this.highOrder+ "\" Starttime=\"" +logTime
+					+"\" Bytes=\"" +monitoringProcessedBytesPerUnitUp+ "\" Util=\"" +utilization1+ "\" />");
 			monitoringProcessedBytesPerUnitUp = 0;
 		}
 
@@ -248,8 +254,11 @@ public class Link {
 				&& this.highOrder instanceof IntercloudSwitch != true
 				&& this.lowOrder instanceof GatewaySwitch != true
 				&& this.highOrder instanceof GatewaySwitch != true) {
-			LogWriter logDown = LogWriter.getLogger("link_utilization.csv");
-			logDown.printLine(this.highOrder+"->"+this.lowOrder+","+logTime+","+monitoringProcessedBytesPerUnitDown+","+utilization2);
+//			LogWriter logDown = LogWriter.getLogger("link_utilization.csv");
+//			logDown.printLine(this.highOrder+"->"+this.lowOrder+","+logTime+","+monitoringProcessedBytesPerUnitDown+","+utilization2);
+			LogWriter log = LogWriter.getLogger("link_utilization.xml");
+			log.printLine("\t<Link Name=\"" +this.linkname+ "\" Src=\"" +this.highOrder+ "\" Dst=\"" +this.lowOrder+ "\" Starttime=\"" +logTime
+					+"\" Bytes=\"" +monitoringProcessedBytesPerUnitDown+ "\" Util=\"" +utilization2+ "\" />");
 			monitoringProcessedBytesPerUnitDown = 0;
 		}
 
