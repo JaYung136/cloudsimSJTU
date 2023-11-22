@@ -1,6 +1,8 @@
 package backend.controller;
 
 //import com.reins.bookstore.service.LoginService;
+import com.opencsv.CSVReader;
+import com.opencsv.CSVReaderBuilder;
 import org.cloudbus.cloudsim.core.CloudSim;
 import org.cloudbus.cloudsim.sdn.main.SimpleExampleInterCloud;
 import org.cloudbus.cloudsim.sdn.workload.Workload;
@@ -8,15 +10,11 @@ import org.cloudbus.cloudsim.sdn.workload.WorkloadResultWriter;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.XML;
-import org.json.simple.JSONValue;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.*;
 
 @RestController
@@ -262,6 +260,36 @@ public class Controller {
         }
         return ResultDTO.success("ok");
     }
+
+    @RequestMapping("/outputdelay")
+    public ResultDTO outputdelay() throws IOException{
+        // 读取CSV文件
+        CSVReader csvReader = new CSVReaderBuilder(new FileReader("./OutputFiles/result_workload.csv")).build();
+        List<String[]> csvData = csvReader.readAll();
+
+        //创建xml
+        File file = new File("Output_Network.xml");
+        file.createNewFile();
+
+        // 写入
+        FileWriter fw = new FileWriter(file.getAbsoluteFile());
+        BufferedWriter bw = new BufferedWriter(fw);
+        bw.write("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
+                "<NetworkDelay>\n<Messages>\n");
+
+        for (int i = 1; i < csvData.size(); i++) {
+            String[] row = csvData.get(i);
+            bw.write("<Message Src=\"" + row[1].trim() + "\" Dst=\"" + row[2].trim() + "\" StartTime=\"" + row[4].trim() + "\" EndTime=\"" + row[15].trim() + "\" NetworkTime=\"" + row[18].trim() + "\" PkgSize=\"" + row[12].trim() + "\">\n</Message>\n");
+        }
+
+        bw.write("</Messages>\n" +
+                "</NetworkDelay>");
+
+        bw.close();
+
+        return ResultDTO.success("ok");
+    }
+
 
 
     @RequestMapping("/run")

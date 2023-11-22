@@ -114,8 +114,11 @@ public class WorkloadResultWriter {
 		double serveTime;
 
 		printDetailInt(wl.workloadId);
+		printDetail(" " + wl.submitVmName + ",");
+		printDetail(" " + wl.destVmName + ",");
 		printDetailInt(wl.appId);
 		printDetailFloat(wl.time);
+
 
 		if(wl.failed) {
 			printRequest(wl.request, false);
@@ -235,6 +238,8 @@ public class WorkloadResultWriter {
 
 	private void printHead(Workload sample) {
 		print(String.format(LogPrinter.fString, "Workload_ID"));
+		print(String.format(LogPrinter.fString, "Src_App"));
+		print(String.format(LogPrinter.fString, "Dst_App"));
 		print(String.format(LogPrinter.fString, "App_ID"));
 		print(String.format(LogPrinter.fString, "SubmitTime"));
 		printRequestTitle(sample.request);
@@ -252,37 +257,37 @@ public class WorkloadResultWriter {
 		//threadExit();
 		List<Workload> wls = flushWorkloadBuffer(); //打印表格
 
-		printLine("#======================================");
-		printLine("#Number of workloads:" + printedWorkloadNum);
-		printLine("#Timeout workloads:" + timeoutNum);
-		if(timeoutNum + printedWorkloadNum != 0)
-			printLine("#Timeout workloads per cent:" + timeoutNum / (timeoutNum + printedWorkloadNum));
-
-		printLine("#Over workloads:" + overNum);
-		if(printedWorkloadNum != 0)
-			printLine("#Over workloads per cent:" + overNum / printedWorkloadNum);
-		printLine("#Number of Cloudlets:" + cloudletNum);
-		printLine("#Over Cloudlets:" + cloudletOverNum);
-		if(cloudletNum != 0)
-			printLine("#Over Cloudlets per cent:" + cloudletOverNum / cloudletNum);
-		printLine("#Number of transmissions:" + transmissionNum);
-		printLine("#Over transmissions:" + transmissionOverNum);
-		if(transmissionNum != 0)
-			printLine("#Over transmissions per cent:" + transmissionOverNum / transmissionNum);
-		printLine("#======================================");
-		printLine("#Total serve time:" + totalServeTime);
-		printLine("#CPU serve time:" + cpuServeTime);
-		printLine("#Network serve time:" + networkServeTime);
-		if(printedWorkloadNum != 0)
-		{
-			printLine("#Average total serve time:" + totalServeTime/printedWorkloadNum);
-			printLine("#Average CPU serve time per workload:" + cpuServeTime/printedWorkloadNum);
-			printLine("#Average network serve time per workload:" + networkServeTime/printedWorkloadNum);
-		}
-		if(cloudletNum != 0)
-			printLine("#Average CPU serve time per Cloudlet:" + cpuServeTime/cloudletNum);
-		if(transmissionNum != 0)
-			printLine("#Average network serve time per transmission:" + networkServeTime/transmissionNum);
+//		printLine("#======================================");
+//		printLine("#Number of workloads:" + printedWorkloadNum);
+//		printLine("#Timeout workloads:" + timeoutNum);
+//		if(timeoutNum + printedWorkloadNum != 0)
+//			printLine("#Timeout workloads per cent:" + timeoutNum / (timeoutNum + printedWorkloadNum));
+//
+//		printLine("#Over workloads:" + overNum);
+//		if(printedWorkloadNum != 0)
+//			printLine("#Over workloads per cent:" + overNum / printedWorkloadNum);
+//		printLine("#Number of Cloudlets:" + cloudletNum);
+//		printLine("#Over Cloudlets:" + cloudletOverNum);
+//		if(cloudletNum != 0)
+//			printLine("#Over Cloudlets per cent:" + cloudletOverNum / cloudletNum);
+//		printLine("#Number of transmissions:" + transmissionNum);
+//		printLine("#Over transmissions:" + transmissionOverNum);
+//		if(transmissionNum != 0)
+//			printLine("#Over transmissions per cent:" + transmissionOverNum / transmissionNum);
+//		printLine("#======================================");
+//		printLine("#Total serve time:" + totalServeTime);
+//		printLine("#CPU serve time:" + cpuServeTime);
+//		printLine("#Network serve time:" + networkServeTime);
+//		if(printedWorkloadNum != 0)
+//		{
+//			printLine("#Average total serve time:" + totalServeTime/printedWorkloadNum);
+//			printLine("#Average CPU serve time per workload:" + cpuServeTime/printedWorkloadNum);
+//			printLine("#Average network serve time per workload:" + networkServeTime/printedWorkloadNum);
+//		}
+//		if(cloudletNum != 0)
+//			printLine("#Average CPU serve time per Cloudlet:" + cpuServeTime/cloudletNum);
+//		if(transmissionNum != 0)
+//			printLine("#Average network serve time per transmission:" + networkServeTime/transmissionNum);
 		return wls;
 	}
 
