@@ -16,21 +16,29 @@ public class LogWriter {
 	private PrintStream out = null;
 
 	private static HashMap<String,LogWriter> map = new HashMap<String,LogWriter>();
-	
-	private LogWriter(String name) {
+
+	public LogWriter(String name) {
 		out = openfile(name);
 	}
-	
+
 	public static LogWriter getLogger(String name) {
 		String exName = Configuration.workingDirectory+Configuration.experimentName+name;
 		LogWriter writer = map.get(exName);
 		if(writer != null)
 			return writer;
-		
+
 		System.out.println("Creating logger..:" +exName);
 		writer = new LogWriter(exName);
 		map.put(exName, writer);
 		return writer;
+	}
+
+	public static void resetLogger(String name) {
+		String exName = Configuration.workingDirectory+Configuration.experimentName+name;
+		LogWriter writer = map.get(exName);
+		if(writer != null) {
+			map.remove(exName);
+		}
 	}
 
 	public void print(String s) {
@@ -39,18 +47,20 @@ public class LogWriter {
 		else
 			out.print(s);
 	}
-	
+
 	public void printLine() {
 		if(out == null)
 			System.err.println("");
 		else
 			out.println();
 	}
-	
+
 	public void printLine(String s) {
 		out.println(s);
 	}
-		
+
+	public void clearAll() {out.write(0);}
+
 	private PrintStream openfile(String name) {
 		PrintStream out = null;
 		try {
@@ -60,7 +70,7 @@ public class LogWriter {
 		}
 		return out;
 	}
-	
+
 	 public static String getExtension(String fullPath) {
 	    int dot = fullPath.lastIndexOf(".");
 	    return fullPath.substring(dot + 1);

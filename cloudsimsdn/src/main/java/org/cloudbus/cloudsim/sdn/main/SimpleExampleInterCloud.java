@@ -29,6 +29,7 @@ import org.cloudbus.cloudsim.sdn.workload.Workload;
 import org.json.JSONObject;
 import org.json.XML;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -132,8 +133,7 @@ public class SimpleExampleInterCloud {
 				Log.disable();
 
 			List<Workload> res = startSimulation(broker, dcs.values());
-			LogWriter log = LogWriter.getLogger("link_utilization.xml");
-			log.printLine("</Links>");
+
 			return res;
 
 		} catch (Exception e) {

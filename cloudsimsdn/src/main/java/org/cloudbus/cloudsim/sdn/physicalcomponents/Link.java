@@ -223,14 +223,6 @@ public class Link {
 	private long monitoringProcessedBytesPerUnitDown = 0;
 
 	public double updateMonitor(double logTime, double timeUnit) {
-		if(CloudSim.linkutif){
-//			LogWriter log = LogWriter.getLogger("link_utilization.csv");
-//			log.printLine("Link,Clock,ProcessedBytes,utilization");
-			LogWriter log = LogWriter.getLogger("link_utilization.xml");
-			log.printLine("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-			log.printLine("<Links Timespan=\"" +timeUnit+ "\" >");
-			CloudSim.linkutif = false;
-		}
 		long capacity = (long) (this.getBw() * timeUnit);
 		double utilization1 = (double)monitoringProcessedBytesPerUnitUp / capacity * 100;
 		mvUp.add(utilization1, logTime);
@@ -239,11 +231,8 @@ public class Link {
 				&& this.highOrder instanceof IntercloudSwitch != true
 				&& this.lowOrder instanceof GatewaySwitch != true
 				&& this.highOrder instanceof GatewaySwitch != true){
-//			LogWriter log = LogWriter.getLogger("link_utilization.csv");
-//			log.printLine(this.lowOrder+"->"+this.highOrder+","+logTime+","+ monitoringProcessedBytesPerUnitUp+","+utilization1);
 			LogWriter log = LogWriter.getLogger("link_utilization.xml");
-			log.printLine("\t<Link Name=\"" +this.linkname+ "\" Src=\"" +this.lowOrder+ "\" Dst=\"" +this.highOrder+ "\" Starttime=\"" +logTime
-					+"\" Bytes=\"" +monitoringProcessedBytesPerUnitUp+ "\" Util=\"" +utilization1+ "\" />");
+			log.printLine("\t<Link Name=\"" +this.linkname+ "\" Starttime=\"" +logTime +"\" Src=\"" +this.lowOrder+ "\" Dst=\"" +this.highOrder+ "\" Bytes=\"" +monitoringProcessedBytesPerUnitUp+ "\" Util=\"" +utilization1+ "\" />");
 			monitoringProcessedBytesPerUnitUp = 0;
 		}
 
@@ -254,11 +243,8 @@ public class Link {
 				&& this.highOrder instanceof IntercloudSwitch != true
 				&& this.lowOrder instanceof GatewaySwitch != true
 				&& this.highOrder instanceof GatewaySwitch != true) {
-//			LogWriter logDown = LogWriter.getLogger("link_utilization.csv");
-//			logDown.printLine(this.highOrder+"->"+this.lowOrder+","+logTime+","+monitoringProcessedBytesPerUnitDown+","+utilization2);
 			LogWriter log = LogWriter.getLogger("link_utilization.xml");
-			log.printLine("\t<Link Name=\"" +this.linkname+ "\" Src=\"" +this.highOrder+ "\" Dst=\"" +this.lowOrder+ "\" Starttime=\"" +logTime
-					+"\" Bytes=\"" +monitoringProcessedBytesPerUnitDown+ "\" Util=\"" +utilization2+ "\" />");
+			log.printLine("\t<Link Name=\"" +this.linkname+ "\" Starttime=\"" +logTime +"\" Src=\"" +this.highOrder+ "\" Dst=\"" +this.lowOrder+ "\" Bytes=\"" +monitoringProcessedBytesPerUnitDown+ "\" Util=\"" +utilization2+ "\" />");
 			monitoringProcessedBytesPerUnitDown = 0;
 		}
 

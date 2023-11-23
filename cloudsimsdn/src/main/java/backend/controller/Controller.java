@@ -4,6 +4,8 @@ package backend.controller;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 import org.cloudbus.cloudsim.core.CloudSim;
+import org.cloudbus.cloudsim.sdn.Configuration;
+import org.cloudbus.cloudsim.sdn.LogWriter;
 import org.cloudbus.cloudsim.sdn.main.SimpleExampleInterCloud;
 import org.cloudbus.cloudsim.sdn.workload.Workload;
 import org.cloudbus.cloudsim.sdn.workload.WorkloadResultWriter;
@@ -22,10 +24,13 @@ import java.util.*;
 @CrossOrigin
 public class Controller {
     private SimpleExampleInterCloud simulator;
-
+    private String input_topo = "./InputFiles/Input_TopoInfo.xml";
+    private String input_container = "./InputFiles/result1.json";
+    private String input_app = "./InputFiles/Input_AppInfo10.xml";
     private String physicalf = "Intermediate/physical.json";
     private String virtualf = "Intermediate/virtual.json";
     private String workloadf = "Intermediate/workload.csv";
+    private String workload_result = "./OutputFiles/result_workload.csv";
     private boolean halfDuplex = false;
 
     @RequestMapping("/visit")
@@ -49,8 +54,7 @@ public class Controller {
 
     @RequestMapping("/convertphytopo")
     public ResultDTO convertphytopo() throws IOException {
-        String xml = Files.readString(
-                Path.of("./InputFiles/Input_TopoInfo.xml"));
+        String xml = Files.readString(Path.of(input_topo));
         JSONObject json = XML.toJSONObject(xml).getJSONObject("NetworkTopo");
         JSONArray swches = json.getJSONObject("Switches").getJSONArray("Switch");
         JSONArray links = json.getJSONObject("Links").getJSONArray("Link");
@@ -160,7 +164,7 @@ public class Controller {
         }
         String jsonPrettyPrintString = topo.toString(4);
         //保存格式化后的json
-        FileWriter writer = new FileWriter("Intermediate/physical.json");
+        FileWriter writer = new FileWriter(physicalf);
         writer.write(jsonPrettyPrintString);
         writer.close();
         return ResultDTO.success("ok");
@@ -169,8 +173,8 @@ public class Controller {
 
     // 必需保持 hostname = “host” + hostid 对应关系。flows字段在解析workload文件时添加
     @RequestMapping("/convertvirtopo")
-    public ResultDTO convertvirtopo() throws Exception{
-        String content = Files.readString(Path.of("./InputFiles/result1.json"));
+    public ResultDTO convertvirtopo() throws IOException{
+        String content = Files.readString(Path.of(input_container));
         JSONArray json = new JSONArray(content);
         JSONObject vir = new JSONObject();
         for(Object obj : json){
@@ -193,16 +197,16 @@ public class Controller {
         vir.put("policies", new JSONArray());
         String jsonPrettyPrintString = vir.toString(4);
         //保存格式化后的json
-        FileWriter writer = new FileWriter("Intermediate/virtual.json");
+        FileWriter writer = new FileWriter(virtualf);
         writer.write(jsonPrettyPrintString);
         writer.close();
         return ResultDTO.success(jsonPrettyPrintString);
     }
 
     @RequestMapping("/convertworkload")
-    public ResultDTO convertworkload() throws Exception{
+    public ResultDTO convertworkload() throws IOException{
         //读result1制作ip->starttime/endtime的字典
-        String content = Files.readString(Path.of("./InputFiles/result1.json"));
+        String content = Files.readString(Path.of(input_container));
         JSONArray json = new JSONArray(content);
         Map<String, String> startmap = new HashMap<>();
         Map<String, String> endmap = new HashMap<>();
@@ -214,10 +218,9 @@ public class Controller {
         }
 
         //读appinfo.xml 写workload.csv
-        String xml = Files.readString(
-                Path.of("./InputFiles/Input_AppInfo10.xml"));
+        String xml = Files.readString(Path.of(input_app));
         JSONArray apps = XML.toJSONObject(xml).getJSONObject("AppInfo").getJSONArray("Application");
-        String filePath = "./Intermediate/workload.csv";
+        String filePath = workloadf;
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
             writer.write("count,period,atime,name.1,zeros,w.1.1,link.1.2,name.2,p.1.2,w.2.1,link.2.3,name.3,p.2.3,w.3\n");
@@ -264,7 +267,7 @@ public class Controller {
     @RequestMapping("/outputdelay")
     public ResultDTO outputdelay() throws IOException{
         // 读取CSV文件
-        CSVReader csvReader = new CSVReaderBuilder(new FileReader("./OutputFiles/result_workload.csv")).build();
+        CSVReader csvReader = new CSVReaderBuilder(new FileReader(workload_result)).build();
         List<String[]> csvData = csvReader.readAll();
 
         //创建xml
@@ -279,26 +282,32 @@ public class Controller {
 
         for (int i = 1; i < csvData.size(); i++) {
             String[] row = csvData.get(i);
-            bw.write("<Message Src=\"" + row[1].trim() + "\" Dst=\"" + row[2].trim() + "\" StartTime=\"" + row[4].trim() + "\" EndTime=\"" + row[15].trim() + "\" NetworkTime=\"" + row[18].trim() + "\" PkgSize=\"" + row[12].trim() + "\">\n</Message>\n");
+            bw.write("\t<Message Src=\"" + row[1].trim() + "\" Dst=\"" + row[2].trim() + "\" StartTime=\"" + row[4].trim() + "\" EndTime=\"" + row[15].trim() + "\" NetworkTime=\"" + row[18].trim() + "\" PkgSize=\"" + row[12].trim() + "\">\n\t</Message>\n");
         }
 
         bw.write("</Messages>\n" +
                 "</NetworkDelay>");
-
         bw.close();
-
         return ResultDTO.success("ok");
     }
-
-
 
     @RequestMapping("/run")
     public ResultDTO run() throws IOException {
         System.out.println("\n开始仿真");
+        convertphytopo();
+        convertvirtopo();
+        convertworkload();
 //        String args[] = {"LFF","example-intercloud/intercloud.physical2.xml","example-intercloud/intercloud.virtual2.json", "example-intercloud/one-workload.csv"};
         String args[] = {"",physicalf,virtualf,workloadf};
+        LogWriter.resetLogger("link_utilization.xml");
+        LogWriter log = LogWriter.getLogger("link_utilization.xml");
+        log.printLine("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+        log.printLine("<Links Timespan=\"" + Configuration.monitoringTimeInterval+ "\">");
         simulator = new SimpleExampleInterCloud();
         List<Workload> wls = simulator.main(args);
+        log = LogWriter.getLogger("link_utilization.xml");
+        log.printLine("</Links>");
+        outputdelay();
         List<WorkloadResult> wrlist = new ArrayList<>();
         for(Workload workload:wls){
 //------------------------------------------ calculate total time
