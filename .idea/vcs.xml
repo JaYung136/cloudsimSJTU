@@ -3,7 +3,7 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/cloudsim" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/cloudsim_frontend" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/cloudsimsdn" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/cloudsimsdn/cloudsim_frontend" vcs="Git" />
   </component>
 </project>

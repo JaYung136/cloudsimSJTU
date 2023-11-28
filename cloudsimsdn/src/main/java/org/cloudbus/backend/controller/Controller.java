@@ -1,4 +1,4 @@
-package backend.controller;
+package org.cloudbus.backend.controller;
 
 //import com.reins.bookstore.service.LoginService;
 import com.opencsv.CSVReader;
@@ -48,7 +48,7 @@ public class Controller {
         halfDuplex = state.getBoolean("switchstate");
         System.out.println(String.valueOf(halfDuplex));
         CloudSim.HalfDuplex = halfDuplex;
-        CloudSim.wirelessBw = 10000000; //10M
+//        CloudSim.wirelessBw = 10000000; //10M
         return ResultDTO.success("ok");
     }
 

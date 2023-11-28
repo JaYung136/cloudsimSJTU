@@ -1,10 +1,9 @@
-package backend.controller;
+package org.cloudbus.backend.controller;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.json.JSONObject;
 
 @Data
 @Builder

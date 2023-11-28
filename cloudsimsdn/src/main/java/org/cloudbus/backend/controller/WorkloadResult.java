@@ -1,4 +1,4 @@
-package backend.controller;
+package org.cloudbus.backend.controller;
 
 public class WorkloadResult {
     public int jobid; //周期性，一个job可对应多条workloads
