@@ -149,8 +149,8 @@ public class SDNVm extends Vm {
 	private long monitoringGivenMIsPerUnit = 0;
 
 	public void updateMonitor(double logTime, double timeUnit) {
-		updateMonitorCPU(logTime, timeUnit);
-		updateMonitorBW(logTime, timeUnit);
+//		updateMonitorCPU(logTime, timeUnit);
+//		updateMonitorBW(logTime, timeUnit);
 	}
 
 	private void updateMonitorCPU(double logTime, double timeUnit) {

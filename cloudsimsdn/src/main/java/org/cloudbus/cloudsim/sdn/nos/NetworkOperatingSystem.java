@@ -154,10 +154,10 @@ public abstract class NetworkOperatingSystem extends SimEntity {
 				if(this.datacenter != null)
 					this.datacenter.processUpdateProcessing();
 				channelManager.updatePacketProcessing();
-				this.updateHostMonitor(Configuration.monitoringTimeInterval);
-				this.updateSwitchMonitor(Configuration.monitoringTimeInterval);
+//				this.updateHostMonitor(Configuration.monitoringTimeInterval);
+//				this.updateSwitchMonitor(Configuration.monitoringTimeInterval);
 
-				this.updateVmMonitor(CloudSim.clock());
+//				this.updateVmMonitor(CloudSim.clock());
 
 				excludetags = new HashSet<Integer>() ;
 				excludetags.add(CloudSimTagsSDN.MONITOR_UPDATE_UTILIZATION);

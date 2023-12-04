@@ -13,7 +13,9 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.XML;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -25,21 +27,39 @@ import java.util.*;
 public class Controller {
     private SimpleExampleInterCloud simulator;
     private String input_topo = "./InputFiles/Input_TopoInfo.xml";
+    private String input_host = "./InputFiles/Input_Hosts.xml";
     private String input_container = "./InputFiles/result1.json";
-    private String input_app = "./InputFiles/Input_AppInfo10.xml";
+    private String input_app = "./InputFiles/Input_AppInfo.xml";
     private String physicalf = "Intermediate/physical.json";
     private String virtualf = "Intermediate/virtual.json";
-    private String workloadf = "Intermediate/workload.csv";
-    private String workload_result = "./OutputFiles/result_workload.csv";
+    private String workloadf = "Intermediate/messages.csv";
+    private String workload_result = "./OutputFiles/result_messages.csv";
+    private String latency_result = "OutputFiles/Output_Network.xml";
     private boolean halfDuplex = false;
 
     @RequestMapping("/visit")
     public ResultDTO login(@RequestBody String req){
-        System.out.println("访问后端");
-        System.out.println(CloudSim.HalfDuplex);
-        System.out.println(CloudSim.HalfDuplex);
-        System.out.println(CloudSim.HalfDuplex);
+        System.out.println("simulator可访问");
         return ResultDTO.success("This is simulator backend");
+    }
+
+    @PostMapping("/specifyhostfile")
+    public ResultDTO specifyhostfile(MultipartFile file, HttpServletRequest req) {
+        input_host = "InputFiles/" + file.getOriginalFilename();
+        System.out.println("\n"+"主机配置文件，路径为"+ input_host +"\n");
+        return ResultDTO.success("主机配置文件，路径为"+ input_host);
+    }
+    @RequestMapping("/specifytopofile")
+    public ResultDTO specifytopofile(MultipartFile file, HttpServletRequest req){
+        input_topo = "InputFiles/" + file.getOriginalFilename();
+        System.out.println("网络拓扑文件，路径为"+input_topo+"\n");
+        return ResultDTO.success("网络拓扑文件，路径为"+input_topo);
+    }
+    @RequestMapping("/specifyappfile")
+    public ResultDTO specifyappfile(MultipartFile file, HttpServletRequest req){
+        input_app = "InputFiles/" + file.getOriginalFilename();
+        System.out.println("应用文件，路径为"+input_app+"\n");
+        return ResultDTO.success("应用文件，路径为"+input_app);
     }
 
     @RequestMapping("/halfduplex")
@@ -48,7 +68,6 @@ public class Controller {
         halfDuplex = state.getBoolean("switchstate");
         System.out.println(String.valueOf(halfDuplex));
         CloudSim.HalfDuplex = halfDuplex;
-//        CloudSim.wirelessBw = 10000000; //10M
         return ResultDTO.success("ok");
     }
 
@@ -58,7 +77,6 @@ public class Controller {
         JSONObject json = XML.toJSONObject(xml).getJSONObject("NetworkTopo");
         JSONArray swches = json.getJSONObject("Switches").getJSONArray("Switch");
         JSONArray links = json.getJSONObject("Links").getJSONArray("Link");
-
         // 计算多少dc
         Set<String> dcnames = new HashSet<>();
         for(Object obj : swches){
@@ -147,7 +165,7 @@ public class Controller {
             }
         }
         // 新建所有的主机
-        xml = Files.readString(Path.of("./InputFiles/Input_Host8.xml"));
+        xml = Files.readString(Path.of(input_host));
         json = XML.toJSONObject(xml);
         JSONArray hosts = json.getJSONObject("adag").getJSONArray("node");
         for(Object obj : hosts){
@@ -271,7 +289,7 @@ public class Controller {
         List<String[]> csvData = csvReader.readAll();
 
         //创建xml
-        File file = new File("Output_Network.xml");
+        File file = new File(latency_result);
         file.createNewFile();
 
         // 写入
@@ -294,18 +312,18 @@ public class Controller {
     @RequestMapping("/run")
     public ResultDTO run() throws IOException {
         System.out.println("\n开始仿真");
+        CloudSim.HalfDuplex = false;
         convertphytopo();
         convertvirtopo();
-        convertworkload();
-//        String args[] = {"LFF","example-intercloud/intercloud.physical2.xml","example-intercloud/intercloud.virtual2.json", "example-intercloud/one-workload.csv"};
+//        convertworkload();
         String args[] = {"",physicalf,virtualf,workloadf};
-        LogWriter.resetLogger("link_utilization.xml");
-        LogWriter log = LogWriter.getLogger("link_utilization.xml");
+        LogWriter.resetLogger("OutputFiles/link_utilization.xml");
+        LogWriter log = LogWriter.getLogger("OutputFiles/link_utilization.xml");
         log.printLine("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
         log.printLine("<Links Timespan=\"" + Configuration.monitoringTimeInterval+ "\">");
         simulator = new SimpleExampleInterCloud();
         List<Workload> wls = simulator.main(args);
-        log = LogWriter.getLogger("link_utilization.xml");
+        log = LogWriter.getLogger("OutputFiles/link_utilization.xml");
         log.printLine("</Links>");
         outputdelay();
         List<WorkloadResult> wrlist = new ArrayList<>();

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Links Timespan="0.01">
+	<Link Name="LINK3" Starttime="0.31" Src="host1" Dst="Switch: edge1" Bytes="320000" Util="32.0" />
+	<Link Name="LINK1" Starttime="0.31" Src="Switch: edge1" Dst="Switch: core1" Bytes="320000" Util="32.0" />
+	<Link Name="LINK8" Starttime="0.39" Src="Switch: core2" Dst="Switch: edge4" Bytes="320000" Util="32.0" />
+	<Link Name="LINK12" Starttime="0.39" Src="Switch: edge4" Dst="host8" Bytes="320000" Util="32.0" />
+	<Link Name="LINK3" Starttime="1.31" Src="host1" Dst="Switch: edge1" Bytes="320000" Util="32.0" />
+	<Link Name="LINK1" Starttime="1.31" Src="Switch: edge1" Dst="Switch: core1" Bytes="320000" Util="32.0" />
+	<Link Name="LINK8" Starttime="1.39" Src="Switch: core2" Dst="Switch: edge4" Bytes="320000" Util="32.0" />
+	<Link Name="LINK12" Starttime="1.39" Src="Switch: edge4" Dst="host8" Bytes="320000" Util="32.0" />
+	<Link Name="LINK8" Starttime="2.31" Src="Switch: edge4" Dst="Switch: core2" Bytes="320000" Util="32.0" />
+	<Link Name="LINK12" Starttime="2.31" Src="host8" Dst="Switch: edge4" Bytes="320000" Util="32.0" />
+	<Link Name="LINK3" Starttime="2.39" Src="Switch: edge1" Dst="host1" Bytes="320000" Util="32.0" />
+	<Link Name="LINK1" Starttime="2.39" Src="Switch: core1" Dst="Switch: edge1" Bytes="320000" Util="32.0" />
+	<Link Name="LINK8" Starttime="4.31" Src="Switch: edge4" Dst="Switch: core2" Bytes="320000" Util="32.0" />
+	<Link Name="LINK12" Starttime="4.31" Src="host8" Dst="Switch: edge4" Bytes="320000" Util="32.0" />
+	<Link Name="LINK3" Starttime="4.39" Src="Switch: edge1" Dst="host1" Bytes="320000" Util="32.0" />
+	<Link Name="LINK1" Starttime="4.39" Src="Switch: core1" Dst="Switch: edge1" Bytes="320000" Util="32.0" />
+	<Link Name="LINK3" Starttime="6.31" Src="host1" Dst="Switch: edge1" Bytes="320000" Util="32.0" />
+	<Link Name="LINK1" Starttime="6.31" Src="Switch: edge1" Dst="Switch: core1" Bytes="320000" Util="32.0" />
+	<Link Name="LINK8" Starttime="6.39" Src="Switch: core2" Dst="Switch: edge4" Bytes="320000" Util="32.0" />
+	<Link Name="LINK12" Starttime="6.39" Src="Switch: edge4" Dst="host8" Bytes="320000" Util="32.0" />
+	<Link Name="LINK3" Starttime="7.31" Src="host1" Dst="Switch: edge1" Bytes="320000" Util="32.0" />
+	<Link Name="LINK1" Starttime="7.31" Src="Switch: edge1" Dst="Switch: core1" Bytes="320000" Util="32.0" />
+	<Link Name="LINK8" Starttime="7.39" Src="Switch: core2" Dst="Switch: edge4" Bytes="320000" Util="32.0" />
+	<Link Name="LINK12" Starttime="7.39" Src="Switch: edge4" Dst="host8" Bytes="320000" Util="32.0" />
+	<Link Name="LINK3" Starttime="8.31" Src="host1" Dst="Switch: edge1" Bytes="320000" Util="32.0" />
+	<Link Name="LINK1" Starttime="8.31" Src="Switch: edge1" Dst="Switch: core1" Bytes="320000" Util="32.0" />
+	<Link Name="LINK8" Starttime="8.39" Src="Switch: core2" Dst="Switch: edge4" Bytes="320000" Util="32.0" />
+	<Link Name="LINK12" Starttime="8.39" Src="Switch: edge4" Dst="host8" Bytes="320000" Util="32.0" />
+	<Link Name="LINK3" Starttime="9.31" Src="host1" Dst="Switch: edge1" Bytes="320000" Util="32.0" />
+	<Link Name="LINK1" Starttime="9.31" Src="Switch: edge1" Dst="Switch: core1" Bytes="320000" Util="32.0" />
+	<Link Name="LINK8" Starttime="9.39" Src="Switch: core2" Dst="Switch: edge4" Bytes="320000" Util="32.0" />
+	<Link Name="LINK12" Starttime="9.39" Src="Switch: edge4" Dst="host8" Bytes="320000" Util="32.0" />
+</Links>

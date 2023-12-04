@@ -49,7 +49,7 @@ public class SimpleExampleInterCloud {
 	protected static String physicalTopologyFile 	= "dataset-energy/energy-physical.json";
 	protected static String deploymentFile 		= "dataset-energy/energy-virtual.json";
 	protected static String [] workload_files 			= {
-		"dataset-energy/energy-workload.csv"
+		"dataset-energy/energy-messages.csv"
 		};
 
 	protected static List<String> workloads;

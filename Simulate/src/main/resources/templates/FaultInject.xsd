@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'
+           elementFormDefault="qualified">
+    <xs:element name="FaultGenerator">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element  ref="shape" minOccurs="1" maxOccurs="1">
+                </xs:element>
+                <xs:element ref="scale"  minOccurs="1" maxOccurs="1">
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="shape"></xs:element>
+    <xs:element name="scale"></xs:element>
+
+</xs:schema>
