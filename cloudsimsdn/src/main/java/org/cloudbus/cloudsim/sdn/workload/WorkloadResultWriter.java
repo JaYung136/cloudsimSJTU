@@ -47,6 +47,8 @@ public class WorkloadResultWriter {
 		df.setGroupingUsed(false);
 
 		this.filename = file;
+
+		LogWriter.resetLogger(this.filename);
 		out = LogWriter.getLogger(filename);
 
 		//workloadToPrint = new PriorityQueue<Workload>();

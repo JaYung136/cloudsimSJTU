@@ -282,7 +282,12 @@ public class Controller {
 
         for (int i = 1; i < csvData.size(); i++) {
             String[] row = csvData.get(i);
-            bw.write("\t<Message Src=\"" + row[1].trim() + "\" Dst=\"" + row[2].trim() + "\" StartTime=\"" + row[4].trim() + "\" EndTime=\"" + row[15].trim() + "\" NetworkTime=\"" + row[18].trim() + "\" PkgSize=\"" + row[12].trim() + "\">\n\t</Message>\n");
+            try {
+                bw.write("\t<Message Src=\"" + row[1].trim() + "\" Dst=\"" + row[2].trim() + "\" StartTime=\"" + row[4].trim() + "\" EndTime=\"" + row[15].trim() + "\" NetworkTime=\"" + row[18].trim() + "\" PkgSize=\"" + row[12].trim() + "\">\n\t</Message>\n");
+            }
+            catch (Exception e) {
+                bw.write("\t<Message Src=\"" + row[1].trim() + "\" Dst=\"" + row[2].trim() + "\" StartTime=\"" + row[4].trim() + "\" EndTime=\"TimeOut\" NetworkTime=\"TimeOut\" PkgSize=\"" + row[12].trim() + "\">\n\t</Message>\n");
+            }
         }
 
         bw.write("</Messages>\n" +
