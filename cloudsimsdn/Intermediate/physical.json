@@ -1,6 +1,10 @@
 {
     "datacenters": [
         {
+            "name": "net",
+            "type": "wirelessnetwork"
+        },
+        {
             "name": "A",
             "type": "cloud"
         }
@@ -8,7 +12,34 @@
     "nodes": [
         {
             "upports": 0,
-            "bw": 1000000,
+            "bw": 100000000,
+            "downports": 0,
+            "iops": 1000000000,
+            "name": "inter",
+            "datacenter": "net",
+            "type": "intercloud"
+        },
+        {
+            "upports": 0,
+            "bw": 100000000,
+            "downports": 0,
+            "iops": 1000000000,
+            "name": "gwA",
+            "datacenter": "net",
+            "type": "gateway"
+        },
+        {
+            "upports": 0,
+            "bw": 100000000,
+            "downports": 0,
+            "iops": 1000000000,
+            "name": "gwA",
+            "datacenter": "A",
+            "type": "gateway"
+        },
+        {
+            "upports": 0,
+            "bw": 10000000,
             "downports": 0,
             "iops": 1000000000,
             "name": "edge1",
@@ -17,34 +48,34 @@
             "ports": 4
         },
         {
-            "bw": 1000000,
+            "bw": 450000000,
             "name": "host1",
             "datacenter": "A",
             "storage": 1363148800,
             "type": "host",
             "mips": 30000,
-            "pes": 8,
-            "ram": 30720
+            "pes": 2,
+            "ram": 2096000
         },
         {
-            "bw": 1000000,
+            "bw": 250000000,
             "name": "host2",
             "datacenter": "A",
             "storage": 1363148800,
             "type": "host",
             "mips": 20000,
-            "pes": 4,
-            "ram": 30720
+            "pes": 2,
+            "ram": 2096000
         },
         {
-            "bw": 1000000,
+            "bw": 350000000,
             "name": "host3",
             "datacenter": "A",
             "storage": 1363148800,
             "type": "host",
             "mips": 25000,
-            "pes": 8,
-            "ram": 30720
+            "pes": 2,
+            "ram": 2096000
         }
     ],
     "links": [
@@ -65,6 +96,12 @@
             "destination": "host3",
             "name": "LINK3",
             "source": "edge1"
+        },
+        {
+            "latency": "0",
+            "destination": "gwA",
+            "name": "gwA-inter",
+            "source": "inter"
         }
     ]
 }

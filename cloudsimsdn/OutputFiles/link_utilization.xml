@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Links Timespan="0.01">
-	<Link Name="LINK1" Starttime="0.31" Src="host1" Dst="Switch: edge1" KBytes="1000" Util="10.0" />
 	<Link Name="LINK2" Starttime="0.31" Src="Switch: edge1" Dst="host2" KBytes="1000" Util="10.0" />
+	<Link Name="LINK1" Starttime="0.31" Src="host1" Dst="Switch: edge1" KBytes="1000" Util="10.0" />
 </Links>

@@ -75,7 +75,14 @@ public class Controller {
     public ResultDTO convertphytopo() throws IOException {
         String xml = Files.readString(Path.of(input_topo));
         JSONObject json = XML.toJSONObject(xml).getJSONObject("NetworkTopo");
-        JSONArray swches = json.getJSONObject("Switches").getJSONArray("Switch");
+        JSONObject swes = json.getJSONObject("Switches");
+        JSONArray swches = new JSONArray();
+        try {
+            swches = swes.getJSONArray("Switch");
+        } catch (Exception e){
+            swches.clear();
+            swches.put(swes.getJSONObject("Switch"));
+        }
         JSONArray links = json.getJSONObject("Links").getJSONArray("Link");
         // 计算多少dc
         Set<String> dcnames = new HashSet<>();
