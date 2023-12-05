@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Links Timespan="0.01">
-	<Link Name="LINK2" Starttime="0.31" Src="Switch: edge1" Dst="host2" KBytes="1000" Util="10.0" />
-	<Link Name="LINK1" Starttime="0.31" Src="host1" Dst="Switch: edge1" KBytes="1000" Util="10.0" />
+	<Link Name="LINK2" Starttime="0.11" Src="host2" Dst="Switch: edge1" KBytes="1500" Util="1.5" />
+	<Link Name="LINK2" Starttime="0.11" Src="Switch: edge1" Dst="host2" KBytes="2000" Util="2.0" />
+	<Link Name="LINK3" Starttime="0.11" Src="host3" Dst="Switch: edge1" KBytes="1000" Util="1.0" />
+	<Link Name="LINK3" Starttime="0.11" Src="Switch: edge1" Dst="host3" KBytes="2000" Util="2.0" />
+	<Link Name="LINK1" Starttime="0.11" Src="host1" Dst="Switch: edge1" KBytes="1500" Util="1.5" />
+	<Link Name="LINK2" Starttime="0.16" Src="host2" Dst="Switch: edge1" KBytes="1000" Util="1.0" />
+	<Link Name="LINK3" Starttime="0.16" Src="Switch: edge1" Dst="host3" KBytes="1000" Util="1.0" />
+	<Link Name="LINK2" Starttime="0.19" Src="Switch: edge1" Dst="host2" KBytes="3200" Util="3.2" />
+	<Link Name="LINK3" Starttime="0.19" Src="host3" Dst="Switch: edge1" KBytes="3200" Util="3.2" />
+	<Link Name="LINK2" Starttime="0.38" Src="Switch: edge1" Dst="host2" KBytes="50000" Util="50.0" />
+	<Link Name="LINK1" Starttime="0.38" Src="host1" Dst="Switch: edge1" KBytes="50000" Util="50.0" />
+	<Link Name="LINK2" Starttime="0.41" Src="host2" Dst="Switch: edge1" KBytes="1000" Util="1.0" />
+	<Link Name="LINK3" Starttime="0.41" Src="Switch: edge1" Dst="host3" KBytes="1000" Util="1.0" />
+	<Link Name="LINK3" Starttime="0.65" Src="Switch: edge1" Dst="host3" KBytes="2000" Util="2.0" />
+	<Link Name="LINK1" Starttime="0.65" Src="host1" Dst="Switch: edge1" KBytes="2000" Util="2.0" />
+	<Link Name="LINK2" Starttime="0.83" Src="Switch: edge1" Dst="host2" KBytes="1000" Util="1.0" />
+	<Link Name="LINK3" Starttime="0.83" Src="host3" Dst="Switch: edge1" KBytes="1000" Util="1.0" />
 </Links>

@@ -244,7 +244,7 @@ public class Controller {
 
         //读appinfo.xml 写workload.csv
         String xml = Files.readString(Path.of(input_app));
-        JSONArray apps = XML.toJSONObject(xml).getJSONObject("AppInfo").getJSONArray("Application");
+        JSONArray apps = XML.toJSONObject(xml).getJSONObject("AppInfo").getJSONArray("application");
         String filePath = workloadf;
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
