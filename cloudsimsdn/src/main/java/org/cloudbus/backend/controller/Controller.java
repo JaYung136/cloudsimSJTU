@@ -252,7 +252,13 @@ public class Controller {
             for(Object obj : apps){
                 JSONObject app = (JSONObject) obj;
                 String src = app.getString("IpAddress");
-                JSONObject tem = app.getJSONObject("A653SamplingPort").getJSONObject("A664Message");
+                JSONObject tem = new JSONObject();
+                try {
+                    tem = app.getJSONObject("A653SamplingPort");
+                }catch (Exception e){
+                    continue;
+                }
+                tem = tem.getJSONObject("A664Message");
                 Object dataField = tem.opt("A653SamplingPort");
 
                 //case1:大于等于2条msg
