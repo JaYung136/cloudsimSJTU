@@ -318,9 +318,9 @@ public class Controller {
     public ResultDTO run() throws IOException {
         System.out.println("\n开始仿真");
         CloudSim.HalfDuplex = false;
-//        convertphytopo();
-//        convertvirtopo();
-//        convertworkload();
+        convertphytopo();
+        convertvirtopo();
+        convertworkload();
         String args[] = {"",physicalf,virtualf,workloadf};
         LogWriter.resetLogger("OutputFiles/link_utilization.xml");
         LogWriter log = LogWriter.getLogger("OutputFiles/link_utilization.xml");
