@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<NetworkDelay>
+<Messages>
+	<Message Src="10.31.40.1" Dst="10.31.40.2" StartTime="0.3" EndTime="0.305" NetworkTime="0.005" PkgSizeKB="1000">
+	</Message>
+</Messages>
+</NetworkDelay>

@@ -56,51 +56,50 @@ public class LogPrinter {
 		}
 		//*/
 
-		Log.printLine("========== HOST POWER CONSUMPTION based on Actual Workload processing ===========");
-		for(Host host:hostList) {
-			// Actual workload based power consumption
-			double consumedEnergy = ((SDNHost)host).getConsumedEnergy();
-			Log.printLine("Host #"+host.getId()+": "+consumedEnergy);
-			hostEnergyConsumption+= consumedEnergy;
-		}
-
-		Log.printLine("========== SWITCH POWER CONSUMPTION AND DETAILED UTILIZATION ===========");
-		for(Switch sw:switchList) {
-			//sw.addUtilizationEntryTermination(finishTime);
-			double energy = sw.getConsumedEnergy();
-			Log.printLine("Switch:"+sw.getName()+": "+energy);
-			switchEnergyConsumption+= energy;
-
-//			printSwitchUtilizationHistory(sw.getUtilizationHisotry());
-
-		}
-		Log.printLine("========== HOST Overload percentage ===========");
-		for(Host host:hostList) {
-			// Overloaded time
-			double overScaleTime = ((SDNHost)host).overloadLoggerGetScaledOverloadedDuration();
-			double overTime = ((SDNHost)host).overloadLoggerGetOverloadedDuration();
-			double totalTime = ((SDNHost)host).overloadLoggerGetTotalDuration();
-			double overPercent = (totalTime != 0) ? overTime/totalTime : 0;
-			Log.printLine("Overload Host #"+host.getId()+": "+overTime+"/"+totalTime+"="+overPercent + "... Scaled Overload duration= "+overScaleTime);
-			hostTotalTime += totalTime;
-			hostOverTime += overTime;
-			hostOverScaleTime += overScaleTime;
-		}
-
-		Log.printLine("========== VM Overload percentage ===========");
-		for(Host host:hostList) {
-			for (SDNVm vm : host.<SDNVm>getVmList()) {
-				// Overloaded time
-				double overScaleTime = vm.overloadLoggerGetScaledOverloadedDuration();
-				double overTime = vm.overloadLoggerGetOverloadedDuration();
-				double totalTime = vm.overloadLoggerGetTotalDuration();
-				double overPercent = (totalTime != 0) ? overTime/totalTime : 0;
-				Log.printLine("Vm("+vm+"): "+overTime+"/"+totalTime+"="+overPercent + "... Scaled Overload duration= "+overScaleTime);
-				vmTotalTime += totalTime;
-				vmOverTime += overTime;
-				vmOverScaleTime += overScaleTime;
-			}
-		}
+//		Log.printLine("========== HOST POWER CONSUMPTION based on Actual Workload processing ===========");
+//		for(Host host:hostList) {
+//			// Actual workload based power consumption
+//			double consumedEnergy = ((SDNHost)host).getConsumedEnergy();
+//			Log.printLine("Host #"+host.getId()+": "+consumedEnergy);
+//			hostEnergyConsumption+= consumedEnergy;
+//		}
+//
+//		Log.printLine("========== SWITCH POWER CONSUMPTION AND DETAILED UTILIZATION ===========");
+//		for(Switch sw:switchList) {
+//			//sw.addUtilizationEntryTermination(finishTime);
+//			double energy = sw.getConsumedEnergy();
+//			Log.printLine("Switch:"+sw.getName()+": "+energy);
+//			switchEnergyConsumption+= energy;
+//
+////			printSwitchUtilizationHistory(sw.getUtilizationHisotry());
+//
+//		}
+//		Log.printLine("========== HOST Overload percentage ===========");
+//		for(Host host:hostList) {
+//			// Overloaded time
+//			double overScaleTime = ((SDNHost)host).overloadLoggerGetScaledOverloadedDuration();
+//			double overTime = ((SDNHost)host).overloadLoggerGetOverloadedDuration();
+//			double totalTime = ((SDNHost)host).overloadLoggerGetTotalDuration();
+//			double overPercent = (totalTime != 0) ? overTime/totalTime : 0;
+//			Log.printLine("Overload Host #"+host.getId()+": "+overTime+"/"+totalTime+"="+overPercent + "... Scaled Overload duration= "+overScaleTime);
+//			hostTotalTime += totalTime;
+//			hostOverTime += overTime;
+//			hostOverScaleTime += overScaleTime;
+//		}
+//		Log.printLine("========== VM Overload percentage ===========");
+//		for(Host host:hostList) {
+//			for (SDNVm vm : host.<SDNVm>getVmList()) {
+//				// Overloaded time
+//				double overScaleTime = vm.overloadLoggerGetScaledOverloadedDuration();
+//				double overTime = vm.overloadLoggerGetOverloadedDuration();
+//				double totalTime = vm.overloadLoggerGetTotalDuration();
+//				double overPercent = (totalTime != 0) ? overTime/totalTime : 0;
+//				Log.printLine("Vm("+vm+"): "+overTime+"/"+totalTime+"="+overPercent + "... Scaled Overload duration= "+overScaleTime);
+//				vmTotalTime += totalTime;
+//				vmOverTime += overTime;
+//				vmOverScaleTime += overScaleTime;
+//			}
+//		}
 	}
 	public static void printTotalEnergy() {
 		Log.printLine("========== TOTAL POWER CONSUMPTION ===========");

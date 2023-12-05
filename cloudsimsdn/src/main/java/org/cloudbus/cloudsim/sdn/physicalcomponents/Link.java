@@ -232,7 +232,7 @@ public class Link {
 				&& this.lowOrder instanceof GatewaySwitch != true
 				&& this.highOrder instanceof GatewaySwitch != true){
 			LogWriter log = LogWriter.getLogger("OutputFiles/link_utilization.xml");
-			log.printLine("\t<Link Name=\"" +this.linkname+ "\" Starttime=\"" +String.format("%.2f", logTime) +"\" Src=\"" +this.lowOrder+ "\" Dst=\"" +this.highOrder+ "\" Bytes=\"" +monitoringProcessedBytesPerUnitUp+ "\" Util=\"" +utilization1+ "\" />");
+			log.printLine("\t<Link Name=\"" +this.linkname+ "\" Starttime=\"" +String.format("%.2f", logTime) +"\" Src=\"" +this.lowOrder+ "\" Dst=\"" +this.highOrder+ "\" KBytes=\"" +monitoringProcessedBytesPerUnitUp+ "\" Util=\"" +utilization1+ "\" />");
 			monitoringProcessedBytesPerUnitUp = 0;
 		}
 
@@ -244,7 +244,7 @@ public class Link {
 				&& this.lowOrder instanceof GatewaySwitch != true
 				&& this.highOrder instanceof GatewaySwitch != true) {
 			LogWriter log = LogWriter.getLogger("OutputFiles/link_utilization.xml");
-			log.printLine("\t<Link Name=\"" +this.linkname+ "\" Starttime=\"" +String.format("%.2f", logTime) +"\" Src=\"" +this.highOrder+ "\" Dst=\"" +this.lowOrder+ "\" Bytes=\"" +monitoringProcessedBytesPerUnitDown+ "\" Util=\"" +utilization2+ "\" />");
+			log.printLine("\t<Link Name=\"" +this.linkname+ "\" Starttime=\"" +String.format("%.2f", logTime) +"\" Src=\"" +this.highOrder+ "\" Dst=\"" +this.lowOrder+ "\" KBytes=\"" +monitoringProcessedBytesPerUnitDown+ "\" Util=\"" +utilization2+ "\" />");
 			monitoringProcessedBytesPerUnitDown = 0;
 		}
 

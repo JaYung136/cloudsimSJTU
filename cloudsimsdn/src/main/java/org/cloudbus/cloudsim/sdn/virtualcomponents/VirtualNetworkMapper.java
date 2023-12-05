@@ -33,11 +33,11 @@ public class VirtualNetworkMapper {
 		}
 
 		if(srchost.equals(dsthost)) {
-			Log.printLine(CloudSim.clock() + ": Source SDN Host is same as Destination. Go loopback");
+//			Log.printLine(CloudSim.clock() + ": Source SDN Host is same as Destination. Go loopback");
 			srchost.addVMRoute(srcVm, dstVm, flowId, dsthost);
 		}
 		else {
-			Log.printLine(CloudSim.clock() + ": VMs are in different hosts:"+ srchost+ "("+srcVm+")->"+dsthost+"("+dstVm+")");
+//			Log.printLine(CloudSim.clock() + ": VMs are in different hosts:"+ srchost+ "("+srcVm+")->"+dsthost+"("+dstVm+")");
 			boolean findRoute = buildForwardingTableRec(srchost, srcVm, dstVm, flowId);
 
 			if(!findRoute) {

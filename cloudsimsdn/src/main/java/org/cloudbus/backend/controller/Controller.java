@@ -33,8 +33,8 @@ public class Controller {
     private String physicalf = "Intermediate/physical.json";
     private String virtualf = "Intermediate/virtual.json";
     private String workloadf = "Intermediate/messages.csv";
-    private String workload_result = "./OutputFiles/result_messages.csv";
-    private String latency_result = "OutputFiles/Output_Network.xml";
+    private String workload_result = "./Intermediate/result_messages.csv";
+    private String latency_result = "OutputFiles/output_latency.xml";
     private boolean halfDuplex = false;
 
     @RequestMapping("/visit")
@@ -301,10 +301,10 @@ public class Controller {
         for (int i = 1; i < csvData.size(); i++) {
             String[] row = csvData.get(i);
             try {
-                bw.write("\t<Message Src=\"" + row[1].trim() + "\" Dst=\"" + row[2].trim() + "\" StartTime=\"" + row[4].trim() + "\" EndTime=\"" + row[15].trim() + "\" NetworkTime=\"" + row[18].trim() + "\" PkgSize=\"" + row[12].trim() + "\">\n\t</Message>\n");
+                bw.write("\t<Message Src=\"" + row[1].trim() + "\" Dst=\"" + row[2].trim() + "\" StartTime=\"" + row[4].trim() + "\" EndTime=\"" + row[15].trim() + "\" NetworkTime=\"" + row[18].trim() + "\" PkgSizeKB=\"" + row[12].trim() + "\">\n\t</Message>\n");
             }
             catch (Exception e) {
-                bw.write("\t<Message Src=\"" + row[1].trim() + "\" Dst=\"" + row[2].trim() + "\" StartTime=\"" + row[4].trim() + "\" EndTime=\"TimeOut\" NetworkTime=\"TimeOut\" PkgSize=\"" + row[12].trim() + "\">\n\t</Message>\n");
+                bw.write("\t<Message Src=\"" + row[1].trim() + "\" Dst=\"" + row[2].trim() + "\" StartTime=\"" + row[4].trim() + "\" EndTime=\"TimeOut\" NetworkTime=\"TimeOut\" PkgSizeKB=\"" + row[12].trim() + "\">\n\t</Message>\n");
             }
         }
 
@@ -318,8 +318,8 @@ public class Controller {
     public ResultDTO run() throws IOException {
         System.out.println("\n开始仿真");
         CloudSim.HalfDuplex = false;
-        convertphytopo();
-        convertvirtopo();
+//        convertphytopo();
+//        convertvirtopo();
 //        convertworkload();
         String args[] = {"",physicalf,virtualf,workloadf};
         LogWriter.resetLogger("OutputFiles/link_utilization.xml");

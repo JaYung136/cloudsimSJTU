@@ -77,7 +77,7 @@ public class WorkloadParser {
 		if(indexSlash != -1) {
 			String path_folder = fileName.substring(0, indexSlash+1);
 			String path_file = fileName.substring(indexSlash+1);
-			result_file = "./OutputFiles/"/*path_folder*/ + "result_" + path_file;
+			result_file = "./Intermediate/"/*path_folder*/ + "result_" + path_file;
 		}
 		else {
 			result_file = "result_"+fileName;
