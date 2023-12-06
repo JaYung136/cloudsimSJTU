@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
+import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
@@ -267,7 +268,7 @@ public class Controller {
                     for (Object obj2 : msgs) {
                         JSONObject msg = (JSONObject) obj2;
                         String dst = msg.getString("IpAddress");
-                        int period = msg.getInt("SamplePeriod");
+                        double period = msg.getDouble("SamplePeriod");
                         int pktsize = msg.getInt("MessageSize");
                         int count = 0;
                         for (double t = Double.parseDouble(startmap.get(src)); t < Double.parseDouble(endmap.get(src)); t += period) {
@@ -280,10 +281,12 @@ public class Controller {
                 else {
                     JSONObject msg = (JSONObject) dataField;
                     String dst = msg.getString("IpAddress");
-                    int period = msg.getInt("SamplePeriod");
+                    double period = msg.getDouble("SamplePeriod");
                     int pktsize = msg.getInt("MessageSize");
                     int count = 0;
-                    for (double t = Double.parseDouble(startmap.get(src)); t < Double.parseDouble(endmap.get(src)); t += period) {
+                    double st = Double.parseDouble(startmap.get(src));
+                    double ed = Double.parseDouble(endmap.get(src));
+                    for (double t = st; t <= ed; t += period) {
                         count++;
                     }
                     writer.write(count + "," + period + "," + startmap.get(src) + "," + src + ",0,0,default," + dst + "," + pktsize + ",0,,,,\n");
@@ -364,9 +367,9 @@ public class Controller {
                 wr.status = "timeout";
             else
                 wr.status = "arrived";
-            wr.finishtime = String.format("%.4f", finishTime);
-            wr.starttime = String.format("%.4f", startTime);
-            wr.time = String.format("%.4f", Time);
+            wr.finishtime = String.format("%.6f", finishTime);
+            wr.starttime = String.format("%.6f", startTime);
+            wr.time = String.format("%.6f", Time);
             wrlist.add(wr);
         }
         WorkloadResult[] wrarray = wrlist.toArray(new WorkloadResult[wrlist.size()]);

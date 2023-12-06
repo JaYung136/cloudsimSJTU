@@ -137,7 +137,7 @@ public class LogPrinter {
 	static public String tabSize = "10";
 	static public String fString = 	"%"+tabSize+"s"+indent;
 	static public String fInt = 	"%"+tabSize+"d"+indent;
-	static public String fFloat = 	"%"+tabSize+".3f"+indent;
+	static public String fFloat = 	"%"+tabSize+".6f"+indent;
 
 	public static void printCloudletList(List<Cloudlet> list) {
 		int size = list.size();
