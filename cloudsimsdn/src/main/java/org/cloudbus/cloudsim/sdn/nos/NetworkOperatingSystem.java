@@ -354,7 +354,7 @@ public abstract class NetworkOperatingSystem extends SimEntity {
 
 	public void sendWirelessTimeSlide(int destNOSID, String chankey) {
 //		CloudSim.cancelAll(destNOSID, new PredicateType(CloudSimTagsSDN.SDN_WIRELESS_TIMESLIDE));
-		send(destNOSID, 0.001, CloudSimTagsSDN.SDN_WIRELESS_TIMESLIDE, chankey);
+		send(destNOSID, 0.1, CloudSimTagsSDN.SDN_WIRELESS_TIMESLIDE, chankey);
 	}
 
 	public long getBandwidthBackup(int flowId) {

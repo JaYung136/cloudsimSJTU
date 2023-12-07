@@ -267,11 +267,11 @@ public class Controller {
                 String src = app.getString("IpAddress");
                 JSONObject tem = new JSONObject();
                 try {
-                    tem = app.getJSONObject("A653SamplingPort");
+                    tem = app.getJSONObject("A653SamplingPort").getJSONObject("A664Message");
                 }catch (Exception e){
                     continue;
                 }
-                tem = tem.getJSONObject("A664Message");
+
                 Object dataField = tem.opt("A653SamplingPort");
 
                 //case1:大于等于2条msg
