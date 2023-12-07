@@ -31,12 +31,13 @@ import java.util.*;
 public class CloudSim {
 	public static WirelessScheduler wirelessScheduler = new WirelessScheduler();
 
-	public static double wirelessBw = 10000000; //10M
-	public static long HostSendBw = 10000000; // 10M
+	public static double wirelessBw = 10000000; //10G
+	public static long HostSendBw = 10000000; // 10G
 	/** The Constant CLOUDSIM_VERSION_STRING. */
 	private static final String CLOUDSIM_VERSION_STRING = "3.0";
 	public static boolean HalfDuplex = false; //半双工
     public static boolean linkutif = true;
+	public static Map<String, Long> wirelesschan_bw;
 
     /** The id of CIS entity. */
 	private static int cisId = -1;

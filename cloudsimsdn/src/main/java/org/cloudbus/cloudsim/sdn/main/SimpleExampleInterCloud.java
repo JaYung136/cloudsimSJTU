@@ -56,7 +56,7 @@ public class SimpleExampleInterCloud {
 
 	private  static boolean logEnabled = true;
 
-	public interface VmAllocationPolicyFactory {
+    public interface VmAllocationPolicyFactory {
 		public VmAllocationPolicy create(List<? extends Host> list);
 	}
 	enum VmAllocationPolicyEnum{ CombLFF, CombMFF, MipLFF, MipMFF, OverLFF, OverMFF, LFF, MFF, Overbooking}

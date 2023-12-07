@@ -178,7 +178,9 @@ public class SDNDatacenter extends Datacenter {
 			}
 		}
 /*******************************************************************************************/
-		double wirelessBwUp = CloudSim.wirelessBw;
+//		double wirelessBwUp = CloudSim.wirelessBw;
+		String mydcname = this.getName();
+		double wirelessBwUp = Double.parseDouble(String.valueOf(CloudSim.wirelesschan_bw.get(mydcname)) );
 		Channel channel = channelManager.findChannel(src, dst, flowId+1000);
 		time = CloudSim.clock();
 		if(channel == null) {
@@ -223,7 +225,9 @@ public class SDNDatacenter extends Datacenter {
 			}
 		}
 /*******************************************************************************************/
-		double wirelessBwDown = CloudSim.wirelessBw;
+//		double wirelessBwDown = CloudSim.wirelessBw;
+		String mydcname = SDNDatacenter.findDatacenterGlobal(dst).getName();
+		double wirelessBwDown = Double.parseDouble(String.valueOf(CloudSim.wirelesschan_bw.get(mydcname)) );
 		Channel channel = channelManager.findChannel(src, dst, flowId+2000);
 		if(channel == null) {
 			channel = new Channel(flowId + 2000, src, dst, originCh.nodesAll, originCh.linksAll, wirelessBwDown,

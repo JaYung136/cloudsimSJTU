@@ -36,6 +36,7 @@ public class Controller {
     private String workloadf = "Intermediate/messages.csv";
     private String workload_result = "./Intermediate/result_messages.csv";
     private String latency_result = "OutputFiles/output_latency.xml";
+    private Map<String, Long> wirelessChan_bw = new HashMap<>();
     private boolean halfDuplex = false;
 
     @RequestMapping("/visit")
@@ -75,8 +76,8 @@ public class Controller {
     @RequestMapping("/convertphytopo")
     public ResultDTO convertphytopo() throws IOException {
         String xml = Files.readString(Path.of(input_topo));
-        JSONObject json = XML.toJSONObject(xml).getJSONObject("NetworkTopo");
-        JSONObject swes = json.getJSONObject("Switches");
+        JSONObject topojson = XML.toJSONObject(xml).getJSONObject("NetworkTopo");
+        JSONObject swes = topojson.getJSONObject("Switches");
         JSONArray swches = new JSONArray();
         try {
             swches = swes.getJSONArray("Switch");
@@ -84,7 +85,7 @@ public class Controller {
             swches.clear();
             swches.put(swes.getJSONObject("Switch"));
         }
-        JSONArray links = json.getJSONObject("Links").getJSONArray("Link");
+        JSONArray links = topojson.getJSONObject("Links").getJSONArray("Link");
         // 计算多少dc
         Set<String> dcnames = new HashSet<>();
         for(Object obj : swches){
@@ -174,8 +175,8 @@ public class Controller {
         }
         // 新建所有的主机
         xml = Files.readString(Path.of(input_host));
-        json = XML.toJSONObject(xml);
-        JSONArray hosts = json.getJSONObject("adag").getJSONArray("node");
+        JSONObject hostjson = XML.toJSONObject(xml);
+        JSONArray hosts = hostjson.getJSONObject("adag").getJSONArray("node");
         for(Object obj : hosts){
             JSONObject host = (JSONObject) obj;
             topo.accumulate("nodes", new JSONObject()
@@ -193,6 +194,17 @@ public class Controller {
         FileWriter writer = new FileWriter(physicalf);
         writer.write(jsonPrettyPrintString);
         writer.close();
+        JSONObject endsys = topojson
+                .getJSONObject("EndSystems")
+                .getJSONObject("EndSystem")
+                .getJSONObject("AesPhysPorts");
+        JSONArray sys = endsys.getJSONArray("AesPhysPort");
+        for(Object obj : sys){
+            JSONObject wirelesschan = (JSONObject) obj;
+            String name = wirelesschan.getString("Network");
+            long bw = (long) (wirelesschan.getDouble("Speed")*1000); //MB
+            wirelessChan_bw.put(name, bw);
+        }
         return ResultDTO.success("ok");
     }
 
@@ -334,6 +346,8 @@ public class Controller {
     public ResultDTO run() throws IOException {
         System.out.println("\n开始仿真");
         CloudSim.HalfDuplex = false;
+        CloudSim.wirelesschan_bw = wirelessChan_bw;
+
         convertphytopo();
         convertvirtopo();
         convertworkload();

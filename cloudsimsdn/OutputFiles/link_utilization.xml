@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Links Timespan="0.01">
+	<Link Name="LINK11" Starttime="0.01" Src="host1" Dst="Switch: edge1" KBytes="2048" Util="2.048" />
+	<Link Name="LINK12" Starttime="0.01" Src="host2" Dst="Switch: edge1" KBytes="2048" Util="2.048" />
+	<Link Name="LINK13" Starttime="0.01" Src="Switch: edge1" Dst="Switch: core1" KBytes="4096" Util="4.096" />
+	<Link Name="LINK21" Starttime="0.01" Src="Switch: edge2" Dst="host3" KBytes="2048" Util="2.048" />
+	<Link Name="LINK22" Starttime="0.01" Src="host4" Dst="Switch: edge2" KBytes="2048" Util="2.048" />
+	<Link Name="LINK31" Starttime="0.01" Src="host5" Dst="Switch: edge3" KBytes="2048" Util="2.048" />
+	<Link Name="LINK33" Starttime="0.01" Src="Switch: edge3" Dst="Switch: core3" KBytes="2048" Util="2.048" />
+	<Link Name="LINK23" Starttime="0.05" Src="Switch: core2" Dst="Switch: edge2" KBytes="2048" Util="2.048" />
+	<Link Name="LINK21" Starttime="0.05" Src="Switch: edge2" Dst="host3" KBytes="2048" Util="2.048" />
+	<Link Name="LINK23" Starttime="0.09" Src="Switch: core2" Dst="Switch: edge2" KBytes="4096" Util="4.096" />
+	<Link Name="LINK21" Starttime="0.09" Src="Switch: edge2" Dst="host3" KBytes="4096" Util="4.096" />
+</Links>

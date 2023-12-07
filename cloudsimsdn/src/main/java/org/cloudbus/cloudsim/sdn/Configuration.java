@@ -8,6 +8,8 @@
 
  package org.cloudbus.cloudsim.sdn;
 
+import java.util.Map;
+
 public class Configuration {
 	public static String workingDirectory = "./";
 	public static String experimentName="";
@@ -133,6 +135,7 @@ public class Configuration {
 	public static boolean DEBUG_RESULT_WRITE_DETAIL = true;
 	public static boolean DEBUG_PRINT_DETAIL_SIZE_TIME = true;
 	public static boolean DEBUG_CHECK_OVER_TIME_REQUESTS = false;
+//	public static Map<String, Long> wirelesschan_bw;
 
-	//*/
+    //*/
 }
