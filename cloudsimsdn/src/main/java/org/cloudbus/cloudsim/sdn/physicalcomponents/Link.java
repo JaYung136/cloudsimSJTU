@@ -30,6 +30,7 @@ public class Link {
 	// bi-directional link (one link = both ways)
 	private Node highOrder;
 	private Node lowOrder;
+	public double totalBW;
 	private double upBW;	// low -> high
 	private double downBW;	// high -> low
 	private double latency;	// in milliseconds, need to *0.001 to transform in seconds.
@@ -40,7 +41,8 @@ public class Link {
 	public Link(Node highOrder, Node lowOrder, double latency, double bw, String name) {
 		this.highOrder = highOrder;
 		this.lowOrder = lowOrder;
-		this.upBW = this.downBW = bw;
+		this.upBW = this.downBW = bw * CloudSim.bwLimit;
+		this.totalBW = bw;
 		this.latency = latency;
 		this.linkname = name;
 		this.upChannels = new LinkedList<Channel>();
@@ -223,7 +225,7 @@ public class Link {
 	private long monitoringProcessedBytesPerUnitDown = 0;
 
 	public double updateMonitor(double logTime, double timeUnit) {
-		long capacity = (long) (this.getBw() * timeUnit);
+		long capacity = (long) (this.totalBW * timeUnit);
 		double utilization1 = (double)monitoringProcessedBytesPerUnitUp / capacity * 100;
 		mvUp.add(utilization1, logTime);
 		if(monitoringProcessedBytesPerUnitUp != 0

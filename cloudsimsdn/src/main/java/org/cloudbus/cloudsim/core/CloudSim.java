@@ -38,6 +38,7 @@ public class CloudSim {
 	public static boolean HalfDuplex = false; //半双工
     public static boolean linkutif = true;
 	public static Map<String, Long> wirelesschan_bw;
+	public static double bwLimit;
 
     /** The id of CIS entity. */
 	private static int cisId = -1;

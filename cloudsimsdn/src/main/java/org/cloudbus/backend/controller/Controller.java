@@ -194,17 +194,50 @@ public class Controller {
         FileWriter writer = new FileWriter(physicalf);
         writer.write(jsonPrettyPrintString);
         writer.close();
-        JSONObject endsys = topojson
-                .getJSONObject("EndSystems")
-                .getJSONObject("EndSystem")
-                .getJSONObject("AesPhysPorts");
-        JSONArray sys = endsys.getJSONArray("AesPhysPort");
-        for(Object obj : sys){
-            JSONObject wirelesschan = (JSONObject) obj;
-            String name = wirelesschan.getString("Network");
-            long bw = (long) (wirelesschan.getDouble("Speed")*1000); //MB
-            wirelessChan_bw.put(name, bw);
+        try {
+            JSONObject endsys = topojson
+                    .getJSONObject("EndSystems")
+                    .getJSONObject("EndSystem")
+                    .getJSONObject("AesPhysPorts");
+            JSONArray sys = endsys.getJSONArray("AesPhysPort");
+            for (Object obj : sys) {
+                JSONObject wirelesschan = (JSONObject) obj;
+                String name = wirelesschan.getString("Network");
+                long bw = (long) (wirelesschan.getDouble("Speed") * 1000); //MB
+                wirelessChan_bw.put(name, bw);
+            }
+        }catch (Exception e) {
+            System.out.println("以太网络仿真");
         }
+        CloudSim.bwLimit = 1.0;
+
+        try {
+            JSONArray ups = hostjson.getJSONObject("adag").getJSONArray("utilization");
+            for (Object obj : ups) {
+                JSONObject up = (JSONObject) obj;
+                String name = up.getString("type");
+                double upvalue =  up.getDouble("up");
+                if(name.equals("bandwidth")){
+                    CloudSim.bwLimit = upvalue;
+                }
+            }
+        } catch (Exception e){
+            try {
+                JSONArray ups = new JSONArray();
+                ups.put(hostjson.getJSONObject("adag").getJSONObject("utilization"));
+                for (Object obj : ups) {
+                    JSONObject up = (JSONObject) obj;
+                    String name = up.getString("type");
+                    double upvalue =  up.getDouble("up");
+                    if(name.equals("bandwidth")){
+                        CloudSim.bwLimit = upvalue;
+                    }
+                }
+            }
+            catch (Exception e1){
+            }
+        }
+        System.out.println("带宽利用率:"+CloudSim.bwLimit);
         return ResultDTO.success("ok");
     }
 
