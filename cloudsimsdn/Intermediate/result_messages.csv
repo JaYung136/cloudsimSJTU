@@ -1,2 +1,2 @@
 Workload_ID,   Src_App,   Dst_App,    App_ID,SubmitTime,Pr:StartTime,Pr:EndTime,Pr:CPUTime,   Pr:Size,Tr:StartTime,Tr:EndTime,Tr:NetworkTime,   Tr:Size,Tr:Channel,Pr:StartTime,Pr:EndTime,Pr:CPUTime,   Pr:Size,ResponseTime,
- 0, 10.31.40.1, 10.31.40.2, 0, 0.82, 0.82, 0.822, 0.002, 1, 0.822, 1.279, 0.457, 3200000, -1, 1.279, 1.28, 0.001, 1,  0.460000,
+ 0, 10.31.40.1, 10.31.40.2, 0, 0.82, 0.82, 0.822, 0.002, 1, 0.822, 0.868, 0.046, 320000, -1, 0.868, 0.87, 0.002, 1,  0.049716,
