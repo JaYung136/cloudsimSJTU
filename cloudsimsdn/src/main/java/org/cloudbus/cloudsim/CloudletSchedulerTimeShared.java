@@ -58,7 +58,8 @@ public class CloudletSchedulerTimeShared extends CloudletScheduler {
 		double nextEvent = Double.MAX_VALUE;
 		List<ResCloudlet> toRemove = new ArrayList<ResCloudlet>();
 		for (ResCloudlet rcl : getCloudletExecList()) {
-			long remainingLength = rcl.getRemainingCloudletLength();
+			//TODO: 让任务剩余bit总为0
+			long remainingLength = 0; //rcl.getRemainingCloudletLength();
 			if (remainingLength == 0) {// finished: remove from the list
 				toRemove.add(rcl);
 				cloudletFinish(rcl);

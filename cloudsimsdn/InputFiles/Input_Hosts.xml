@@ -5,5 +5,5 @@
     <node name="host3" memory="2096000" storage="1363148800" cores="2" mips="25000" bandwidth="350" network="A"/>
     <utilization type = "cpu" up = "0.70" />
     <utilization type = "memory" up = "0.70"/>
-    <utilization type = "bandwidth" up = "0.70"/>
+    <utilization type = "bandwidth" up = "1.0"/>
 </adag>

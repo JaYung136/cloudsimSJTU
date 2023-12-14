@@ -132,16 +132,16 @@ public final class XmlUtil {
      */
     public void parse() {
         if (this.daxPath != null) {
-            parseXmlFile(this.daxPath);
+            parseXmlFile(new File(this.daxPath));
         } else if (this.daxPaths != null) {
             for (String path : this.daxPaths) {
-                parseXmlFile(path);
+                parseXmlFile(new File(path));
             }
         }
     }
 
-    public void parseHostXml(String path) {
-        parseXmlFile(path);
+    public void parseHostXml(File f) {
+        parseXmlFile(f);
     }
 
     /**
@@ -159,12 +159,12 @@ public final class XmlUtil {
         }
     }
 
-    public void parseContainerInfo(String path) throws Exception{
+    public void parseContainerInfo(File f) throws Exception{
         try {
 
             SAXBuilder builder = new SAXBuilder();
             //parse using builder to get DOM representation of the XML file
-            Document dom = builder.build(new File(path));
+            Document dom = builder.build(f);
             Element root = dom.getRootElement();
             List<Element> list = root.getChildren();
             for (Element node : list) {
@@ -215,13 +215,13 @@ public final class XmlUtil {
     /**
      * Parse a DAX file with jdom
      */
-    private void parseXmlFile(String path) {
+    private void parseXmlFile(File fil) {
 
         try {
 
             SAXBuilder builder = new SAXBuilder();
             //parse using builder to get DOM representation of the XML file
-            Document dom = builder.build(new File(path));
+            Document dom = builder.build(fil);
             Element root = dom.getRootElement();
             List<Element> list = root.getChildren();
             for (Element node : list) {

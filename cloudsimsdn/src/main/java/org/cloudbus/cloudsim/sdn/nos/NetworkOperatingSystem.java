@@ -213,6 +213,7 @@ public abstract class NetworkOperatingSystem extends SimEntity {
 	}
 
 	public Packet addPacketToChannel(Packet orgPkt) {
+		double timenow = CloudSim.clock();
 		Packet pkt = orgPkt;
 		channelManager.updatePacketProcessing();
 		int src = pkt.getOrigin();

@@ -80,19 +80,19 @@
     ],
     "links": [
         {
-            "latency": "0.001",
+            "latency": "0.007",
             "destination": "host1",
             "name": "LINK1",
             "source": "edge1"
         },
         {
-            "latency": "0.001",
+            "latency": "0.007",
             "destination": "host2",
             "name": "LINK2",
             "source": "edge1"
         },
         {
-            "latency": "0.001",
+            "latency": "0.007",
             "destination": "host3",
             "name": "LINK3",
             "source": "edge1"

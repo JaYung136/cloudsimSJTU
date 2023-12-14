@@ -15,6 +15,7 @@
  */
 package org.sim.workflowsim;
 
+import org.sim.service.Constants;
 import org.sim.workflowsim.planning.DHEFTPlanningAlgorithm;
 import org.sim.workflowsim.planning.RandomPlanningAlgorithm;
 import org.sim.cloudbus.cloudsim.Log;
@@ -143,7 +144,7 @@ public final class WorkflowPlanner extends SimEntity {
             case WorkflowSimTags.START_SIMULATION:
                 //getWorkflowParser().parseXmlFile(appPath);
                 XmlUtil util = new XmlUtil(getClusteringEngine().getWorkflowEngine().getSchedulerId(0));
-                util.parseHostXml(appPath);
+                util.parseHostXml(Constants.appFile);
                 setTaskList(util.getTaskList());
                 //setTaskList(getWorkflowParser().getTaskList());
                 processPlanning();

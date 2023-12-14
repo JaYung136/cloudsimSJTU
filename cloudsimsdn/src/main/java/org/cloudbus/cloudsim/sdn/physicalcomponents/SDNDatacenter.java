@@ -358,17 +358,20 @@ public class SDNDatacenter extends Datacenter {
 			//estimatedFinishTime -= CloudSim.clock();
 
 			// if this cloudlet is in the exec queue
-			if (estimatedFinishDelay > 0.0 && estimatedFinishTime < Double.MAX_VALUE) {
+			//TODO:去掉cloudlet的estimatedFinishDelay范围判断、去掉执行MinTime
+//			if (estimatedFinishDelay > 0.0 && estimatedFinishTime < Double.MAX_VALUE) {
 				estimatedFinishTime += fileTransferTime;
 				//Log.printLine(getName() + ".processCloudletSubmit(): " + "Cloudlet is going to be processed at: "+(estimatedFinishTime + CloudSim.clock()));
 
 				// gurantees a minimal interval before scheduling the event
-				if (estimatedFinishDelay < CloudSim.getMinTimeBetweenEvents()) {
-					estimatedFinishDelay = CloudSim.getMinTimeBetweenEvents();
-				}
+//				if (estimatedFinishDelay < CloudSim.getMinTimeBetweenEvents()) {
+//					estimatedFinishDelay = CloudSim.getMinTimeBetweenEvents();
+//				}
+				// TODO:自定义cloudlet延迟，这里可以设为交换时间
+				estimatedFinishDelay = 0.0003;
 				// 加上主机发送带宽的延迟？？
 				send(getId(), estimatedFinishDelay, CloudSimTags.VM_DATACENTER_EVENT);
-			}
+//			}
 
 			if (ack) {
 				int[] data = new int[3];
@@ -387,8 +390,8 @@ public class SDNDatacenter extends Datacenter {
 			Log.printLine(getName() + ".processCloudletSubmit(): " + "Exception error.");
 			e.printStackTrace();
 		}
-
-		checkCloudletCompletion();
+		//TODO: CloudletSubmit时不要检查CloudletCompletion
+//		checkCloudletCompletion();
 	}
 
 	@Override
@@ -518,6 +521,7 @@ public class SDNDatacenter extends Datacenter {
 		proc.clearCloudlet();
 
 		requestsTable.put(cl.getCloudletId(), reqAfterCloudlet);
+		double timenow = CloudSim.clock();
 		sendNow(getId(), CloudSimTags.CLOUDLET_SUBMIT, cl);
 
 		// Set the requested MIPS for this cloudlet.

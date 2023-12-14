@@ -71,7 +71,7 @@ public class NetworkOperatingSystemSimple extends NetworkOperatingSystem {
 
 		// print the created VM info
 		SDNVm vm = (SDNVm) ev.getData();
-		Log.printLine(CloudSim.clock() + ": " + getName() + ": VM Created: " +  vm + " in " + vm.getHost());
+		Log.printLine(CloudSim.clock() + ": " + getName() + ": Container Created: " +  vm);
 		deployFlow(this.flowMapVmId2Flow.values());
 	}
 

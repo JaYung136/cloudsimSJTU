@@ -40,28 +40,9 @@ public class Controller {
     private boolean halfDuplex = false;
 
     @RequestMapping("/visit")
-    public ResultDTO login(@RequestBody String req){
+    public ResultDTO hello(){
         System.out.println("simulator可访问");
         return ResultDTO.success("This is simulator backend");
-    }
-
-    @PostMapping("/specifyhostfile")
-    public ResultDTO specifyhostfile(MultipartFile file, HttpServletRequest req) {
-        input_host = "InputFiles/" + file.getOriginalFilename();
-        System.out.println("\n"+"主机配置文件，路径为"+ input_host +"\n");
-        return ResultDTO.success("主机配置文件，路径为"+ input_host);
-    }
-    @RequestMapping("/specifytopofile")
-    public ResultDTO specifytopofile(MultipartFile file, HttpServletRequest req){
-        input_topo = "InputFiles/" + file.getOriginalFilename();
-        System.out.println("网络拓扑文件，路径为"+input_topo+"\n");
-        return ResultDTO.success("网络拓扑文件，路径为"+input_topo);
-    }
-    @RequestMapping("/specifyappfile")
-    public ResultDTO specifyappfile(MultipartFile file, HttpServletRequest req){
-        input_app = "InputFiles/" + file.getOriginalFilename();
-        System.out.println("应用文件，路径为"+input_app+"\n");
-        return ResultDTO.success("应用文件，路径为"+input_app);
     }
 
     @RequestMapping("/halfduplex")
@@ -71,6 +52,51 @@ public class Controller {
         System.out.println(String.valueOf(halfDuplex));
         CloudSim.HalfDuplex = halfDuplex;
         return ResultDTO.success("ok");
+    }
+
+    @RequestMapping("/uploadhost")
+    public ResultDTO uploadhost(MultipartFile file, HttpServletRequest req) throws IOException {
+        System.out.println("上传host.xml文件");
+        try {
+            String InputDir = System.getProperty("user.dir")+"\\InputFiles";
+            System.out.println(InputDir);
+            File hostfile = new File(InputDir,"Input_Hosts.xml");
+            boolean dr = hostfile.getParentFile().mkdirs(); //创建目录
+            file.transferTo(hostfile);
+        }catch (IOException e){
+            System.out.print(e.getMessage());
+        }
+        return ResultDTO.success("上传成功");
+    }
+
+    @RequestMapping("/uploadtopo")
+    public ResultDTO uploadtopo(MultipartFile file, HttpServletRequest req) throws IOException {
+        System.out.println("上传topo.xml文件");
+        try {
+            String InputDir = System.getProperty("user.dir")+"\\InputFiles";
+            System.out.println(InputDir);
+            File topofile = new File(InputDir,"Input_TopoInfo.xml");
+            boolean dr = topofile.getParentFile().mkdirs(); //创建目录
+            file.transferTo(topofile);
+        }catch (IOException e){
+            System.out.print(e.getMessage());
+        }
+        return ResultDTO.success("上传成功");
+    }
+
+    @RequestMapping("/uploadapp")
+    public ResultDTO uploadapp(MultipartFile file, HttpServletRequest req) throws IOException {
+        System.out.println("上传app.xml文件");
+        try {
+            String InputDir = System.getProperty("user.dir")+"\\InputFiles";
+            System.out.println(InputDir);
+            File appfile = new File(InputDir,"Input_AppInfo.xml");
+            boolean dr = appfile.getParentFile().mkdirs(); //创建目录
+            file.transferTo(appfile);
+        } catch (IOException e){
+            System.out.print(e.getMessage());
+        }
+        return ResultDTO.success("上传成功");
     }
 
     @RequestMapping("/convertphytopo")
@@ -241,7 +267,6 @@ public class Controller {
         return ResultDTO.success("ok");
     }
 
-
     // 必需保持 hostname = “host” + hostid 对应关系。flows字段在解析workload文件时添加
     @RequestMapping("/convertvirtopo")
     public ResultDTO convertvirtopo() throws IOException{
@@ -383,7 +408,7 @@ public class Controller {
 
         convertphytopo();
         convertvirtopo();
-        convertworkload();
+//        convertworkload();
         String args[] = {"",physicalf,virtualf,workloadf};
         LogWriter.resetLogger("OutputFiles/link_utilization.xml");
         LogWriter log = LogWriter.getLogger("OutputFiles/link_utilization.xml");

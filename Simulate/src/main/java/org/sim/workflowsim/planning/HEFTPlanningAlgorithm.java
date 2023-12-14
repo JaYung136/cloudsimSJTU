@@ -213,9 +213,6 @@ public class HEFTPlanningAlgorithm extends BasePlanningAlgorithm {
         if (rank.containsKey(task)) {
             return rank.get(task);
         }
-        if(Constants.hosts.size() <= 9) {
-            Constants.nodeEnough = false;
-        }
         double averageComputationCost = 0.0;
 
         for (Double cost : computationCosts.get(task).values()) {

@@ -128,7 +128,7 @@ public class VirtualTopologyParser {
 				//CloudletScheduler clSch = new CloudletSchedulerTimeSharedMonitor(mips);
 				int vmId = SDNVm.getUniqueVmId();
 
-				if(nodeType.equalsIgnoreCase("vm")){
+				if(nodeType.equalsIgnoreCase("cn")){
 					// Create VM objects
 					SDNVm vm = new SDNVm(vmId, userId,mips,pes,ram,bw,size,"VMM", clSch, starttime, endtime);
 					vm.setName(nodeName2);

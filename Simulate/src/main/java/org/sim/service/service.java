@@ -61,7 +61,7 @@ public class service {
      * Creates main() to run this example This example has only one datacenter
      * and one storage
      */
-    public void simulate(String hostPath, String appPath, String faultPath, Integer arithmetic) {
+    public void simulate(Integer arithmetic) {
         DistributionGenerator.DistributionFamily f = DistributionGenerator.DistributionFamily.WEIBULL;
         Double s = 100.0;
         Double shape = 1.0;
@@ -74,14 +74,14 @@ public class service {
              */
             XmlUtil util = new XmlUtil(6);
             //util.parseHostXml("D:/WorkflowSim-1.0/config/tmp/Host_8.xml");
-            if(!faultPath.equals("")) {
-                util.parseHostXml(faultPath);
+            if(Constants.faultFile != null) {
+                util.parseHostXml(Constants.faultFile);
                 f = util.distributionFamily;
                 s = util.scale;
                 shape = util.shape;
                 Log.printLine("FaultInject: \n"  + "type: " + f.name() + "  scale: " + s + " shape: " + shape);
             }
-            util.parseHostXml(hostPath);
+            util.parseHostXml(Constants.hostFile);
             hostList = util.getHostList();
             int vmNum = 1;//number of vms;
             FailureParameters.FTCMonitor ftc_monitor = FailureParameters.FTCMonitor.MONITOR_ALL;
@@ -176,7 +176,7 @@ public class service {
              */
             WorkflowPlanner wfPlanner = new WorkflowPlanner("planner_0", 1);
             //wfPlanner.setAppPath("D:/WorkflowSim-1.0/config/tmp/app10.xml");
-            wfPlanner.setAppPath(appPath);
+            wfPlanner.setAppPath("");
             /**
              * Create a WorkflowEngine.
              */
@@ -281,7 +281,15 @@ public class service {
                     double t1 = job.getFinishTime();
                     r.finish = dft.format(t1);
                     r.start = dft.format(job.getExecStartTime());
-                    r.host = "host" + job.getVmId();
+                    //r.host = "host" + job.getVmId();
+                    Host host = null;
+                    for(Host h: Constants.hosts) {
+                        if(h.getId() == job.getVmId()) {
+                            host = h;
+                            break;
+                        }
+                    }
+                    r.host = host.getName();
                     r.name = job.getTaskList().get(0).getType();
                     Constants.results.add(r);
                 }

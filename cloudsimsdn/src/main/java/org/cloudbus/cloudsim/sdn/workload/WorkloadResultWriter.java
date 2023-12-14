@@ -13,6 +13,7 @@ import org.cloudbus.cloudsim.sdn.Configuration;
 import org.cloudbus.cloudsim.sdn.LogWriter;
 import org.cloudbus.cloudsim.sdn.main.LogPrinter;
 
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -133,8 +134,9 @@ public class WorkloadResultWriter {
 		else {
 			printRequest(wl.request, true);
 
-			serveTime= getWorkloadFinishTime(wl) - getWorkloadStartTime(wl);
+//			BigDecimal temServeTime = new BigDecimal(getWorkloadFinishTime(wl)).subtract(new BigDecimal(getWorkloadStartTime(wl)));
 
+			serveTime= getWorkloadFinishTime(wl) - getWorkloadStartTime(wl);//temServeTime.doubleValue();
 			printDetail(String.format(LogPrinter.fFloat, serveTime));
 			printDetail("\n");
 

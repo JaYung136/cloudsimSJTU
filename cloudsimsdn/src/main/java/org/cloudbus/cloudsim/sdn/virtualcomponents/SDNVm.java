@@ -94,7 +94,7 @@ public class SDNVm extends Vm {
 	}
 
 	public String toString() {
-		return "VM #"+getId()+" ("+getName()+") in ("+getHost()+")";
+		return "Container #"+getId()+" ("+getName()+") in "+getHost();
 	}
 
 	@Override

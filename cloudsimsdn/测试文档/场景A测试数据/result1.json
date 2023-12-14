@@ -7,7 +7,7 @@
     "end":"0.15",
     "datacenter":"A",
     "mips":500,
-    "type":"vm",
+    "type":"container",
     "pes":1,
     "ram":512
   },
@@ -19,7 +19,7 @@
     "end":"0.18",
     "datacenter":"A",
     "mips":500,
-    "type":"vm",
+    "type":"container",
     "pes":1,
     "ram":512
   },

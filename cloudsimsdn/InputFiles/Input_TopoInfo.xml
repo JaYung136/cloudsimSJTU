@@ -6,11 +6,11 @@
     </Switches>
 
     <Links>
-        <Link Name="LINK1" Src="edge1" Dst="host1" BW="10" Latency="0.001">
+        <Link Name="LINK1" Src="edge1" Dst="host1" BW="10" Latency="0.007">
         </Link>
-        <Link Name="LINK2" Src="edge1" Dst="host2" BW="10" Latency="0.001">
+        <Link Name="LINK2" Src="edge1" Dst="host2" BW="10" Latency="0.007">
         </Link>
-        <Link Name="LINK3" Src="edge1" Dst="host3" BW="10" Latency="0.001">
+        <Link Name="LINK3" Src="edge1" Dst="host3" BW="10" Latency="0.007">
         </Link>
     </Links>
 

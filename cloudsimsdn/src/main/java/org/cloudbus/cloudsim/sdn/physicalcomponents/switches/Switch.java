@@ -118,7 +118,7 @@ public class Switch implements Node{
 	}
 
 	public String toString() {
-		return "Switch: "+this.getName();
+		return this.getName();
 	}
 
 	public String getName() {

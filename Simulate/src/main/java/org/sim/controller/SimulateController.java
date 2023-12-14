@@ -8,24 +8,120 @@ import org.sim.service.Constants;
 import org.sim.service.YamlWriter;
 import org.sim.workflowsim.XmlUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.sim.service.service;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 
 @RestController
+@CrossOrigin
 public class SimulateController {
     @Autowired
     private service service;
 
+
+
+    @RequestMapping("/uploadhost")
+    public Message uploadhost(MultipartFile file, HttpServletRequest req) throws IOException {
+        System.out.println("上传host.xml文件");
+        Message r = new Message();
+        try {
+            String InputDir = System.getProperty("user.dir")+"\\InputFiles";
+            System.out.println(InputDir);
+            File hostfile = new File(InputDir,"Input_Hosts_a_try.xml");
+            boolean dr = hostfile.getParentFile().mkdirs(); //创建目录
+            file.transferTo(hostfile);
+            Constants.hostFile = hostfile;
+        }catch (IOException e){
+            r.message = e.getMessage();
+            r.code = CODE.FAILED;
+            System.out.print(e.getMessage());
+        }
+        r.message = "upload successfully";
+        r.code = CODE.SUCCESS;
+        return r;
+    }
+
+    @RequestMapping("/uploadApp")
+    public Message uploadApp(MultipartFile file, HttpServletRequest req) throws IOException {
+        System.out.println("上传AppInfo.xml文件");
+        Message r = new Message();
+        try {
+            String InputDir = System.getProperty("user.dir")+"\\InputFiles";
+            System.out.println(InputDir);
+            File hostfile = new File(InputDir,"Input_Apps_a_try.xml");
+            boolean dr = hostfile.getParentFile().mkdirs(); //创建目录
+            file.transferTo(hostfile);
+            Constants.appFile = hostfile;
+        }catch (IOException e){
+            r.message = e.getMessage();
+            r.code = CODE.FAILED;
+            System.out.print(e.getMessage());
+        }
+        r.message = "upload successfully";
+        r.code = CODE.SUCCESS;
+        return r;
+    }
+
+    @RequestMapping("/uploadContainer")
+    public Message uploadContainer(MultipartFile file, HttpServletRequest req) throws IOException {
+        System.out.println("上传ContainerInfo.xml文件");
+        Message r = new Message();
+        try {
+            XmlUtil xmlUtil = new XmlUtil(-1);
+            String InputDir = System.getProperty("user.dir")+"\\InputFiles";
+            System.out.println(InputDir);
+            File hostfile = new File(InputDir,"Input_Containers_a_try.xml");
+            boolean dr = hostfile.getParentFile().mkdirs(); //创建目录
+            file.transferTo(hostfile);
+            Constants.containerFile = hostfile;
+            xmlUtil.parseContainerInfo(hostfile);
+        }catch (IOException e){
+            r.message = e.getMessage();
+            r.code = CODE.FAILED;
+            System.out.print(e.getMessage());
+        } catch (Exception e) {
+            r.message = e.getMessage();
+            r.code = CODE.FAILED;
+            e.printStackTrace();
+        }
+        r.message = "upload successfully";
+        r.code = CODE.SUCCESS;
+        return r;
+    }
+
+    @RequestMapping("/uploadFault")
+    public Message uploadFault(MultipartFile file, HttpServletRequest req) throws IOException {
+        System.out.println("上传FaultInject.xml文件");
+        Message r = new Message();
+        try {
+            String InputDir = System.getProperty("user.dir")+"\\InputFiles";
+            System.out.println(InputDir);
+            File hostfile = new File(InputDir,"Input_Fault_a_try.xml");
+            boolean dr = hostfile.getParentFile().mkdirs(); //创建目录
+            file.transferTo(hostfile);
+            Constants.faultFile = hostfile;
+        }catch (IOException e){
+            r.message = e.getMessage();
+            r.code = CODE.FAILED;
+            System.out.print(e.getMessage());
+        }
+        r.message = "upload successfully";
+        r.code = CODE.SUCCESS;
+        return r;
+    }
+
     @RequestMapping(value = "/startSimulate")
-    public Message startSimulate(@RequestParam("hostPath")String hostPath, @RequestParam("appPath")String appPath, @RequestParam("faultPath")String faultPath, @RequestParam("arithmetic")Integer arithmetic) {
+    public Message startSimulate(@RequestBody Map<String, Integer> req) {
         try{
             Message m = new Message();
             Constants.results = new ArrayList<>();
@@ -34,8 +130,8 @@ public class SimulateController {
             Constants.id2Name = new HashMap<>();
             Constants.name2Container = new HashMap<>();
             Constants.nodeEnough = true;
-            service.simulate(hostPath, appPath, faultPath, arithmetic);
-            Log.printLine("1");
+            Integer arithmetic = req.get("arithmetic");
+            service.simulate(arithmetic);
             JSONArray array = new JSONArray();
             for(Result result: Constants.results) {
                 JSONObject obj = new JSONObject().put("name", result.name).put("host", result.host).put("start", result.start).put("end", result.finish).put("size", result.size)
@@ -43,7 +139,8 @@ public class SimulateController {
                 array.put(obj);
             }
             try {
-                OutputStreamWriter osw = new OutputStreamWriter(new FileOutputStream(Constants.midpath), "UTF-8");
+                String InputDir = System.getProperty("user.dir")+"\\Intermediate\\assign.json";
+                OutputStreamWriter osw = new OutputStreamWriter(new FileOutputStream(InputDir), "UTF-8");
                 osw.write(array.toString());
 
                 osw.flush();//清空缓冲区，强制输出数据
@@ -60,7 +157,17 @@ public class SimulateController {
             if(!Constants.nodeEnough) {
                 m.code = CODE.FAILED;
                 m.message = "node is not enough";
+            } YamlWriter writer = new YamlWriter();
+            try {
+                String path = System.getProperty("user.dir")+"\\OutputFiles\\yaml";
+                writer.writeYaml(path, Constants.resultPods);
+                m.code = CODE.SUCCESS;
+                m.message = "generate successfully";
+            } catch (Exception e) {
+                m.code = CODE.FAILED;
+                m.message = e.getMessage();
             }
+
             return m;
         }catch (Exception e) {
             Message m = new Message();
@@ -71,16 +178,23 @@ public class SimulateController {
     }
 
     @RequestMapping("/pauseContainer")
-    public Message pauseContainer(@RequestParam("id") Integer containerId, @RequestParam("start") double start, @RequestParam("last") double last) {
+    public Message pauseContainer(@RequestBody String req) {
+        JSONObject content = new JSONObject(req);
+        Integer containerId = content.getInt("id");
+        double start = content.getDouble("start");
+        double last = content.getDouble("last");
         Message m = new Message();
         m.code = CODE.SUCCESS;
         m.message = "container " + containerId + " will be paused";
         Constants.pause.put(containerId, new Pair<>(start, last));
+        System.out.println("pauseContainer success");
         return m;
     }
 
     @RequestMapping("/deletePause")
-    public Message deletePause(@RequestParam("id") Integer containerId) {
+    public Message deletePause(@RequestBody String req) {
+        JSONObject content = new JSONObject(req);
+        Integer containerId = content.getInt("id");
         if(containerId == -1) {
             Constants.pause = new HashMap<>();
         } else {
@@ -89,22 +203,8 @@ public class SimulateController {
         Message m = new Message();
         m.code = CODE.SUCCESS;
         m.message = "delete pause";
+        System.out.println("pauseContainer success");
         return m;
-    }
-
-    @RequestMapping("/inputContainer")
-    public Message inputContainer(@RequestParam("path") String path) {
-        Message ret = new Message();
-        XmlUtil xmlUtil = new XmlUtil(-1);
-        try{
-            xmlUtil.parseContainerInfo(path);
-            ret.code = CODE.SUCCESS;
-            ret.message = "input successfully";
-        }catch (Exception e) {
-            ret.code = CODE.FAILED;
-            ret.message = e.getMessage();
-        }
-        return ret;
     }
 
     @RequestMapping("/writeYaml")

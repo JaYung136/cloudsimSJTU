@@ -85,6 +85,7 @@ public class Configuration {
 	public static final double CPU_SIZE_MULTIPLY = 1;	// Multiply all the CPU size for scale. Default =1 (No amplify)
 	public static final double NETWORK_PACKET_SIZE_MULTIPLY = 1;	// Multiply all the network packet size. Default =1 (No amplify)
 
+	//TODO: 修改监测间隙
 	public static double monitoringTimeInterval = 0.01; // every 1800 seconds, polling utilization.
 
 	public static final double overbookingTimeWindowInterval = monitoringTimeInterval;	// Time interval between points

@@ -4,6 +4,7 @@ package org.sim.service;
 
 import javafx.util.Pair;
 import org.sim.cloudbus.cloudsim.Cloudlet;
+import org.sim.cloudbus.cloudsim.Host;
 import org.sim.cloudbus.cloudsim.Log;
 import org.sim.workflowsim.Job;
 import org.yaml.snakeyaml.DumperOptions;
@@ -44,6 +45,7 @@ public class YamlWriter {
             int cId = ((Job)pods.get(i)).getTaskList().get(0).getCloudletId();
             String name = Constants.id2Name.get(cId);
             Container c = Constants.name2Container.get(name);
+            Log.printLine("1");
             Map<String, Object> podConfig = new HashMap<>();
             List<Map<String, String>> labels = new ArrayList<>();
             podConfig.put("apiVersion", "v1");
@@ -51,7 +53,7 @@ public class YamlWriter {
 
             /* metadata */
             Map<String, Object> metaData = new HashMap<>();
-            metaData.put("name", "pod_" + pods.get(i).getCloudletId());
+            metaData.put("name", "pod" + pods.get(i).getCloudletId());
             for(Pair<String, String> p: c.labels) {
                 Map<String, String> l = new HashMap<>();
                 l.put(p.getKey(), p.getValue());
@@ -63,10 +65,17 @@ public class YamlWriter {
             /* spec */
             Map<String, Object> spec = new HashMap<>();
             List<Map<String, Object>> containers = new ArrayList<>();
-            String nodeName = "Host " + pods.get(i).getVmId();
+            Host host = null;
+            for(Host h: Constants.hosts) {
+                if(h.getId() == ((Job) pods.get(i)).getVmId()) {
+                    host = h;
+                    break;
+                }
+            }
+            String nodeName = host.getName();
             for(int j = 0; j < 1; j++) {
                 Map<String, Object> container = new HashMap<>();
-                container.put("name", "container_" + i + "_" + j);
+                container.put("name", "container" + i + "" + j);
                 container.put("image", c.image);
                 Map<String, Object> resources = new HashMap<>();
                 Map<String, Object> limits = new HashMap<>();
@@ -103,8 +112,9 @@ public class YamlWriter {
 
             Yaml yaml = new Yaml(options);
             String yamlString = yaml.dump(podConfig);
-            String pathFile = path+"/pod_" + pods.get(i).getCloudletId() + ".yml";
+            String pathFile = path+"\\pod" + pods.get(i).getCloudletId() + ".yml";
             try {
+                Log.printLine("2");
                 FileWriter writer = new FileWriter(pathFile);
                 writer.write(yamlString);
                 writer.close();

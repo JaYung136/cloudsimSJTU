@@ -9,15 +9,20 @@ import org.sim.cloudbus.cloudsim.power.models.PowerModelSpecPowerHpProLiantMl110
 import org.sim.controller.Result;
 import org.sim.service.result.LogEntity;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Constants {
+    public static File faultFile = null;
+    public static File containerFile = null;
+    public static File appFile = null;
+    public static File hostFile = null;
     public static Double cpuUp = 1.1;
     public static Double ramUp = 1.1;
-    public static String midpath="D:/result.json";
+    public static String midpath="./Intermediate/assign.json";
     public static List<? extends Cloudlet> resultPods = new ArrayList<>();
     public static List<? extends Host> hosts = new ArrayList<>();
     public static int Scheduler_Id = -1;
