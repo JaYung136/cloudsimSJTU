@@ -440,7 +440,7 @@ public class Datacenter extends SimEntity {
 	protected void processVmCreate(SimEvent ev, boolean ack) {
 		Vm vm = (Vm) ev.getData();
 		if(vm.getId() == -1) {
-			Log.printLine("Datacenter create vm");
+			//Log.printLine("Datacenter create vm");
 			int[] data = new int[3];
 			data[0] = getId();
 			data[1] = -1;
@@ -526,7 +526,7 @@ public class Datacenter extends SimEntity {
 		host.removeMigratingInVm(vm);
 		boolean result = getVmAllocationPolicy().allocateHostForVm(vm, host);
 		if (!result) {
-			Log.printLine("[Datacenter.processVmMigrate] VM allocation to the destination host failed");
+			//Log.printLine("[Datacenter.processVmMigrate] VM allocation to the destination host failed");
 			System.exit(0);
 		}
 
@@ -627,7 +627,7 @@ public class Datacenter extends SimEntity {
 	 * @post $none
 	 */
 	protected void processCloudletMove(int[] receivedData, int type) {
-		Log.printLine("move");
+		//Log.printLine("move");
 		//updateCloudletProcessing();
 
 		int[] array = receivedData;
@@ -704,7 +704,7 @@ public class Datacenter extends SimEntity {
 	 * @post $none
 	 */
 	protected void processCloudletSubmit(SimEvent ev, boolean ack) {
-		Log.printLine("Datacenter submit");
+		//Log.printLine("Datacenter submit");
 		updateCloudletProcessing();
 
 		try {

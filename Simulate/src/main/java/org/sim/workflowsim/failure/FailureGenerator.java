@@ -16,6 +16,10 @@
 package org.sim.workflowsim.failure;
 
 import org.apache.commons.math3.distribution.*;
+import org.sim.cloudbus.cloudsim.Log;
+import org.sim.cloudbus.cloudsim.core.CloudSim;
+import org.sim.service.Constants;
+import org.sim.service.result.FaultRecord;
 import org.sim.workflowsim.Job;
 import org.sim.cloudbus.cloudsim.Cloudlet;
 import org.sim.workflowsim.Task;
@@ -113,9 +117,18 @@ public class FailureGenerator {
         double start = task.getExecStartTime();
         double end = task.getTaskFinishTime();
         
-        
+        if(Constants.faultFile == null) {
+            return false;
+        }
         double[] samples = generator.getCumulativeSamples();
-        
+        if(!Constants.faultNum.containsKey(task.name)) {
+            Constants.faultNum.put(task.name, 0);
+        }else {
+            Integer n = Constants.faultNum.get(task.name);
+            if(n >= 8) {
+                return false;
+            }
+        }
         while (samples[samples.length - 1] < start) {
             generator.extendSamples();
             samples = generator.getCumulativeSamples();
@@ -127,14 +140,19 @@ public class FailureGenerator {
         }
 
         for (int sampleId = 0; sampleId < samples.length; sampleId++) {
+
             if (end < samples[sampleId]) {
                 //no failure
+
                 return false;
             }
             if (start <= samples[sampleId]) {
                 //has a failure
                 /** The idea is we need to update the cursor in generator**/
                 generator.getNextSample();
+                Integer n = Constants.faultNum.get(task.name);
+                n++;
+                Constants.faultNum.put(task.name, n);
                 return true;
             }
         }
@@ -156,7 +174,6 @@ public class FailureGenerator {
             return jobFailed;
         }
         try {
-
             for (Task task : job.getTaskList()) {
                 int failedTaskSum = 0;
                 if (checkFailureStatus(task, job.getVmId())) {
@@ -164,6 +181,10 @@ public class FailureGenerator {
                     jobFailed = true;
                     failedTaskSum++;
                     task.setCloudletStatus(Cloudlet.FAILED);
+                    FaultRecord f = new FaultRecord();
+                    f.name = task.name;
+                    f.time = CloudSim.clock();
+                    Constants.records.add(f);
                 }
                 FailureRecord record = new FailureRecord(0, failedTaskSum, task.getDepth(), 1, job.getVmId(), task.getCloudletId(), job.getUserId());
                 FailureMonitor.postFailureRecord(record);

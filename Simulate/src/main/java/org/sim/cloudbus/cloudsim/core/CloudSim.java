@@ -472,7 +472,7 @@ public class CloudSim {
 		}
 		if (e.getId() == -1) { // Only add once!
 			int id = entities.size();
-			Log.printLine("add " + e.getName() + " with id " + id);
+			//Log.printLine("add " + e.getName() + " with id " + id);
 			e.setId(id);
 			entities.add(e);
 			entitiesByName.put(e.getName(), e);
@@ -767,7 +767,7 @@ public class CloudSim {
 					throw new IllegalArgumentException("Attempt to send to a null entity detected.");
 				} else {
 					int tag = e.getTag();
-					Log.printLine(tag);
+					//Log.printLine(tag);
 					dest_ent = entities.get(dest);
 					if (dest_ent.getState() == SimEntity.WAITING) {
 						Integer destObj = Integer.valueOf(dest);
@@ -875,7 +875,7 @@ public class CloudSim {
 		}
 		while (true) {
 			if (runClockTick() || abruptTerminate) {
-				Log.printLine("break1" +abruptTerminate);
+				//Log.printLine("break1" +abruptTerminate);
 				break;
 			}
 

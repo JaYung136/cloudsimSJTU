@@ -223,7 +223,7 @@ public final class WorkflowEngine extends SimEntity {
     protected void processJobReturn(SimEvent ev) {
 
         Job job = (Job) ev.getData();
-        Log.printLine("Engine: job " + job.getCloudletId() + " return , now jobSubmitted: " + (jobsSubmitted - 1));
+        //Log.printLine("Engine: job " + job.getCloudletId() + " return , now jobSubmitted: " + (jobsSubmitted - 1));
         if (job.getCloudletStatus() == Cloudlet.FAILED) {
             // Reclusteringengine will add retry job to jobList
             int newId = getJobsList().size() + getJobsSubmittedList().size();
@@ -242,7 +242,7 @@ public final class WorkflowEngine extends SimEntity {
 
         getJobsReceivedList().add(job);
         jobsSubmitted--;
-        Log.printLine("Job submitted: " + jobsSubmitted  + "job received: " + getJobsReceivedList().size());
+        //Log.printLine("Job submitted: " + jobsSubmitted  + "job received: " + getJobsReceivedList().size());
         if (getJobsList().isEmpty() && jobsSubmitted == 0) {
             //send msg to all the schedulers
             for (int i = 0; i < getSchedulerIds().size(); i++) {
@@ -356,7 +356,7 @@ public final class WorkflowEngine extends SimEntity {
                     index++;
                     if (index % interval == 0) {
                         //create a new one
-                        Log.printLine("cc");
+                        //Log.printLine("cc");
                         schedule(getSchedulerId(i), delay, CloudSimTags.CLOUDLET_SUBMIT, subList);
                         delay += delaybase;
                         subList = new ArrayList();

@@ -10,6 +10,7 @@ package org.sim.cloudbus.cloudsim;
 import org.sim.cloudbus.cloudsim.core.CloudSim;
 import org.sim.service.Constants;
 import org.sim.workflowsim.Job;
+import org.sim.workflowsim.Task;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,8 +92,8 @@ public class CloudletSchedulerTimeShared extends CloudletScheduler {
 		this.currentCPUs = mipsShare.size();
 		getCapacity(mipsShare);
 		for (ResCloudlet rcl : getCloudletExecList()) {
-			Log.printLine("InExec: Container " + rcl.getCloudlet().getCloudletId());
-			Log.printLine(rcl.getRemainingCloudletLength());
+			//Log.printLine("InExec: Container " + rcl.getCloudlet().getCloudletId());
+			//Log.printLine(rcl.getRemainingCloudletLength());
 			rcl.updateCloudletFinishedSoFar((long) (getCapacity(mipsShare) * timeSpam * rcl.getNumberOfPes() * Consts.MILLION));
 		}
 
@@ -146,14 +147,14 @@ public class CloudletSchedulerTimeShared extends CloudletScheduler {
 			Double start = Constants.pause.get(rcl.getCloudlet().getCloudletId()).getKey();
 			Double last = Constants.pause.get(rcl.getCloudlet().getCloudletId()).getValue();
 			if(currentTime >= rcl.getExecStartTime() + start + last) {
-				Log.printLine(CloudSim.clock() + " : Container " + rcl.getCloudletId() + " is in exec");
+				//Log.printLine(CloudSim.clock() + " : Container " + rcl.getCloudletId() + " is in exec");
 				toExec.add(rcl);
 			} else {
 				double n = rcl.getExecStartTime() + start + last;
 				if(n - currentTime < CloudSim.getMinTimeBetweenEvents()) {
 					n = currentTime + CloudSim.getMinTimeBetweenEvents();
 				}
-				Log.printLine("pause need to be exec in : " + n);
+				//Log.printLine("pause need to be exec in : " + n);
 				if(n < nextEvent) {
 					nextEvent = n;
 				}
@@ -194,15 +195,19 @@ public class CloudletSchedulerTimeShared extends CloudletScheduler {
 		for (ResCloudlet rcl : getCloudletExecList()) {
 			pesInUse += ((Job)rcl.getCloudlet()).getNumberOfPes();
 			if(((Job)rcl.getCloudlet()).getTaskList().size() >= 1) {
-				ramInUse += ((Job)rcl.getCloudlet()).getTaskList().get(0).getRam();
+				for(Task t: ((Job)rcl.getCloudlet()).getTaskList()) {
+					ramInUse += t.getRam();
+					//Log.printLine("ramInUse: " + ramInUse);
+				}
 			}
 		}
 		usedPes = Math.min(currentCPUs, pesInUse);
 		usedRam = Math.min(currentRam, ramInUse);
+		//Log.printLine("usedRam: " + usedRam + " curRam: " + currentRam);
 		if(usedRam > currentRam) {
 			Constants.nodeEnough = false;
 		}
-		Log.printLine("peInUse: " + usedPes);
+		//Log.printLine("peInUse: " + usedPes);
 		if (pesInUse > currentCPUs) {
 			Constants.nodeEnough = false;
 			capacity /= pesInUse;
@@ -381,6 +386,18 @@ public class CloudletSchedulerTimeShared extends CloudletScheduler {
 	 */
 	@Override
 	public double cloudletSubmit(Cloudlet cloudlet, double fileTransferTime) {
+		Double pauseTime = 0.0;
+		if(((Job)cloudlet).getTaskList().size() >= 1) {
+			for(Task t: ((Job)cloudlet).getTaskList()) {
+				if(Constants.pause.containsKey(t.getCloudletId())) {
+					//Log.printLine("Container " + t.getCloudletId() + " should be paused");
+					pauseTime += Constants.pause.get(t.getCloudletId()).getValue();
+					double extraSize = getCapacity(getCurrentMipsShare()) * pauseTime * cloudlet.getNumberOfPes();
+					long length = (long) (cloudlet.getCloudletLength() + extraSize);
+					cloudlet.setCloudletLength(length);
+				}
+			}
+		}
 		ResCloudlet rcl = new ResCloudlet(cloudlet);
 		rcl.setCloudletStatus(Cloudlet.INEXEC);
 		for (int i = 0; i < cloudlet.getNumberOfPes(); i++) {

@@ -4,6 +4,7 @@ import org.sim.cloudbus.cloudsim.*;
 import org.sim.cloudbus.cloudsim.*;
 import org.sim.cloudbus.cloudsim.core.CloudSim;
 import org.sim.controller.Result;
+import org.sim.service.result.FaultRecord;
 import org.sim.workflowsim.*;
 import org.sim.workflowsim.failure.FailureGenerator;
 import org.sim.workflowsim.failure.FailureMonitor;
@@ -79,7 +80,7 @@ public class service {
                 f = util.distributionFamily;
                 s = util.scale;
                 shape = util.shape;
-                Log.printLine("FaultInject: \n"  + "type: " + f.name() + "  scale: " + s + " shape: " + shape);
+                Log.printLine("FaultInject: || "  + "type: " + f.name() + "  scale: " + s + " shape: " + shape + " ||");
             }
             util.parseHostXml(Constants.hostFile);
             hostList = util.getHostList();
@@ -187,7 +188,8 @@ public class service {
              */
             List<CondorVM> vmlist0 = createVM(wfEngine.getSchedulerId(0), 1);
             Constants.Scheduler_Id = wfEngine.getSchedulerId(0);
-            Constants.LOG_PATH = "D:/WorkflowSim-1.0/config/result/log2.xml";
+            Constants.LOG_PATH = System.getProperty("user.dir")+"\\OutputFiles\\hostUtil\\hostUtilization.xml";
+            Constants.FAULT_LOG_PATH = System.getProperty("user.dir") + "\\OutputFiles\\faultLog\\faultLog.xml";
             /**
              * Submits this list of vms to this WorkflowEngine.
              */
@@ -256,12 +258,14 @@ public class service {
         String indent = "    ";
         Log.printLine();
         Log.printLine("========== OUTPUT ==========");
-        Log.printLine("Job ID" + indent + "Task ID" + indent + "STATUS" + indent
-                + "Data center ID" + indent + "VM ID" + indent + indent
+        Log.printLine("Task Name" + indent + "Task ID" + indent + "STATUS" + indent
+                + "Host ID" + indent + indent
                 + "Time" + indent + "Start Time" + indent + "Finish Time" + indent + "Depth");
         DecimalFormat dft = new DecimalFormat("###.##");
         for (Job job : list) {
-            Log.print(indent + job.getCloudletId() + indent + indent);
+            if(job.getTaskList().size() == 0)
+                continue;
+            Log.print(indent + job.getTaskList().get(0).name + indent + indent);
             if (job.getClassType() == Parameters.ClassType.STAGE_IN.value) {
                 Log.print("Stage-in");
             }
@@ -272,7 +276,7 @@ public class service {
 
             if (job.getCloudletStatus() == Cloudlet.SUCCESS) {
                 Log.print("SUCCESS");
-                Log.printLine(indent + indent + job.getResourceId() + indent + indent + indent + job.getVmId()
+                Log.printLine(indent + indent + indent + job.getVmId()
                         + indent + indent + indent + dft.format(job.getActualCPUTime())
                         + indent + indent + dft.format(job.getExecStartTime()) + indent + indent + indent
                         + dft.format(job.getFinishTime()) + indent + indent + indent + job.getDepth());
@@ -295,13 +299,19 @@ public class service {
                 }
             } else if (job.getCloudletStatus() == Cloudlet.FAILED) {
                 Log.print("FAILED");
-                Log.printLine(indent + indent + job.getResourceId() + indent + indent + indent + job.getVmId()
+                Log.printLine(indent + indent + indent + job.getVmId()
                         + indent + indent + indent + dft.format(job.getActualCPUTime())
                         + indent + indent + dft.format(job.getExecStartTime()) + indent + indent + indent
                         + dft.format(job.getFinishTime()) + indent + indent + indent + job.getDepth());
             }
         }
         try {
+            Double cpuAll = 0.0;
+            Double ramAll = 0.0;
+            Double cpuP = 0.0;
+            Double ramP = 0.0;
+            int size = 0;
+            int size_T = 0;
             File file = new File(Constants.LOG_PATH);
             if(!file.exists()) {
                 file.getParentFile().mkdir();
@@ -311,6 +321,7 @@ public class service {
             int hostSize = hostList.size();
             Element r = null;
             for(int i = 0; i < Constants.logs.size(); i++) {
+                size ++;
                 if(i % hostSize == 0) {
                     r = new Element("Utilization");
                     r.setAttribute("time", Constants.logs.get(i).time+"");
@@ -320,12 +331,30 @@ public class service {
                 t.setAttribute("cpuUtilization", Constants.logs.get(i).cpuUtilization + "");
                 t.setAttribute("ramUtilization", Constants.logs.get(i).ramUtilization + "");
                 r.addContent(t);
+                cpuP += Double.parseDouble(Constants.logs.get(i).cpuUtilization);
+                ramP += Double.parseDouble(Constants.logs.get(i).ramUtilization);
                 if(i % hostSize == hostSize - 1)
                 {
+                    if(cpuP != 0 && ramP != 0) {
+                        size_T++;
+                    }
+                    cpuAll += cpuP / size;
+                    ramAll += ramP / size;
                     doc.getRootElement().addContent(r);
                 }
 
             }
+            cpuAll /= size_T;
+            ramAll /= size_T;
+            DecimalFormat dfs = new DecimalFormat("#.000");
+            r = new Element("Average");
+            Element t = new Element("cpuUtilization");
+            t.setAttribute("value",  dfs.format(cpuAll)+ "");
+            r.addContent(t);
+            t = new Element("ramUtilization");
+            t.setAttribute("value", dfs.format(ramAll) + "");
+            r.addContent(t);
+            doc.getRootElement().addContent(r);
 
             XMLOutputter xmlOutput = new XMLOutputter();
             Format f = Format.getRawFormat();
@@ -334,6 +363,17 @@ public class service {
             xmlOutput.setFormat(f);
 
             // 把xml文件输出到指定的位置
+            xmlOutput.output(doc, new FileOutputStream(file));
+
+            file = new File(Constants.FAULT_LOG_PATH);
+            root = new Element("root");
+            doc = new Document(root);
+            for(FaultRecord rs: Constants.records) {
+                Element e = new Element("FaultRecord");
+                e.setAttribute("time", dfs.format(rs.time) + "");
+                e.setAttribute("jobName", rs.name);
+                doc.getRootElement().addContent(e);
+            }
             xmlOutput.output(doc, new FileOutputStream(file));
         } catch (IOException e) {
             e.printStackTrace();

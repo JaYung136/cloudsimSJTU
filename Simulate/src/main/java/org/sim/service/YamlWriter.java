@@ -36,16 +36,21 @@ public class YamlWriter {
     }*/
 
     public void writeYaml(String path, List<? extends Cloudlet> pods) throws Exception {
-        Log.printLine("YamlWriter: write " + pods.size() + " pod");
+        Log.printLine("YamlWriter: write " + (pods.size()-1) + " pod");
+        for(int i = 0; i < pods.size(); i++) {
+            if (((Job) pods.get(i)).getTaskList().size() > 1) {
+                Log.printLine("yes");
+            }
+        }
         for(int i = 0; i < pods.size(); i++) {
             if(((Job)pods.get(i)).getTaskList().size() < 1) {
-                Log.printLine("no need to write");
                 continue;
             }
-            int cId = ((Job)pods.get(i)).getTaskList().get(0).getCloudletId();
-            String name = Constants.id2Name.get(cId);
+            if(((Job) pods.get(i)).getCloudletStatus() == Cloudlet.FAILED) {
+                continue;
+            }
+            String name = ((Job)pods.get(i)).getTaskList().get(0).name;
             Container c = Constants.name2Container.get(name);
-            Log.printLine("1");
             Map<String, Object> podConfig = new HashMap<>();
             List<Map<String, String>> labels = new ArrayList<>();
             podConfig.put("apiVersion", "v1");
@@ -53,15 +58,16 @@ public class YamlWriter {
 
             /* metadata */
             Map<String, Object> metaData = new HashMap<>();
-            metaData.put("name", "pod" + pods.get(i).getCloudletId());
+            metaData.put("name", name);
             for(Pair<String, String> p: c.labels) {
                 Map<String, String> l = new HashMap<>();
                 l.put(p.getKey(), p.getValue());
                 labels.add(l);
             }
-            metaData.put("labels", labels);
+            if(!labels.isEmpty()) {
+                metaData.put("labels", labels);
+            }
             podConfig.put("metadata", metaData);
-
             /* spec */
             Map<String, Object> spec = new HashMap<>();
             List<Map<String, Object>> containers = new ArrayList<>();
@@ -75,7 +81,7 @@ public class YamlWriter {
             String nodeName = host.getName();
             for(int j = 0; j < 1; j++) {
                 Map<String, Object> container = new HashMap<>();
-                container.put("name", "container" + i + "" + j);
+                container.put("name", "container" + name + "" + j);
                 container.put("image", c.image);
                 Map<String, Object> resources = new HashMap<>();
                 Map<String, Object> limits = new HashMap<>();
@@ -114,7 +120,6 @@ public class YamlWriter {
             String yamlString = yaml.dump(podConfig);
             String pathFile = path+"\\pod" + pods.get(i).getCloudletId() + ".yml";
             try {
-                Log.printLine("2");
                 FileWriter writer = new FileWriter(pathFile);
                 writer.write(yamlString);
                 writer.close();

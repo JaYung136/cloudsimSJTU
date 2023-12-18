@@ -16,6 +16,7 @@
 package org.sim.workflowsim;
 
 import org.sim.service.Constants;
+import org.sim.workflowsim.failure.FailureGenerator;
 import org.sim.workflowsim.scheduling.*;
 import org.sim.cloudbus.cloudsim.Cloudlet;
 import org.sim.cloudbus.cloudsim.DatacenterBroker;
@@ -291,8 +292,8 @@ public class WorkflowScheduler extends DatacenterBroker {
         /**
          * Generate a failure if failure rate is not zeros.
          */
-        //FailureGenerator.generate(job);
-        Random r = new Random();
+        FailureGenerator.generate(job);
+        /*Random r = new Random();
         Integer t = r.nextInt(90) + 10;
         if(t > 500) {
             try {
@@ -306,8 +307,8 @@ public class WorkflowScheduler extends DatacenterBroker {
             } catch (Exception e) {
                 Log.printLine("fail");
             }
-        }
-        Log.printLine("Job: "+ job.getCloudletId() + " " + job.getCloudletStatus());
+        }*/
+        //Log.printLine("Job: "+ job.getCloudletId() + " " + job.getCloudletStatus());
         getCloudletReceivedList().add(cloudlet);
         getCloudletSubmittedList().remove(cloudlet);
         Host host = null;
@@ -368,7 +369,7 @@ public class WorkflowScheduler extends DatacenterBroker {
      */
     @Override
     protected void submitCloudlets() {
-        Log.printLine("sub " + workflowEngineId);
+        //Log.printLine("sub " + workflowEngineId);
         sendNow(this.workflowEngineId, CloudSimTags.CLOUDLET_SUBMIT, null);
     }
     /**

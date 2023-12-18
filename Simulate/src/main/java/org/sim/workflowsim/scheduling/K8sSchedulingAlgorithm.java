@@ -55,7 +55,7 @@ public class K8sSchedulingAlgorithm extends BaseSchedulingAlgorithm{
             double maxScore = -1;
             Integer hostId = -1;
             for(Host h: Constants.hosts) {
-                if(((Job)getCloudletList().get(i)).getTaskList().size() >= 1) {
+                /*if(((Job)getCloudletList().get(i)).getTaskList().size() >= 1) {
                     //Log.printLine("asasas");
                     Log.printLine("cpu: " + cpus.get(h.getId()));
                     Log.printLine("request: " + ((Job)getCloudletList().get(i)).getNumberOfPes());
@@ -67,7 +67,7 @@ public class K8sSchedulingAlgorithm extends BaseSchedulingAlgorithm{
                     if(h.getRam() < rams.get(h.getId()) + ((Job)getCloudletList().get(i)).getTaskList().get(0).getRam()) {
                         continue;
                     }
-                }
+                }*/
                 if(getScore(h) > maxScore) {
                     hostId = h.getId();
                 }

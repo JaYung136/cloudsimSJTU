@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Links Timespan="0.01">
+	<Link Name="LINK2" Starttime="0.500000" Endtime="0.510000" Src="edge1" Dst="host2" KBytes="32000" Util="32.0" />
+	<Link Name="LINK1" Starttime="0.500000" Endtime="0.510000" Src="host1" Dst="edge1" KBytes="32000" Util="32.0" />
+	<Link Name="LINK2" Starttime="100.500000" Endtime="100.510000" Src="edge1" Dst="host2" KBytes="32000" Util="32.0" />
+	<Link Name="LINK1" Starttime="100.500000" Endtime="100.510000" Src="host1" Dst="edge1" KBytes="32000" Util="32.0" />
+</Links>

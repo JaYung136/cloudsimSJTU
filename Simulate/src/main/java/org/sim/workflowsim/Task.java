@@ -79,6 +79,8 @@ public class Task extends Cloudlet {
 
     private long size;
 
+    public String name;
+
     public void setRam(double r) {
         this.ram = r;
     }

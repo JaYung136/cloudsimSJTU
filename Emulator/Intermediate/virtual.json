@@ -1,0 +1,407 @@
+{
+    "nodes": [
+        {
+            "app": "HF_SM_2",
+            "pausestart": 0,
+            "start": "0.17",
+            "datacenter": "A",
+            "mips": 500,
+            "type": "cn",
+            "pauseend": 0,
+            "size": 1000,
+            "name": "10.31.40.2",
+            "host": "host1",
+            "end": "0.17",
+            "pes": 1,
+            "ram": 512
+        },
+        {
+            "app": "HF_SM_3",
+            "pausestart": 0,
+            "start": "0.24",
+            "datacenter": "A",
+            "mips": 500,
+            "type": "cn",
+            "pauseend": 0,
+            "size": 1000,
+            "name": "10.31.40.3",
+            "host": "host1",
+            "end": "0.24",
+            "pes": 1,
+            "ram": 512
+        },
+        {
+            "app": "HF_SM_1",
+            "pausestart": 0,
+            "start": "0.29",
+            "datacenter": "A",
+            "mips": 500,
+            "type": "cn",
+            "pauseend": 0,
+            "size": 1000,
+            "name": "10.31.40.1",
+            "host": "host1",
+            "end": "0.4",
+            "pes": 1,
+            "ram": 512
+        },
+        {
+            "app": "HF_SM_4",
+            "pausestart": 0,
+            "start": "0.43",
+            "datacenter": "A",
+            "mips": 500,
+            "type": "cn",
+            "pauseend": 0,
+            "size": 1000,
+            "name": "10.31.40.4",
+            "host": "host1",
+            "end": "0.43",
+            "pes": 1,
+            "ram": 512
+        },
+        {
+            "app": "HF_SM_5",
+            "pausestart": 0,
+            "start": "0.24",
+            "datacenter": "A",
+            "mips": 500,
+            "type": "cn",
+            "pauseend": 0,
+            "size": 1000,
+            "name": "10.31.40.5",
+            "host": "host1",
+            "end": "0.46",
+            "pes": 1,
+            "ram": 512
+        },
+        {
+            "app": "HF_SM_7",
+            "pausestart": 0,
+            "start": "0.46",
+            "datacenter": "A",
+            "mips": 500,
+            "type": "cn",
+            "pauseend": 0,
+            "size": 1000,
+            "name": "10.31.40.7",
+            "host": "host1",
+            "end": "0.5",
+            "pes": 1,
+            "ram": 512
+        },
+        {
+            "app": "HF_SM_8",
+            "pausestart": 0,
+            "start": "0.1",
+            "datacenter": "A",
+            "mips": 500,
+            "type": "cn",
+            "pauseend": 0,
+            "size": 1000,
+            "name": "10.31.40.8",
+            "host": "host2",
+            "end": "0.74",
+            "pes": 1,
+            "ram": 512
+        },
+        {
+            "app": "HF_SM_6",
+            "pausestart": 0,
+            "start": "0.1",
+            "datacenter": "A",
+            "mips": 500,
+            "type": "cn",
+            "pauseend": 0,
+            "size": 1000,
+            "name": "10.31.40.6",
+            "host": "host3",
+            "end": "0.74",
+            "pes": 1,
+            "ram": 512
+        }
+    ],
+    "flows": [
+        {
+            "name": "default",
+            "destination": "10.31.40.2",
+            "source": "10.31.40.3"
+        },
+        {
+            "name": "default",
+            "destination": "10.31.40.2",
+            "source": "10.31.40.1"
+        },
+        {
+            "name": "default",
+            "destination": "10.31.40.2",
+            "source": "10.31.40.4"
+        },
+        {
+            "name": "default",
+            "destination": "10.31.40.2",
+            "source": "10.31.40.5"
+        },
+        {
+            "name": "default",
+            "destination": "10.31.40.2",
+            "source": "10.31.40.7"
+        },
+        {
+            "name": "default",
+            "destination": "10.31.40.2",
+            "source": "10.31.40.8"
+        },
+        {
+            "name": "default",
+            "destination": "10.31.40.2",
+            "source": "10.31.40.6"
+        },
+        {
+            "name": "default",
+            "destination": "10.31.40.3",
+            "source": "10.31.40.2"
+        },
+        {
+            "name": "default",
+            "destination": "10.31.40.3",
+            "source": "10.31.40.1"
+        },
+        {
+            "name": "default",
+            "destination": "10.31.40.3",
+            "source": "10.31.40.4"
+        },
+        {
+            "name": "default",
+            "destination": "10.31.40.3",
+            "source": "10.31.40.5"
+        },
+        {
+            "name": "default",
+            "destination": "10.31.40.3",
+            "source": "10.31.40.7"
+        },
+        {
+            "name": "default",
+            "destination": "10.31.40.3",
+            "source": "10.31.40.8"
+        },
+        {
+            "name": "default",
+            "destination": "10.31.40.3",
+            "source": "10.31.40.6"
+        },
+        {
+            "name": "default",
+            "destination": "10.31.40.1",
+            "source": "10.31.40.2"
+        },
+        {
+            "name": "default",
+            "destination": "10.31.40.1",
+            "source": "10.31.40.3"
+        },
+        {
+            "name": "default",
+            "destination": "10.31.40.1",
+            "source": "10.31.40.4"
+        },
+        {
+            "name": "default",
+            "destination": "10.31.40.1",
+            "source": "10.31.40.5"
+        },
+        {
+            "name": "default",
+            "destination": "10.31.40.1",
+            "source": "10.31.40.7"
+        },
+        {
+            "name": "default",
+            "destination": "10.31.40.1",
+            "source": "10.31.40.8"
+        },
+        {
+            "name": "default",
+            "destination": "10.31.40.1",
+            "source": "10.31.40.6"
+        },
+        {
+            "name": "default",
+            "destination": "10.31.40.4",
+            "source": "10.31.40.2"
+        },
+        {
+            "name": "default",
+            "destination": "10.31.40.4",
+            "source": "10.31.40.3"
+        },
+        {
+            "name": "default",
+            "destination": "10.31.40.4",
+            "source": "10.31.40.1"
+        },
+        {
+            "name": "default",
+            "destination": "10.31.40.4",
+            "source": "10.31.40.5"
+        },
+        {
+            "name": "default",
+            "destination": "10.31.40.4",
+            "source": "10.31.40.7"
+        },
+        {
+            "name": "default",
+            "destination": "10.31.40.4",
+            "source": "10.31.40.8"
+        },
+        {
+            "name": "default",
+            "destination": "10.31.40.4",
+            "source": "10.31.40.6"
+        },
+        {
+            "name": "default",
+            "destination": "10.31.40.5",
+            "source": "10.31.40.2"
+        },
+        {
+            "name": "default",
+            "destination": "10.31.40.5",
+            "source": "10.31.40.3"
+        },
+        {
+            "name": "default",
+            "destination": "10.31.40.5",
+            "source": "10.31.40.1"
+        },
+        {
+            "name": "default",
+            "destination": "10.31.40.5",
+            "source": "10.31.40.4"
+        },
+        {
+            "name": "default",
+            "destination": "10.31.40.5",
+            "source": "10.31.40.7"
+        },
+        {
+            "name": "default",
+            "destination": "10.31.40.5",
+            "source": "10.31.40.8"
+        },
+        {
+            "name": "default",
+            "destination": "10.31.40.5",
+            "source": "10.31.40.6"
+        },
+        {
+            "name": "default",
+            "destination": "10.31.40.7",
+            "source": "10.31.40.2"
+        },
+        {
+            "name": "default",
+            "destination": "10.31.40.7",
+            "source": "10.31.40.3"
+        },
+        {
+            "name": "default",
+            "destination": "10.31.40.7",
+            "source": "10.31.40.1"
+        },
+        {
+            "name": "default",
+            "destination": "10.31.40.7",
+            "source": "10.31.40.4"
+        },
+        {
+            "name": "default",
+            "destination": "10.31.40.7",
+            "source": "10.31.40.5"
+        },
+        {
+            "name": "default",
+            "destination": "10.31.40.7",
+            "source": "10.31.40.8"
+        },
+        {
+            "name": "default",
+            "destination": "10.31.40.7",
+            "source": "10.31.40.6"
+        },
+        {
+            "name": "default",
+            "destination": "10.31.40.8",
+            "source": "10.31.40.2"
+        },
+        {
+            "name": "default",
+            "destination": "10.31.40.8",
+            "source": "10.31.40.3"
+        },
+        {
+            "name": "default",
+            "destination": "10.31.40.8",
+            "source": "10.31.40.1"
+        },
+        {
+            "name": "default",
+            "destination": "10.31.40.8",
+            "source": "10.31.40.4"
+        },
+        {
+            "name": "default",
+            "destination": "10.31.40.8",
+            "source": "10.31.40.5"
+        },
+        {
+            "name": "default",
+            "destination": "10.31.40.8",
+            "source": "10.31.40.7"
+        },
+        {
+            "name": "default",
+            "destination": "10.31.40.8",
+            "source": "10.31.40.6"
+        },
+        {
+            "name": "default",
+            "destination": "10.31.40.6",
+            "source": "10.31.40.2"
+        },
+        {
+            "name": "default",
+            "destination": "10.31.40.6",
+            "source": "10.31.40.3"
+        },
+        {
+            "name": "default",
+            "destination": "10.31.40.6",
+            "source": "10.31.40.1"
+        },
+        {
+            "name": "default",
+            "destination": "10.31.40.6",
+            "source": "10.31.40.4"
+        },
+        {
+            "name": "default",
+            "destination": "10.31.40.6",
+            "source": "10.31.40.5"
+        },
+        {
+            "name": "default",
+            "destination": "10.31.40.6",
+            "source": "10.31.40.7"
+        },
+        {
+            "name": "default",
+            "destination": "10.31.40.6",
+            "source": "10.31.40.8"
+        }
+    ],
+    "policies": []
+}

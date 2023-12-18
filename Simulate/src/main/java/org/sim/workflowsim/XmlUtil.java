@@ -171,36 +171,35 @@ public final class XmlUtil {
                 //Log.printLine("node: " + node.getName().toLowerCase());
                 switch (node.getName().toLowerCase()) {
                     case "container":
+                        Container container = new Container();
+                        //Log.printLine("add container information");
                         String name = node.getAttributeValue("AppName");
-                        String image = node.getAttributeValue("image");
-                        String workingDir = node.getAttributeValue("WorkingDir");
+                        //Log.printLine("name: " + name);
+                        container.image = node.getAttributeValue("image");
+                        //Log.printLine("image: " + container.image);
+                        container.workingDir = node.getAttributeValue("WorkingDir");
+                        //Log.printLine("working dir: " + container.workingDir);
                         List<Element> cList = node.getChildren();
-                        List<String> commands = new ArrayList<>();
-                        List<String> args = new ArrayList<>();
-                        List<Pair<String, String>> labels = new ArrayList<>();
                         for(Element e : cList) {
                             switch (e.getName()) {
                                 case "command" :
                                     String cC = e.getAttributeValue("Content");
-                                    commands.add(cC);
+                                    //Log.printLine("command: " + cC);
+                                    container.commands.add(cC);
                                     break;
                                 case "args":
                                     String cA = e.getAttributeValue("Content");
-                                    args.add(cA);
+                                    //Log.printLine("args: " + cA);
+                                    container.args.add(cA);
                                     break;
                                 case "label":
                                     String key = e.getAttributeValue("Key");
                                     String value = e.getAttributeValue("val");
-                                    labels.add(new Pair<>(key, value));
+                                    //Log.printLine("label: " + key + " : " + value);
+                                    container.labels.add(new Pair<>(key, value));
                                     break;
                             }
                         }
-                        Container container = new Container();
-                        container.commands = new ArrayList<>(commands);
-                        container.args = new ArrayList<>(args);
-                        container.image = image;
-                        container.workingDir = workingDir;
-                        container.labels = new ArrayList<Pair<String, String>>(labels);
                         Constants.name2Container.put(name, container);
                         break;
                 }
@@ -536,6 +535,7 @@ public final class XmlUtil {
 
                         taskT.setUserId(userId);
                         taskT.setRam(reqMem);
+                        taskT.name = aName;
                         mName2Task.put(aName, taskT);
                         Constants.id2Name.put(taskT.getCloudletId(), aName);
                         for (FileItem file : mFileListT) {
@@ -543,7 +543,7 @@ public final class XmlUtil {
                         }
                         taskT.setFileList(mFileListT);
                         this.getTaskList().add(taskT);
-                        Log.printLine("new Job: " + taskT.getCloudletId() + " \n pes: " + taskT.getNumOfPes() + " length: " + taskT.getCloudletLength() + " ram: " + taskT.getRam() + " ip: " + taskT.getType());
+                        //Log.printLine("new Job: " + taskT.getCloudletId() + " \n pes: " + taskT.getNumOfPes() + " length: " + taskT.getCloudletLength() + " ram: " + taskT.getRam() + " ip: " + taskT.getType());
                     case "":
                 }
             }

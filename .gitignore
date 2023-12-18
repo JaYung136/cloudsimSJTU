@@ -1,10 +1,8 @@
 HELP.md
-cloudsimsdn/target/
-cloudsimsdn/build/
-cloudsimsdn/cloudsim_frontend/
+Control-Panel/node_modules/*
+Control-Panel/dist/*
+electron-quick-start/*
 
-cloudsim/target/
-cloudsim/build/
 ### STS ###
 .apt_generated
 .classpath

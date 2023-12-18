@@ -188,10 +188,10 @@ public class PowerDatacenter extends Datacenter {
 		}
 
 		if (timeDiff > 0) {
-			Log.formatLine(
+			/*Log.formatLine(
 					"\nEnergy consumption for the last time frame from %.2f to %.2f:",
 					getLastProcessTime(),
-					currentTime);
+					currentTime);*/
 
 			for (PowerHost host : this.<PowerHost> getHostList()) {
 				double previousUtilizationOfCpu = host.getPreviousUtilizationOfCpu();
@@ -217,10 +217,10 @@ public class PowerDatacenter extends Datacenter {
 						timeFrameHostEnergy);
 			}
 
-			Log.formatLine(
+			/*Log.formatLine(
 					"\n%.2f: Data center's energy is %.2f W*sec\n",
 					currentTime,
-					timeFrameDatacenterEnergy);
+					timeFrameDatacenterEnergy);*/
 		}
 
 		setPower(getPower() + timeFrameDatacenterEnergy);

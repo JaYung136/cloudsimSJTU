@@ -7,6 +7,7 @@ import org.sim.cloudbus.cloudsim.power.models.PowerModel;
 import org.sim.cloudbus.cloudsim.power.models.PowerModelSpecPowerHpProLiantMl110G4Xeon3040;
 import org.sim.cloudbus.cloudsim.power.models.PowerModelSpecPowerHpProLiantMl110G5Xeon3075;
 import org.sim.controller.Result;
+import org.sim.service.result.FaultRecord;
 import org.sim.service.result.LogEntity;
 
 import java.io.File;
@@ -40,9 +41,11 @@ public class Constants {
     public final static int CLOUDLET_PES	= 1;
 
     public static String LOG_PATH = "";
-
+    public static String FAULT_LOG_PATH = "";
     public static List<LogEntity> logs = new ArrayList<>();
     public static List<Result> results = new ArrayList<>();
+    public static Map<String, Integer> faultNum = new HashMap<>();
+    public static List<FaultRecord> records = new ArrayList<>();
 
     /*
      * VM instance types:

@@ -1,0 +1,15 @@
+metadata:
+  name: HF_SM_4
+apiVersion: v1
+kind: Pod
+spec:
+  nodeName: host3
+  containers:
+  - image: ubuntu
+    name: containerHF_SM_40
+    resources:
+      limits:
+        memory: 30000.0
+        cpu: 1
+    command:
+    - -t

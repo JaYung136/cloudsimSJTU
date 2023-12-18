@@ -101,6 +101,7 @@ public class WorkflowDatacenter extends Datacenter {
             }
 
             int userId = job.getUserId();
+            int jobId = job.getCloudletId();
             int vmId = job.getVmId();
             //Host host = getVmAllocationPolicy().getHost(vmId, userId);
             Host host = null;
@@ -201,10 +202,14 @@ public class WorkflowDatacenter extends Datacenter {
     private void updateTaskExecTime(Job job, Host host) {
         double start_time = job.getExecStartTime();
         for (Task task : job.getTaskList()) {
+            Double pause = 0.0;
+            if(Constants.pause.containsKey(task.getCloudletId())) {
+                pause = Constants.pause.get(task.getCloudletId()).getValue();
+            }
             task.setExecStartTime(start_time);
             double mips = host.getPeList().get(0).getPeProvisioner().getMips();
             mips = mips * task.getNumOfPes();
-            double task_runtime = task.getCloudletLength() / mips;
+            double task_runtime = task.getCloudletLength() / mips + pause;
             start_time += task_runtime;
             //Because CloudSim would not let us update end time here
             task.setTaskFinishTime(start_time);
@@ -381,7 +386,7 @@ public class WorkflowDatacenter extends Datacenter {
             return;
         }
         double time = 0;
-        Log.printLine("current time: " + currentTime);
+        //Log.printLine("current time: " + currentTime);
         //updateCloudletProcessingWithoutSchedulingFutureEventsForce();
         if(currentTime > getLastProcessTime()) {
             double minTime = updateCloudletProcessingWithoutSchedulingFutureEventsForce();
@@ -392,7 +397,7 @@ public class WorkflowDatacenter extends Datacenter {
                 setLastProcessTime(CloudSim.clock());
                 //CloudSim.cancelAll(getId(), new PredicateType(CloudSimTags.VM_DATACENTER_EVENT));
                 //send(getId(), getSchedulingInterval(), CloudSimTags.VM_DATACENTER_EVENT);
-                Log.printLine("no more");
+                //Log.printLine("no more");
                 return;
             }
             List<Map<String, Object>> migrationMap = getVmAllocationPolicy().optimizeAllocation(getVmList());
@@ -449,10 +454,10 @@ public class WorkflowDatacenter extends Datacenter {
         }
 
         if (timeDiff > 0) {
-            Log.formatLine(
+            /*Log.formatLine(
                     "\nEnergy consumption for the last time frame from %.2f to %.2f:",
                     getLastProcessTime(),
-                    currentTime);
+                    currentTime);*/
 
             /*for (PowerHost host : this.<PowerHost> getHostList()) {
                 double previousUtilizationOfCpu = host.getPreviousUtilizationOfCpu();
@@ -478,10 +483,10 @@ public class WorkflowDatacenter extends Datacenter {
                         timeFrameHostEnergy);
             }*/
 
-            Log.formatLine(
+            /*Log.formatLine(
                     "\n%.2f: Data center's energy is %.2f W*sec\n",
                     currentTime,
-                    timeFrameDatacenterEnergy);
+                    timeFrameDatacenterEnergy);*/
         }
 
         checkCloudletCompletion();
@@ -517,7 +522,7 @@ public class WorkflowDatacenter extends Datacenter {
                 while (host.getCloudletScheduler().isFinishedCloudlets()) {
                     Cloudlet cl = host.getCloudletScheduler().getNextFinishedCloudlet();
                     if(cl != null) {
-                        Log.printLine("is not null");
+                        //Log.printLine("is not null");
                     }
                     if (cl != null) {
 

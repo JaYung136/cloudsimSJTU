@@ -124,7 +124,7 @@ public class CloudletSchedulerSpaceShared extends CloudletScheduler {
 		for (ResCloudlet rcl : getCloudletExecList()) {
 			// finished anyway, rounding issue...
 			if (rcl.getRemainingCloudletLength() == 0) {
-				Log.printLine("finish");
+				//Log.printLine("finish");
 				toRemove.add(rcl);
 				cloudletFinish(rcl);
 				finished++;
@@ -296,7 +296,7 @@ public class CloudletSchedulerSpaceShared extends CloudletScheduler {
 		rcl.finalizeCloudlet();
 		getCloudletFinishedList().add(rcl);
 		usedPes -= rcl.getNumberOfPes();
-		Log.printLine("pes reveal");
+		//Log.printLine("pes reveal");
 		usedRam -= ((Job)rcl.getCloudlet()).getRam();
 	}
 
@@ -387,7 +387,7 @@ public class CloudletSchedulerSpaceShared extends CloudletScheduler {
 	public double cloudletSubmit(Cloudlet cloudlet, double fileTransferTime) {
 		// it can go to the exec list
 		num ++;
-		Log.printLine(currentCpus + "  " + usedPes + "  " + cloudlet.getNumberOfPes() + " " + num);
+		//Log.printLine(currentCpus + "  " + usedPes + "  " + cloudlet.getNumberOfPes() + " " + num);
 		if ((currentCpus - usedPes) >= cloudlet.getNumberOfPes()) {
 			ResCloudlet rcl = new ResCloudlet(cloudlet);
 			rcl.setCloudletStatus(Cloudlet.INEXEC);

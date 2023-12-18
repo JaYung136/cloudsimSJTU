@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <Utilization time=".100">
+    <Host id="0" cpuUtilization=".00" ramUtilization=".00" />
+    <Host id="1" cpuUtilization=".00" ramUtilization=".00" />
+    <Host id="2" cpuUtilization=".00" ramUtilization=".00" />
+  </Utilization>
+  <Utilization time=".104">
+    <Host id="0" cpuUtilization=".00" ramUtilization=".00" />
+    <Host id="1" cpuUtilization=".00" ramUtilization=".00" />
+    <Host id="2" cpuUtilization=".50" ramUtilization=".00" />
+  </Utilization>
+  <Utilization time=".144">
+    <Host id="0" cpuUtilization=".00" ramUtilization=".00" />
+    <Host id="1" cpuUtilization="1.00" ramUtilization=".06" />
+    <Host id="2" cpuUtilization="1.00" ramUtilization=".09" />
+  </Utilization>
+  <Utilization time=".184">
+    <Host id="0" cpuUtilization=".00" ramUtilization=".00" />
+    <Host id="1" cpuUtilization="1.00" ramUtilization=".06" />
+    <Host id="2" cpuUtilization="1.00" ramUtilization=".09" />
+  </Utilization>
+  <Utilization time=".404">
+    <Host id="0" cpuUtilization=".00" ramUtilization=".00" />
+    <Host id="1" cpuUtilization="1.00" ramUtilization=".06" />
+    <Host id="2" cpuUtilization="1.00" ramUtilization=".07" />
+  </Utilization>
+  <Utilization time=".484">
+    <Host id="0" cpuUtilization=".00" ramUtilization=".00" />
+    <Host id="1" cpuUtilization="1.00" ramUtilization=".06" />
+    <Host id="2" cpuUtilization="1.00" ramUtilization=".07" />
+  </Utilization>
+  <Utilization time=".504">
+    <Host id="0" cpuUtilization=".00" ramUtilization=".00" />
+    <Host id="1" cpuUtilization="1.00" ramUtilization=".06" />
+    <Host id="2" cpuUtilization="1.00" ramUtilization=".07" />
+  </Utilization>
+  <Utilization time=".744">
+    <Host id="0" cpuUtilization=".00" ramUtilization=".00" />
+    <Host id="1" cpuUtilization=".00" ramUtilization=".00" />
+    <Host id="2" cpuUtilization="1.00" ramUtilization=".07" />
+  </Utilization>
+  <Utilization time=".904">
+    <Host id="0" cpuUtilization=".00" ramUtilization=".00" />
+    <Host id="1" cpuUtilization=".00" ramUtilization=".00" />
+    <Host id="2" cpuUtilization=".00" ramUtilization=".00" />
+  </Utilization>
+  <Average>
+    <cpuUtilization value=".435" />
+    <ramUtilization value=".028" />
+  </Average>
+</root>
