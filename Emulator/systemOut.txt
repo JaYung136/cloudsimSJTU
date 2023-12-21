@@ -1,0 +1,110 @@
+Hello World!
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+[32m :: Spring Boot :: [39m      [2m (v2.2.0.RELEASE)[0;39m
+
+[2m2023-12-20 18:56:45.780[0;39m [32m INFO[0;39m [35m5096[0;39m [2m---[0;39m [2m[           main][0;39m [36morg.cloudbus.backend.StartApplication   [0;39m [2m:[0;39m Starting StartApplication on LAPTOP-66ESC5JH with PID 5096 (started by JuYung_Lee in D:\11桌面备份11\cloudsimSJTU\Emulator)
+[2m2023-12-20 18:56:45.784[0;39m [32m INFO[0;39m [35m5096[0;39m [2m---[0;39m [2m[           main][0;39m [36morg.cloudbus.backend.StartApplication   [0;39m [2m:[0;39m No active profile set, falling back to default profiles: default
+[2m2023-12-20 18:56:46.655[0;39m [32m INFO[0;39m [35m5096[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.s.b.w.embedded.tomcat.TomcatWebServer [0;39m [2m:[0;39m Tomcat initialized with port(s): 8082 (http)
+[2m2023-12-20 18:56:46.666[0;39m [32m INFO[0;39m [35m5096[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.apache.catalina.core.StandardService  [0;39m [2m:[0;39m Starting service [Tomcat]
+[2m2023-12-20 18:56:46.666[0;39m [32m INFO[0;39m [35m5096[0;39m [2m---[0;39m [2m[           main][0;39m [36morg.apache.catalina.core.StandardEngine [0;39m [2m:[0;39m Starting Servlet engine: [Apache Tomcat/9.0.27]
+[2m2023-12-20 18:56:46.768[0;39m [32m INFO[0;39m [35m5096[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.a.c.c.C.[Tomcat].[localhost].[/]      [0;39m [2m:[0;39m Initializing Spring embedded WebApplicationContext
+[2m2023-12-20 18:56:46.769[0;39m [32m INFO[0;39m [35m5096[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.s.web.context.ContextLoader           [0;39m [2m:[0;39m Root WebApplicationContext: initialization completed in 933 ms
+[2m2023-12-20 18:56:46.907[0;39m [32m INFO[0;39m [35m5096[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.s.s.concurrent.ThreadPoolTaskExecutor [0;39m [2m:[0;39m Initializing ExecutorService 'applicationTaskExecutor'
+[2m2023-12-20 18:56:47.055[0;39m [32m INFO[0;39m [35m5096[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.s.b.w.embedded.tomcat.TomcatWebServer [0;39m [2m:[0;39m Tomcat started on port(s): 8082 (http) with context path ''
+[2m2023-12-20 18:56:47.059[0;39m [32m INFO[0;39m [35m5096[0;39m [2m---[0;39m [2m[           main][0;39m [36morg.cloudbus.backend.StartApplication   [0;39m [2m:[0;39m Started StartApplication in 1.758 seconds (JVM running for 3.099)
+[2m2023-12-20 18:57:20.554[0;39m [32m INFO[0;39m [35m5096[0;39m [2m---[0;39m [2m[nio-8082-exec-4][0;39m [36mo.a.c.c.C.[Tomcat].[localhost].[/]      [0;39m [2m:[0;39m Initializing Spring DispatcherServlet 'dispatcherServlet'
+[2m2023-12-20 18:57:20.554[0;39m [32m INFO[0;39m [35m5096[0;39m [2m---[0;39m [2m[nio-8082-exec-4][0;39m [36mo.s.web.servlet.DispatcherServlet       [0;39m [2m:[0;39m Initializing Servlet 'dispatcherServlet'
+[2m2023-12-20 18:57:20.561[0;39m [32m INFO[0;39m [35m5096[0;39m [2m---[0;39m [2m[nio-8082-exec-4][0;39m [36mo.s.web.servlet.DispatcherServlet       [0;39m [2m:[0;39m Completed initialization in 7 ms
+
+开始仿真
+以太网络仿真
+带宽利用率:1.0
+Creating logger..:././OutputFiles/bandwidthUtil/link_utilization.xml
+Data center infrastructure (Physical Topology) : Intermediate/physical.json
+Virtual Machine and Network requests (Virtual Topology) : Intermediate/virtual.json
+Workloads: 
+  Intermediate/messages.csv
+Starting CloudSim SDN...
+Initialising...
+============================================
+Node: host3
+拓扑连接: Link:edge1 <-> host3, BW:1.0E7, Latency:0.001
+============================================
+Node: host2
+拓扑连接: Link:edge1 <-> host2, BW:1.0E7, Latency:0.001
+============================================
+Node: host1
+拓扑连接: Link:edge1 <-> host1, BW:1.0E7, Latency:0.001
+============================================
+Node: edge1
+拓扑连接: Link:edge1 <-> host2, BW:1.0E7, Latency:0.001
+拓扑连接: Link:edge1 <-> host1, BW:1.0E7, Latency:0.001
+拓扑连接: Link:edge1 <-> host3, BW:1.0E7, Latency:0.001
+============================================
+Node: gwA
+============================================
+Node: inter
+============================================
+Node: gwA
+net: inter-cloud networking topology created...
+Starting CloudSim version 3.0
+A is starting...
+net is starting...
+Entities started.
+0.0: NOS_A: Starting deploying application..
+0.0: NOS_net: Starting deploying application..
+Number of online hosts:1, max was =1
+Number of online hosts:1, max was =1
+Number of online hosts:1, max was =1
+Number of online hosts:1, max was =1
+Number of online hosts:1, max was =1
+Number of online hosts:1, max was =1
+Number of online hosts:2, max was =2
+Number of online hosts:3, max was =3
+Creating logger..:././Intermediate/result_messages.csv
+0.0: NOS_A: Container Created: Container #0 (10.31.40.2) in host1
+0.0: NOS_A: Container Created: Container #1 (10.31.40.3) in host1
+0.0: NOS_A: Container Created: Container #2 (10.31.40.1) in host1
+0.0: NOS_A: Container Created: Container #3 (10.31.40.4) in host1
+0.0: NOS_A: Container Created: Container #4 (10.31.40.5) in host1
+0.0: NOS_A: Container Created: Container #5 (10.31.40.7) in host1
+0.0: NOS_A: Container Created: Container #6 (10.31.40.8) in host2
+0.0: NOS_A: Container Created: Container #7 (10.31.40.6) in host3
+0.52: Simulation: No more future events
+CloudInformationService: Notify all CloudSim entities for shutting down.
+A is shutting down...
+net is shutting down...
+Simulation completed.
+Simulation completed.
+============= SDNBroker.printResult() =============================
+Workloads Num: 1
+Workloads CPU Num: 2
+Workloads Network Num: 1
+Workloads Timed Out Num: 0
+Total serve time: 0.0032031999999999616
+Total serve time CPU: 0.0
+Total serve time Network: 0.0032031999999999616
+Avg serve time: 0.0032031999999999616
+Overall overtime percentage: 0.0
+Avg serve time CPU: 0.0
+CPU overtime percentage: 0.0
+Avg serve time Network: 0.0032031999999999616
+Network overtime percentage: 0.0
+============= SDNBroker.printResult() Group analysis =======================
+Group num: 0, groupNumWorkloads:1
+Group num: 0, groupTotalServetime:0.0032031999999999616
+Group num: 0, groupTotalServetimeCPU:0.0
+Group num: 0, groupTotalServetimeNetwork:0.0032031999999999616
+Group num: 0, group avg Serve time:0.0032031999999999616
+Group num: 0, group avg Serve time CPU:0.0
+Group num: 0, group avg Serve time Network:0.0032031999999999616
+0.52: ========== EXPERIMENT FINISHED ===========
+Simultanously used hosts:0
+CloudSim SDN finished!
+[2m2023-12-20 18:59:16.093[0;39m [32m INFO[0;39m [35m5096[0;39m [2m---[0;39m [2m[extShutdownHook][0;39m [36mo.s.s.concurrent.ThreadPoolTaskExecutor [0;39m [2m:[0;39m Shutting down ExecutorService 'applicationTaskExecutor'

@@ -24,7 +24,7 @@
         "pauseend": 0,
         "size": 1000,
         "name": "10.31.40.3",
-        "host": "host1",
+        "host": "host2",
         "end": "2.11",
         "pes": 1,
         "ram": 512
@@ -54,7 +54,7 @@
         "pauseend": 0,
         "size": 1000,
         "name": "10.31.40.5",
-        "host": "host2",
+        "host": "host1",
         "end": "8.11",
         "pes": 1,
         "ram": 512
@@ -85,7 +85,7 @@
         "size": 1000,
         "name": "10.31.40.1",
         "host": "host1",
-        "end": "9.11",
+        "end": "14.79",
         "pes": 1,
         "ram": 512
     },
@@ -99,15 +99,15 @@
         "pauseend": 0,
         "size": 1000,
         "name": "10.31.40.7",
-        "host": "host1",
-        "end": "16.11",
+        "host": "host2",
+        "end": "23.15",
         "pes": 1,
         "ram": 512
     },
     {
         "app": "HF_SM_8",
         "pausestart": 0,
-        "start": "16.11",
+        "start": "23.15",
         "datacenter": "A",
         "mips": 500,
         "type": "cn",
@@ -115,7 +115,7 @@
         "size": 1000,
         "name": "10.31.40.8",
         "host": "host1",
-        "end": "24.11",
+        "end": "40.03",
         "pes": 1,
         "ram": 512
     }

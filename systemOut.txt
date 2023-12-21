@@ -1,0 +1,20 @@
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+[32m :: Spring Boot :: [39m      [2m (v2.2.0.RELEASE)[0;39m
+
+[2m2023-12-20 19:04:27.025[0;39m [32m INFO[0;39m [35m15376[0;39m [2m---[0;39m [2m[           main][0;39m [36morg.cloudbus.backend.StartApplication   [0;39m [2m:[0;39m Starting StartApplication on LAPTOP-66ESC5JH with PID 15376 (started by JuYung_Lee in D:\11桌面备份11\cloudsimSJTU\Emulator)
+[2m2023-12-20 19:04:27.029[0;39m [32m INFO[0;39m [35m15376[0;39m [2m---[0;39m [2m[           main][0;39m [36morg.cloudbus.backend.StartApplication   [0;39m [2m:[0;39m No active profile set, falling back to default profiles: default
+[2m2023-12-20 19:04:27.743[0;39m [32m INFO[0;39m [35m15376[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.s.b.w.embedded.tomcat.TomcatWebServer [0;39m [2m:[0;39m Tomcat initialized with port(s): 8082 (http)
+[2m2023-12-20 19:04:27.751[0;39m [32m INFO[0;39m [35m15376[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.apache.catalina.core.StandardService  [0;39m [2m:[0;39m Starting service [Tomcat]
+[2m2023-12-20 19:04:27.751[0;39m [32m INFO[0;39m [35m15376[0;39m [2m---[0;39m [2m[           main][0;39m [36morg.apache.catalina.core.StandardEngine [0;39m [2m:[0;39m Starting Servlet engine: [Apache Tomcat/9.0.27]
+[2m2023-12-20 19:04:27.828[0;39m [32m INFO[0;39m [35m15376[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.a.c.c.C.[Tomcat].[localhost].[/]      [0;39m [2m:[0;39m Initializing Spring embedded WebApplicationContext
+[2m2023-12-20 19:04:27.829[0;39m [32m INFO[0;39m [35m15376[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.s.web.context.ContextLoader           [0;39m [2m:[0;39m Root WebApplicationContext: initialization completed in 739 ms
+[2m2023-12-20 19:04:27.941[0;39m [32m INFO[0;39m [35m15376[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.s.s.concurrent.ThreadPoolTaskExecutor [0;39m [2m:[0;39m Initializing ExecutorService 'applicationTaskExecutor'
+[2m2023-12-20 19:04:28.088[0;39m [32m INFO[0;39m [35m15376[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.s.b.w.embedded.tomcat.TomcatWebServer [0;39m [2m:[0;39m Tomcat started on port(s): 8082 (http) with context path ''
+[2m2023-12-20 19:04:28.092[0;39m [32m INFO[0;39m [35m15376[0;39m [2m---[0;39m [2m[           main][0;39m [36morg.cloudbus.backend.StartApplication   [0;39m [2m:[0;39m Started StartApplication in 1.484 seconds (JVM running for 2.642)
+[2m2023-12-20 19:04:59.985[0;39m [32m INFO[0;39m [35m15376[0;39m [2m---[0;39m [2m[extShutdownHook][0;39m [36mo.s.s.concurrent.ThreadPoolTaskExecutor [0;39m [2m:[0;39m Shutting down ExecutorService 'applicationTaskExecutor'

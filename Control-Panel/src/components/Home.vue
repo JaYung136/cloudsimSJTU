@@ -54,7 +54,7 @@
                   :limit="3"
                   :on-exceed="handleExceed"
                   :file-list="fileList">
-                  <el-button size="small">上传Container.xml</el-button>
+                  <el-button size="small">上传Container</el-button>
                 </el-upload>
                 <el-upload
                   class="upload-demo"

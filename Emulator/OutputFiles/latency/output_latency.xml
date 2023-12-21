@@ -1,9 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <NetworkDelay>
 <Messages>
-	<Message Src="10.31.40.1" Dst="10.31.40.8" StartTime="0.5" EndTime="0.503" NetworkTime="0.00320320" PkgSizeKB="32000">
+	<Message Src="10.31.40.2" Dst="10.31.40.1" StartTime="0.11" EndTime="0.11" NetworkTime="0.00001280" PkgSizeKB="320">
 	</Message>
-	<Message Src="10.31.40.1" Dst="10.31.40.8" StartTime="100.5" EndTime="100.503" NetworkTime="0.00320320" PkgSizeKB="32000">
+	<Message Src="10.31.40.3" Dst="10.31.40.2" StartTime="0.11" EndTime="0.11" NetworkTime="0.00001280" PkgSizeKB="320">
+	</Message>
+	<Message Src="10.31.40.2" Dst="10.31.40.3" StartTime="0.11" EndTime="0.11" NetworkTime="0.00001280" PkgSizeKB="320">
+	</Message>
+	<Message Src="10.31.40.3" Dst="10.31.40.1" StartTime="0.11" EndTime="0.11" NetworkTime="0.00001280" PkgSizeKB="320">
+	</Message>
+	<Message Src="10.31.40.5" Dst="10.31.40.3" StartTime="0.11" EndTime="0.11" NetworkTime="0.00016350" PkgSizeKB="320">
+	</Message>
+	<Message Src="10.31.40.4" Dst="10.31.40.3" StartTime="0.11" EndTime="0.11" NetworkTime="0.00016350" PkgSizeKB="320">
+	</Message>
+	<Message Src="10.31.40.5" Dst="10.31.40.2" StartTime="0.11" EndTime="0.11" NetworkTime="0.00016350" PkgSizeKB="320">
+	</Message>
+	<Message Src="10.31.40.4" Dst="10.31.40.2" StartTime="0.11" EndTime="0.11" NetworkTime="0.00016350" PkgSizeKB="320">
+	</Message>
+	<Message Src="10.31.40.6" Dst="10.31.40.2" StartTime="0.11" EndTime="0.11" NetworkTime="0.00045150" PkgSizeKB="3200">
+	</Message>
+	<Message Src="10.31.40.5" Dst="10.31.40.3" StartTime="5.11" EndTime="5.11" NetworkTime="0.00009910" PkgSizeKB="320">
+	</Message>
+	<Message Src="10.31.40.5" Dst="10.31.40.2" StartTime="5.11" EndTime="5.11" NetworkTime="0.00009910" PkgSizeKB="320">
+	</Message>
+	<Message Src="10.31.40.6" Dst="10.31.40.2" StartTime="5.11" EndTime="5.11" NetworkTime="0.00038710" PkgSizeKB="3200">
+	</Message>
+	<Message Src="10.31.40.7" Dst="10.31.40.2" StartTime="8.11" EndTime="8.11" NetworkTime="0.00000880" PkgSizeKB="220">
+	</Message>
+	<Message Src="10.31.40.7" Dst="10.31.40.3" StartTime="8.11" EndTime="8.11" NetworkTime="0.00001180" PkgSizeKB="320">
+	</Message>
+	<Message Src="10.31.40.1" Dst="10.31.40.2" StartTime="8.11" EndTime="8.11" NetworkTime="0.00001180" PkgSizeKB="320">
+	</Message>
+	<Message Src="10.31.40.1" Dst="10.31.40.3" StartTime="8.11" EndTime="8.11" NetworkTime="0.00001180" PkgSizeKB="320">
+	</Message>
+	<Message Src="10.31.40.7" Dst="10.31.40.3" StartTime="10.11" EndTime="10.11" NetworkTime="0.00000320" PkgSizeKB="320">
+	</Message>
+	<Message Src="10.31.40.7" Dst="10.31.40.3" StartTime="12.11" EndTime="12.11" NetworkTime="0.00000320" PkgSizeKB="320">
+	</Message>
+	<Message Src="10.31.40.7" Dst="10.31.40.2" StartTime="13.11" EndTime="13.11" NetworkTime="0.00000220" PkgSizeKB="220">
+	</Message>
+	<Message Src="10.31.40.7" Dst="10.31.40.3" StartTime="14.11" EndTime="14.11" NetworkTime="0.00000320" PkgSizeKB="320">
+	</Message>
+	<Message Src="10.31.40.8" Dst="10.31.40.7" StartTime="16.11" EndTime="16.11" NetworkTime="0.00000500" PkgSizeKB="500">
+	</Message>
+	<Message Src="10.31.40.8" Dst="10.31.40.7" StartTime="21.11" EndTime="21.11" NetworkTime="0.00000500" PkgSizeKB="500">
 	</Message>
 </Messages>
+<TotalNetworkTime Time="0.0018080000000000001"/>
+<AvgNetworkTime Time="8.218181818181819E-5"/>
 </NetworkDelay>

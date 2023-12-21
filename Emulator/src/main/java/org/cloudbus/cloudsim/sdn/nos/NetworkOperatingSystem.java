@@ -64,8 +64,8 @@ public abstract class NetworkOperatingSystem extends SimEntity {
 	protected static Map<Integer, FlowConfig> gFlowMapFlowId2Flow = new HashMap<Integer, FlowConfig>();
 
 	// Resolution of the result.
-	public static final long bandwidthWithinSameHost = 1500000000; // bandwidth between VMs within a same host: 12Gbps = 1.5GBytes/sec
-	public static final double latencyWithinSameHost = 0.1; //0.1 msec latency
+	public static final long bandwidthWithinSameHost = 100000000; // bandwidth between VMs within a same host: 12Gbps = 1.5GBytes/sec
+	public static final double latencyWithinSameHost = 0.0; //0.1 msec latency
 
 	private double lastMigration = 0;
 	public double lastAdjustAllChannelTime = -1;

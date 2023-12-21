@@ -33,8 +33,6 @@ public class SimulateController {
     @Autowired
     private service service;
 
-
-
     @RequestMapping("/uploadhost")
     public Message uploadhost(MultipartFile file, HttpServletRequest req) throws IOException {
         System.out.println("上传host.xml文件");

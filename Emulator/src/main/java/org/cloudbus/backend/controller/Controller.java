@@ -409,18 +409,24 @@ public class Controller {
         bw.write("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
                 "<NetworkDelay>\n<Messages>\n");
 
+        int count = 0;
+        double totaltime = 0.0;
         for (int i = 1; i < csvData.size(); i++) {
             String[] row = csvData.get(i);
             try {
                 bw.write("\t<Message Src=\"" + row[1].trim() + "\" Dst=\"" + row[2].trim() + "\" StartTime=\"" + row[4].trim() + "\" EndTime=\"" + row[15].trim() + "\" NetworkTime=\"" + row[18].trim() + "\" PkgSizeKB=\"" + row[12].trim() + "\">\n\t</Message>\n");
+                ++count;
+                totaltime += Double.parseDouble(row[18].trim());
             }
             catch (Exception e) {
                 bw.write("\t<Message Src=\"" + row[1].trim() + "\" Dst=\"" + row[2].trim() + "\" StartTime=\"" + row[4].trim() + "\" EndTime=\"TimeOut\" NetworkTime=\"TimeOut\" PkgSizeKB=\"" + row[12].trim() + "\">\n\t</Message>\n");
             }
         }
 
-        bw.write("</Messages>\n" +
-                "</NetworkDelay>");
+        bw.write("</Messages>\n");
+        bw.write("<TotalNetworkTime Time=\""+String.valueOf(totaltime)+"\"/>\n");
+        bw.write("<AvgNetworkTime Time=\""+String.valueOf(totaltime/count)+"\"/>\n");
+        bw.write("</NetworkDelay>");
         bw.close();
         return ResultDTO.success("ok");
     }
@@ -433,7 +439,7 @@ public class Controller {
 
         convertphytopo();
         convertvirtopo();
-//        convertworkload();
+        convertworkload();
         String args[] = {"",physicalf,virtualf,workloadf};
         LogWriter.resetLogger(bwutil_result);
         LogWriter log = LogWriter.getLogger(bwutil_result);
