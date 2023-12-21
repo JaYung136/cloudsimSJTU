@@ -2,6 +2,7 @@ HELP.md
 Control-Panel/node_modules/*
 Control-Panel/dist/*
 electron-quick-start/*
+electron-quick-start/
 
 ### STS ###
 .apt_generated
